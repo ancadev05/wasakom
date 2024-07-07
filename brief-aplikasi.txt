@@ -1,0 +1,6 @@
+laptop
+- menu untuk tambah tipe laptop yang tersedia
+- menu untuk details laptop perunit
+
+aplikasi karyawan
+- menu untuk mengajukan surat izin atau cuti
