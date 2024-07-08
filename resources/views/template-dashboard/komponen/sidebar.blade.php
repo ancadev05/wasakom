@@ -142,7 +142,7 @@
         <ul class="nav nav-secondary">
           <li class="nav-item">
             <a href="{{ url('laptop') }}">
-              <i class="fas fa-home"></i>
+              <i class="fas fa-laptop"></i>
               <p>Laptop</p>
             </a>
           </li>

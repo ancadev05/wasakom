@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\PenyewaanController;
 use App\Http\Controllers\ServisanController;
@@ -29,6 +30,9 @@ Route::resource('/laptop', LaptopController::class);
 Route::resource('/servisan', ServisanController::class);
 Route::get('/wasakom/servisan/servisan-selesai', [ServisanController::class, 'servisanSelesai'])->name('servisanSelesai');
 Route::resource('/tipe-laptop', TipeLaptopController::class);
+
+Route::get('/display', [DisplayController::class, 'index']);
+Route::get('/display/1', [DisplayController::class, 'laptopdetail']);
 
 // Penyewaan
 Route::get('/penyewaan', [PenyewaanController::class, 'index']);

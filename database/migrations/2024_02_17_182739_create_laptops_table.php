@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('laptops', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
+            $table->date('tgl');
             $table->string('sn')->unique();
-            $table->string('merek');
-            $table->string('type');
+            $table->string('kode_barang')->unique()->nullable();
             $table->string('cpu');
+            $table->string('gpu');
             $table->string('ram');
             $table->string('storage');
-            $table->integer('status')->nullable();
+            $table->integer('status');
             $table->integer('kondisi');
-            $table->string('gambar')->nullable();
+            $table->foreignId('laptop_merek_id')->constrained();
+            $table->foreignId('laptop_tipe_id')->constrained();
             $table->timestamps();
         });
     }

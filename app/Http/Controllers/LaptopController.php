@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Laptop;
+use App\Models\LaptopMerek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -25,8 +26,9 @@ class LaptopController extends Controller
      */
     public function create()
     {
-        //
-        return view('laptop.create');
+        $laptop_merek = LaptopMerek::get();
+
+        return view('laptop.create')->with('laptop_merek', $laptop_merek);
     }
 
     /**

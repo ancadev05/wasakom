@@ -39,9 +39,6 @@
 
 <body>
   <div class="wrapper">
-    <!-- Sidebar -->
-    @include('template-dashboard.komponen.sidebar')
-    <!-- End Sidebar -->
     
     <div class="main-panel">
         {{-- header / navbar --}}
