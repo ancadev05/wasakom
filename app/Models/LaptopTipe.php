@@ -10,4 +10,9 @@ class LaptopTipe extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function laptopmerek()
+    {
+        return $this->belongsTo(LaptopMerek::class, 'laptop_merek_id', 'id');
+    }
 }

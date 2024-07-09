@@ -26,6 +26,7 @@ Route::get('/', function () {
 });
 
 
+Route::get('/mt', [LaptopController::class, 'mt']);
 Route::resource('/laptop', LaptopController::class);
 Route::resource('/servisan', ServisanController::class);
 Route::get('/wasakom/servisan/servisan-selesai', [ServisanController::class, 'servisanSelesai'])->name('servisanSelesai');

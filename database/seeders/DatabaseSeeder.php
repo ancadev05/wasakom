@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            LaptopMerekSeeder::class
+            LaptopMerekSeeder::class,
+            LaptopTipeSeeder::class
         ]);
     }
 }

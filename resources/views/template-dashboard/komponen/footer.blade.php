@@ -7,7 +7,7 @@
 </footer> --}}
 
 {{-- template kaiadmin --}}
-<footer class="footer">
+<footer class="footer mt-3">
     <div class="container-fluid d-flex justify-content-between">
       <nav class="pull-left">
         <ul class="nav">

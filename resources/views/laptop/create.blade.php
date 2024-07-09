@@ -12,7 +12,8 @@
         <input type="file" class="form-control">
 
     </div>
-    <div class="border shadow bg-white p-3">
+
+    <div class="border rounded shadow bg-white p-3">
         <form action="{{ url('laptop') }}" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- <table class="table table-borderless table-responsive">
@@ -152,12 +153,13 @@
             </table> --}}
 
             <div class="row">
+                <p><u><span class="text-danger fw-bold">*</span><i> wajib diisi</u></i></p>
                 <div class="col-5">
                     <div class="mb-3">
-                        <label class="form-label" for="tanggal">Tanggal <span class="text-danger fw-bold">*</span></label>
-                        <input class="form-control @error('tanggal') is-invalid @enderror" type="date" name="tanggal"
-                            id="tanggal" value="{{ old('tanggal') }}">
-                        @error('tanggal')
+                        <label class="form-label" for="tgl">Tanggal <span class="text-danger fw-bold">*</span></label>
+                        <input class="form-control @error('tgl') is-invalid @enderror" type="date" name="tgl"
+                            id="tgl" value="{{ old('tgl') }}">
+                        @error('tgl')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
                     </div> 
@@ -170,7 +172,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="kode_barang">Kode Barang <span class="text-danger fw-bold">*</span></label>
+                        <label class="form-label" for="kode_barang">Kode Barang</label>
                         <input class="form-control @error('kode_barang') is-invalid @enderror" type="text" name="kode_barang"
                             id="kode_barang" value="{{ old('kode_barang') }}">
                         @error('kode_barang')
@@ -190,18 +192,30 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="type">Type <span class="text-danger fw-bold">*</span></label>
-                        <input class="form-control @error('type') is-invalid @enderror" type="text" name="type"
-                            id="type" value="{{ old('type') }}">
-                        @error('type')
+                        <label class="form-label" for="tipe">Tipe <span class="text-danger fw-bold">*</span></label>
+                        <select class="form-select @error('tipe') is-invalid @enderror" name="tipe" id="tipe">
+                            <option value="" selected>---</option>
+                            @foreach ($laptop_tipe as $item)
+                                <option value="{{ $item->id }}" {{ old('tipe') == $item->id ? 'selected' : '' }}>{{ $item->tipe }}</option>
+                            @endforeach
+                        </select>
+                        @error('tipe')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="cpu">Processor <span class="text-danger fw-bold">*</span></label>
                         <input class="form-control @error('cpu') is-invalid @enderror" type="text" name="cpu"
-                            id="cpu" value="{{ old('cpu') }}">
+                            id="cpu" placeholder="example: Intel Core i5-11340U" value="{{ old('cpu') }}">
                         @error('cpu')
+                            <small class="invalid-feedback"> {{ $message }} </small>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="gpu">GPU <span class="text-danger fw-bold">*</span></label>
+                        <input class="form-control @error('gpu') is-invalid @enderror" type="text" name="gpu"
+                            id="gpu" placeholder="example: Invidia RTX 4300" value="{{ old('gpu') }}">
+                        @error('gpu')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
                     </div>
@@ -224,7 +238,7 @@
                 </div>
                 <div class="col-5">
                     <div class="mb-3">
-                        <label class="form-label" for="tanggal">Layar <span class="text-danger fw-bold">*</span></label>
+                        <label class="form-label" for="tanggal">Layar</label>
                         <input class="form-control @error('size') is-invalid @enderror mb-2" type="text" name="size"
                             id="size" value="{{ old('size') }}" placeholder='example: 15,6"'>
                         @error('size')
@@ -239,9 +253,9 @@
                     <div class="mb-3">
                         <label class="form-label" for="status">Status Laptop <span class="text-danger fw-bold">*</span></label>
                         <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
-                            <option value="1" selected>Ready</option>
-                            <option value="2">Display</option>
-                            <option value="3">Dipenyewaan</option>
+                            <option value="" selected>---</option>
+                            <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Display</option>
+                            <option value="2" {{ old('status') == '2' ? 'selected' : '' }}>Penyewaan</option>
                         </select>
                         @error('status')
                             <small class="invalid-feedback"> {{ $message }} </small>
@@ -261,6 +275,14 @@
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="keterangan">Keterangan</label>
+                        <textarea class="form-control @error('keterangan') is-invalid @enderror" type="text" name="keterangan"
+                            id="keterangan" placeholder="masukkan keterangan tambahan" value="{{ old('keterangan') }}" rows="5"></textarea>
+                        @error('keterangan')
+                            <small class="invalid-feedback"> {{ $message }} </small>
+                        @enderror
+                    </div>
+                    {{-- <div class="mb-3">
                         <label class="form-label" for="gambar">Gambar <span class="text-danger fw-bold">*</span></label>
                         <input class="form-control @error('gambar') is-invalid @enderror" type="file" name="gambar"
                             id="gambar">
@@ -268,7 +290,7 @@
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
                         <img src="" alt="foto" class="mt-2" id="img-view" width="330px">
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 

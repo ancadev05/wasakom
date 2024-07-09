@@ -15,7 +15,7 @@
                 <img src="{{ url('storage/contoh/laptop.png') }}" alt="" width="60%">
             </div>
 
-            <table class="table table-sm mt-3">
+            <table class="mt-3">
                 <tr>
                     <td class="w-25">Merek</td>
                     <td>Lenovo</td>

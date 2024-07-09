@@ -141,6 +141,12 @@
       <div class="sidebar-content">
         <ul class="nav nav-secondary">
           <li class="nav-item">
+            <a href="{{ url('mt') }}">
+              <i class="fas fa-laptop"></i>
+              <p>Merek & Tipe</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('laptop') }}">
               <i class="fas fa-laptop"></i>
               <p>Laptop</p>
