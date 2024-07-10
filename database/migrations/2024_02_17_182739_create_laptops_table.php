@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('gpu');
             $table->string('ram');
             $table->string('storage');
+            $table->integer('interfaces_storage')->nullable();
             $table->integer('status');
             $table->integer('kondisi');
-            $table->string('layar')->nullable();
             $table->text('keterangan')->nullable();
             $table->foreignId('laptop_merek_id')->constrained();
             $table->foreignId('laptop_tipe_id')->constrained();

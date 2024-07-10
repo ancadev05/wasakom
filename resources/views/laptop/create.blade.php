@@ -162,9 +162,10 @@
                         @error('tgl')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
-                    </div> 
+                    </div>
                     <div class="mb-3">
-                        <label class="form-label" for="sn">Serial Number <span class="text-danger fw-bold">*</span></label>
+                        <label class="form-label" for="sn">Serial Number <span
+                                class="text-danger fw-bold">*</span></label>
                         <input class="form-control @error('sn') is-invalid @enderror" type="text" name="sn"
                             id="sn" value="{{ old('sn') }}">
                         @error('sn')
@@ -173,8 +174,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="kode_barang">Kode Barang</label>
-                        <input class="form-control @error('kode_barang') is-invalid @enderror" type="text" name="kode_barang"
-                            id="kode_barang" value="{{ old('kode_barang') }}">
+                        <input class="form-control @error('kode_barang') is-invalid @enderror" type="text"
+                            name="kode_barang" id="kode_barang" value="{{ old('kode_barang') }}">
                         @error('kode_barang')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -184,7 +185,8 @@
                         <select class="form-select @error('merek') is-invalid @enderror" name="merek" id="merek">
                             <option value="" selected>---</option>
                             @foreach ($laptop_merek as $item)
-                                <option value="{{ $item->id }}" {{ old('merek') == $item->id ? 'selected' : '' }}>{{ $item->merek }}</option>
+                                <option value="{{ $item->id }}" {{ old('merek') == $item->id ? 'selected' : '' }}>
+                                    {{ $item->merek }}</option>
                             @endforeach
                         </select>
                         @error('merek')
@@ -196,7 +198,8 @@
                         <select class="form-select @error('tipe') is-invalid @enderror" name="tipe" id="tipe">
                             <option value="" selected>---</option>
                             @foreach ($laptop_tipe as $item)
-                                <option value="{{ $item->id }}" {{ old('tipe') == $item->id ? 'selected' : '' }}>{{ $item->tipe }}</option>
+                                <option value="{{ $item->id }}" {{ old('tipe') == $item->id ? 'selected' : '' }}>
+                                    {{ $item->tipe }}</option>
                             @endforeach
                         </select>
                         @error('tipe')
@@ -204,7 +207,8 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="cpu">Processor <span class="text-danger fw-bold">*</span></label>
+                        <label class="form-label" for="cpu">Processor <span
+                                class="text-danger fw-bold">*</span></label>
                         <input class="form-control @error('cpu') is-invalid @enderror" type="text" name="cpu"
                             id="cpu" placeholder="example: Intel Core i5-11340U" value="{{ old('cpu') }}">
                         @error('cpu')
@@ -235,23 +239,46 @@
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="interfaces_storage">Interfaces Storage <span
+                                class="text-danger fw-bold">*</span></label>
+                        <div class="d-flex">
+                            <div class="form-check me-3">
+                                <input class="form-check-input @error('interfaces_storage') is-invalid @enderror"
+                                    type="radio" name="interfaces_storage" id="interfaces_storage1" value="1"
+                                    {{ old('checked') }}>
+                                <label class="form-check-label" for="interfaces_storage1">SATA</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input @error('interfaces_storage') is-invalid @enderror"
+                                    type="radio" name="interfaces_storage" id="interfaces_storage2" value="2"
+                                    {{ old('checked') }}>
+                                <label class="form-check-label" for="interfaces_storage2">NVME</label>
+                            </div>
+                            @error('interfaces_storage')
+                                <small class="invalid-feedback"> {{ $message }} </small>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="col-5">
                     <div class="mb-3">
                         <label class="form-label" for="tanggal">Layar</label>
-                        <input class="form-control @error('size') is-invalid @enderror mb-2" type="text" name="size"
-                            id="size" value="{{ old('size') }}" placeholder='example: 15,6"'>
+                        <input class="form-control @error('size') is-invalid @enderror mb-2" type="text"
+                            name="size" id="size" value="{{ old('size') }}" placeholder='example: 15,6"'>
                         @error('size')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
-                        <input class="form-control @error('resolusi') is-invalid @enderror" type="text" name="resolusi"
-                            id="resolusi" value="{{ old('resolusi') }}" placeholder="example: FHD (1920x1080)">
+                        <input class="form-control @error('resolusi') is-invalid @enderror" type="text"
+                            name="resolusi" id="resolusi" value="{{ old('resolusi') }}"
+                            placeholder="example: FHD (1920x1080)">
                         @error('resolusi')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="status">Status Laptop <span class="text-danger fw-bold">*</span></label>
+                        <label class="form-label" for="status">Status Laptop <span
+                                class="text-danger fw-bold">*</span></label>
                         <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
                             <option value="" selected>---</option>
                             <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Display</option>
@@ -262,9 +289,11 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="kondisi">Kondisi <span class="text-danger fw-bold">*</span></label>
+                        <label class="form-label" for="kondisi">Kondisi <span
+                                class="text-danger fw-bold">*</span></label>
                         <i style="font-size: 12px">* Pastikan kondisi laptop dalam keadaan normal</i>
-                        <select class="form-select @error('kondisi') is-invalid @enderror" name="kondisi" id="kondisi">
+                        <select class="form-select @error('kondisi') is-invalid @enderror" name="kondisi"
+                            id="kondisi">
                             <option value="" selected>---</option>
                             <option value="1" {{ old('kondisi') == '1' ? 'selected' : '' }}>Normal</option>
                             <option value="2" {{ old('kondisi') == '2' ? 'selected' : '' }}>Tidak Normal</option>
@@ -302,5 +331,4 @@
         </form>
 
     </div>
-    
 @endsection

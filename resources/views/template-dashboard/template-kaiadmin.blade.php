@@ -45,7 +45,7 @@
     
     <div class="main-panel">
         {{-- header / navbar --}}
-        @include('template-dashboard.komponen.header')
+        {{-- @include('template-dashboard.komponen.header') --}}
         {{-- /header / navbar --}}
 
       <div class="container">
@@ -97,6 +97,9 @@
 
   <!-- Kaiadmin JS -->
   <script src="{{ asset('kaiadmin/assets/js/kaiadmin.min.js') }}"></script>
+
+  {{-- script costum --}}
+  @yield('script')
 </body>
 
 </html>

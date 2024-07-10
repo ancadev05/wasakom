@@ -70,7 +70,9 @@
                                                 data-bs-placment="top" data-bs-title="Rusak"></i>
                                         @endif
                                     @else
-                                        <span class="text-danger">Dipenyewaan</span>
+                                        <span class="text-secondary">Pengecekan 
+                                            <i class="fas fa-sync-alt text-secondary" data-bs-toggle="tooltip"
+                                            data-bs-placment="top" data-bs-title="Dicek teknisi"></i></span>
                                     @endif
                                 </td>
                                 <td>

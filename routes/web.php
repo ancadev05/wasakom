@@ -27,6 +27,11 @@ Route::get('/', function () {
 
 
 Route::get('/mt', [LaptopController::class, 'mt']);
+Route::post('/tambah-merek', [LaptopController::class, 'tambahmerek']);
+Route::delete('/merek/{id}', [LaptopController::class, 'hapusmerek']);
+Route::get('/tambah-tipe', [LaptopController::class, 'tambahtipe']);
+Route::post('/tambah-tipe', [LaptopController::class, 'tipestore']);
+
 Route::resource('/laptop', LaptopController::class);
 Route::resource('/servisan', ServisanController::class);
 Route::get('/wasakom/servisan/servisan-selesai', [ServisanController::class, 'servisanSelesai'])->name('servisanSelesai');

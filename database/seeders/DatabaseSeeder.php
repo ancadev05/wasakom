@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Laptop;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,5 +25,7 @@ class DatabaseSeeder extends Seeder
             LaptopMerekSeeder::class,
             LaptopTipeSeeder::class
         ]);
+
+        Laptop::factory(20)->create();
     }
 }

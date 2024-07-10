@@ -52,30 +52,11 @@ class LaptopController extends Controller
             'gpu' => 'required',
             'ram' => 'required',
             'storage' => 'required',
+            // 'interfaces_storage' => 'required',
             'status' => 'required',
             'kondisi' => 'required'
-            // 'gambar_1' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
-            // 'gambar_2' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
-            // 'gambar_3' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
-            // 'gambar_4' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
-            // 'gambar_5' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048'
         ]
-        // , [
-            // 'tgl' => 'Tanggal harus diisi',
-            // 'sn' => 'Serial Number sudah terdaftar',
-            // 'merek' => 'Masukkan merek laptop',
-            // 'type' => 'Masukkan tipe laptop',
-            // 'cpu' => 'Masukkan tipe procesor',
-            // 'ram' => 'Masukkan kapasitas dan jenis RAM',
-            // 'storage' => 'Masukkan kapasitas dan jenis SSD',
-            // 'status' => 'Status laptop sekarang',
-            // 'kondisi' => 'Kondisi laptop saat ini',
-            // 'gambar_1:mimes' => 'extensi gambar tidak sesuai',
-            // 'gambar_1:max' => 'Ukuran maksimal gambar 2 MB'
-        // ]
     );
-
-//  dd($request);
 
         $data = [
             'tgl' => $request->tgl,
@@ -85,17 +66,13 @@ class LaptopController extends Controller
             'gpu' => $request->gpu,
             'ram' => strtoupper($request->ram),
             'storage' => strtoupper($request->storage),
+            'interfaces_storage' => $request->interfaces_storage,
             'status' => $request->status,
             'kondisi' => $request->kondisi,
-            'layar' => $request->size . " - " . $request->resolusi,
             'laptop_merek_id' => $request->merek,
             'laptop_tipe_id' => $request->tipe,
             'keterangan' => $request->keterangan
-            // 'gambar' => $gambar_nama
         ];
-
-        // dd($data);
-      
 
         // Memasukkan data kedalam tabel
         Laptop::create($data);
@@ -122,8 +99,13 @@ class LaptopController extends Controller
     {
         //
         $laptop = Laptop::where('id', $id)->first();
+        $laptop_merek = LaptopMerek::get();
+        $laptop_tipe = LaptopTipe::get();
 
-        return view('laptop.edit')->with('laptop', $laptop);
+        return view('laptop.edit')
+            ->with('laptop_merek', $laptop_merek)
+            ->with('laptop_tipe', $laptop_tipe)
+            ->with('laptop', $laptop);
     }
 
     /**
@@ -156,46 +138,7 @@ class LaptopController extends Controller
             'gambar:max' => 'Ukuran maksimal gambar 2MB'
         ]);
 
-        $gambar_nama_1 = false;
-        // Jika user upload gambar
-        if ($request->hasFile('gambar_1')) {
-            // Validasi gambar
-            $gambar_file = $request->file('gambar_1'); // mengambil file dari form
-            $gambar_nama_1 = date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
-            $gambar_file->storeAs('public/gambar-laptop/', '1-' . $gambar_nama_1); // memindahkan file ke folder public agar bisa diakses
-        }
-        $gambar_nama_2 = false;
-        // Jika user upload gambar
-        if ($request->hasFile('gambar_2')) {
-            // Validasi gambar
-            $gambar_file = $request->file('gambar'); // mengambil file dari form
-            $gambar_nama_2 = date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
-            $gambar_file->storeAs('public/gambar-laptop/', '2-' . $gambar_nama_2); // memindahkan file ke folder public agar bisa diakses
-        }
-        $gambar_nama_3 = false;
-        // Jika user upload gambar
-        if ($request->hasFile('gambar_3')) {
-            // Validasi gambar
-            $gambar_file = $request->file('gambar'); // mengambil file dari form
-            $gambar_nama_3 = date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
-            $gambar_file->storeAs('public/gambar-laptop/', '3-' . $gambar_nama_3); // memindahkan file ke folder public agar bisa diakses
-        }
-        $gambar_nama_4 = false;
-        // Jika user upload gambar
-        if ($request->hasFile('gambar_4')) {
-            // Validasi gambar
-            $gambar_file = $request->file('gambar'); // mengambil file dari form
-            $gambar_nama_4 = date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
-            $gambar_file->storeAs('public/gambar-laptop/', '4-' . $gambar_nama_4); // memindahkan file ke folder public agar bisa diakses
-        }
-        $gambar_nama_5 = false;
-        // Jika user upload gambar
-        if ($request->hasFile('gambar_5')) {
-            // Validasi gambar
-            $gambar_file = $request->file('gambar'); // mengambil file dari form
-            $gambar_nama_5 = date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
-            $gambar_file->storeAs('public/gambar-laptop/', '5-' . $gambar_nama_5); // memindahkan file ke folder public agar bisa diakses
-        }
+       
 
         // Validasi gambar baru
         if ($request->hasFile('gambar')) { // Jika ada gambar baru
@@ -228,13 +171,6 @@ class LaptopController extends Controller
             'laptop_tipe_id' => $request->tipe,
         ];
 
-        $gambar_produk = [
-            'gambar_1' => $gambar_nama_1,
-            'gambar_2' => $gambar_nama_2,
-            'gambar_3' => $gambar_nama_3,
-            'gambar_4' => $gambar_nama_4,
-            'gambar_5' => $gambar_nama_5
-        ];
 
         // dd($data);
         // Update data kedalam tabel
@@ -273,5 +209,106 @@ class LaptopController extends Controller
         return view('laptop.merek-tipe')
             ->with('laptop_merek', $laptop_merek)
             ->with('laptop_tipe', $laptop_tipe);
+    }
+
+    // tambah merek laptop
+    public function tambahmerek(Request $request)
+    {
+        $merek = [
+            'merek' => strtoupper($request->merek)
+        ];
+
+        LaptopMerek::create($merek);
+
+        return redirect('/mt');
+    }
+    // hapus merek
+    public function hapusmerek(string $id)
+    {
+        LaptopMerek::where('id', $id)->delete();
+
+        return redirect('/mt');
+    }
+
+    // tambah tipe
+    public function tambahtipe()
+    {
+        $laptop_merek = LaptopMerek::get();
+
+        return view('laptop.tipe-laptop-tambah')
+            ->with('laptop_merek', $laptop_merek);
+    }
+    // tipe store
+    public function tipestore(Request $request)
+    {
+        $request->validate([
+            'merek' => 'required',
+            'tipe' => 'required',
+            'gambar_1' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
+            'gambar_2' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
+            'gambar_3' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
+            'gambar_4' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
+            'gambar_5' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048'
+        ]);
+
+        $gambar_nama_1 = false;
+        // Jika user upload gambar
+        if ($request->hasFile('gambar_1')) {
+            // Validasi gambar
+            $gambar_file = $request->file('gambar_1'); // mengambil file dari form
+            $gambar_nama_1 = '1-' . date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
+            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama_1); // memindahkan file ke folder public agar bisa diakses
+        }
+        $gambar_nama_2 = false;
+        // Jika user upload gambar
+        if ($request->hasFile('gambar_2')) {
+            // Validasi gambar
+            $gambar_file = $request->file('gambar_2'); // mengambil file dari form
+            $gambar_nama_2 = '2-' . date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
+            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama_2); // memindahkan file ke folder public agar bisa diakses
+        }
+        $gambar_nama_3 = false;
+        // Jika user upload gambar
+        if ($request->hasFile('gambar_3')) {
+            // Validasi gambar
+            $gambar_file = $request->file('gambar_3'); // mengambil file dari form
+            $gambar_nama_3 = '3-' . date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
+            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama_3); // memindahkan file ke folder public agar bisa diakses
+        }
+        $gambar_nama_4 = false;
+        // Jika user upload gambar
+        if ($request->hasFile('gambar_4')) {
+            // Validasi gambar
+            $gambar_file = $request->file('gambar_4'); // mengambil file dari form
+            $gambar_nama_4 = '4-' . date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
+            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama_4); // memindahkan file ke folder public agar bisa diakses
+        }
+        $gambar_nama_5 = false;
+        // Jika user upload gambar
+        if ($request->hasFile('gambar_5')) {
+            // Validasi gambar
+            $gambar_file = $request->file('gambar_5'); // mengambil file dari form
+            $gambar_nama_5 = '5-' . date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
+            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama_5); // memindahkan file ke folder public agar bisa diakses
+        }
+
+
+        // dd($request);
+
+        $tipe = [
+            'laptop_merek_id' => $request->merek,
+            'tipe' => $request->tipe,
+            'layar_size' => $request->layar_size,
+            'layar_resolusi' => strtoupper($request->layar_resolusi),
+            'gambar_1' => $gambar_nama_1,
+            'gambar_2' => $gambar_nama_2,
+            'gambar_3' => $gambar_nama_3,
+            'gambar_4' => $gambar_nama_4,
+            'gambar_5' => $gambar_nama_5,
+        ];
+
+        LaptopTipe::create($tipe);
+
+        return redirect('/mt');
     }
 }
