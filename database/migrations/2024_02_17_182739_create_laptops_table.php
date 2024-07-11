@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('ram');
             $table->string('storage');
             $table->integer('interfaces_storage')->nullable();
+            $table->text('kelengkapan')->nullable();
             $table->integer('status');
             $table->integer('kondisi');
             $table->text('keterangan')->nullable();
