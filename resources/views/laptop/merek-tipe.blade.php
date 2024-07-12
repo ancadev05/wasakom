@@ -78,17 +78,14 @@
                             <td>{{ strtoupper($item->tipe) }}</td>
                             <td>{{ $item->laptopmerek->merek }}</td>
                             <td>
-                                <a href="#" class="btn btn-xs btn-secondary d-inline-block"
+                                <a href="{{ url('tambah-tipe/' . $item->id) }}" class="btn btn-xs btn-secondary"
                                         data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Detail"><i
                                             class="far fa-eye"></i></a>
-                                    <a href="{{ url('laptop/' . $item->id . '/edit') }}"
-                                        class="btn btn-xs btn-warning d-inline-block" data-bs-toggle="tooltip"
-                                        data-bs-placment="top" data-bs-title="Edit"><i class="far fa-edit"></i></a>
                                     <form action="{{ url('laptop/' . $item->id) }}" method="POST" class="d-inline"
                                         onsubmit="confirm('Yakin ingin hapus data?')">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-xs btn-danger d-inline-block"
+                                        <button type="submit" class="btn btn-xs btn-danger"
                                             data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Hapus"><i
                                                 class="far fa-trash-alt"></i></button>
                                     </form>

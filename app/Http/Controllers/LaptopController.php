@@ -311,4 +311,15 @@ class LaptopController extends Controller
 
         return redirect('/mt');
     }
+
+    // lihat tipe
+    public function lihattipe(string $id)
+    {
+        $laptop_merek = LaptopMerek::get();
+        $laptop_tipe = LaptopTipe::where('id', $id)->first();
+
+        return view('laptop.tipe-laptop-lihat')
+            ->with('laptop_merek', $laptop_merek)
+            ->with('laptop_tipe', $laptop_tipe);
+    }
 }
