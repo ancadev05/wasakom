@@ -11,8 +11,16 @@
             <div class="page-header">
                 <h4 class="page-title">Merek & Tipe Laptop</h4>
             </div>
-            <form action="{{ url('tambah-tipe') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('/update-tipe/' . $laptop_tipe->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
+
+                {{-- file lama jika ada perubahan foto --}}
+                <input type="hidden" name="gambar_lama_1" value="{{ $laptop_tipe->gambar_1 }}">
+                <input type="hidden" name="gambar_lama_2" value="{{ $laptop_tipe->gambar_2 }}">
+                <input type="hidden" name="gambar_lama_3" value="{{ $laptop_tipe->gambar_3 }}">
+                <input type="hidden" name="gambar_lama_4" value="{{ $laptop_tipe->gambar_4 }}">
+                <input type="hidden" name="gambar_lama_5" value="{{ $laptop_tipe->gambar_5 }}">
+
                 <div class="mb-3 row">
                     <label class="col-sm-3 col-form-label" for="merek">Merek <span
                             class="text-danger fw-bold">*</span></label>
@@ -69,6 +77,7 @@
                                 @error('gambar_1')
                                     <small class="invalid-feedback"> {{ $message }} </small>
                                 @enderror
+                                <img id="preview_1" src="{{ asset('storage/gambar-laptop/' .  $laptop_tipe->gambar_1) }}" alt="Image Preview" style="width: 200px; height: auto;" class="mt-2">
                             </div>
                             <div class="mb-2">
                                 <label for="gambar_2" class="form-label">Gambar 2</label>
@@ -76,13 +85,15 @@
                                 @error('gambar_2')
                                     <small class="invalid-feedback"> {{ $message }} </small>
                                 @enderror
+                                <img id="preview_2" src="{{ asset('storage/gambar-laptop/' .  $laptop_tipe->gambar_2) }}" alt="Image Preview" style="width: 200px; height: auto;" class="mt-2">
                             </div>
                             <div class="mb-2">
                                 <label for="gambar_3" class="form-label">Gambar 3</label>
                                 <input class="form-control @error('gambar_3') is-invalid @enderror" id="gambar_3" name="gambar_3" type="file">
                                 @error('gambar_3')
                                     <small class="invalid-feedback"> {{ $message }} </small>
-                                @enderror
+                                    @enderror
+                                <img id="preview_3" src="{{ asset('storage/gambar-laptop/' .  $laptop_tipe->gambar_3) }}" alt="Image Preview" style="width: 200px; height: auto;" class="mt-2">
                             </div>
                         </div>
                         <div class="col-6">
@@ -92,20 +103,23 @@
                                 @error('gambar_4')
                                     <small class="invalid-feedback"> {{ $message }} </small>
                                 @enderror
+                                <img id="preview_4" src="{{ asset('storage/gambar-laptop/' .  $laptop_tipe->gambar_4) }}" alt="Image Preview" style="width: 200px; height: auto;" class="mt-2">
                             </div>
                             <div class="mb-2">
                                 <label for="gambar_5" class="form-label">Gambar 5</label>
                                 <input class="form-control @error('gambar_5') is-invalid @enderror" id="gambar_5" name="gambar_5" type="file">
                                 @error('gambar_5')
-                                    <small class="invalid-feedback"> {{ $message }} </small>
+                                <small class="invalid-feedback"> {{ $message }} </small>
                                 @enderror
+                                <img id="preview_5" src="{{ asset('storage/gambar-laptop/' .  $laptop_tipe->gambar_5) }}" alt="Image Preview" style="width: 200px; height: auto;" class="mt-2">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-sm btn-primary me-2">Simpan</button>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="window.history.back()">Batal</button>
+                    <a href="{{ url('/mt') }}" type="submit" class="btn btn-sm btn-danger me-2">Batal</a>
+                    {{-- <button type="button" class="btn btn-sm btn-danger" onclick="window.history.back()">Batal</button> --}}
                 </div>
             </form>
         </div>
@@ -115,4 +129,58 @@
 
 {{-- script --}}
 @section('script')
+<script>
+    $(document).ready(function() {
+        $('#gambar_1').change(function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#preview_1').attr('src', e.target.result).show();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        $('#gambar_2').change(function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#preview_2').attr('src', e.target.result).show();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        $('#gambar_3').change(function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#preview_3').attr('src', e.target.result).show();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        $('#gambar_4').change(function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#preview_4').attr('src', e.target.result).show();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        $('#gambar_5').change(function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#preview_5').attr('src', e.target.result).show();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
 @endsection

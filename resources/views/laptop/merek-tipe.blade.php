@@ -74,7 +74,7 @@
                     @foreach ($laptop_tipe as $item)
                         <tr>
                             <td>{{ $i }}</td>
-                            <td><img src="{{ asset('storage/gambar-laptop/' .  $item->gambar_1) }}" alt="" height="100px"></td>
+                            <td><img src="{{ asset('storage/gambar-laptop/' .  $item->gambar_1) }}" alt="" width="100px"></td>
                             <td>{{ strtoupper($item->tipe) }}</td>
                             <td>{{ $item->laptopmerek->merek }}</td>
                             <td>

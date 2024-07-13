@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GambarProduk;
 use App\Models\Laptop;
-use App\Models\LaptopMerek;
 use App\Models\LaptopTipe;
+use App\Models\LaptopMerek;
+use App\Models\GambarProduk;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,20 +44,21 @@ class LaptopController extends Controller
     {
         // dd($request);
         // name object yang dimasukkan dibawah ini sesuai name pada form
-        $request->validate([
-            'tgl' => 'required',
-            'sn' => 'required|unique:laptops,sn',
-            'merek' => 'required',
-            'tipe' => 'required',
-            'cpu' => 'required',
-            'gpu' => 'required',
-            'ram' => 'required',
-            'storage' => 'required',
-            // 'interfaces_storage' => 'required',
-            'status' => 'required',
-            'kondisi' => 'required'
-        ]
-    );
+        $request->validate(
+            [
+                'tgl' => 'required',
+                'sn' => 'required|unique:laptops,sn',
+                'merek' => 'required',
+                'tipe' => 'required',
+                'cpu' => 'required',
+                'gpu' => 'required',
+                'ram' => 'required',
+                'storage' => 'required',
+                // 'interfaces_storage' => 'required',
+                'status' => 'required',
+                'kondisi' => 'required'
+            ]
+        );
 
         $data = [
             'tgl' => $request->tgl,
@@ -138,7 +140,7 @@ class LaptopController extends Controller
             'gambar:max' => 'Ukuran maksimal gambar 2MB'
         ]);
 
-       
+
 
         // Validasi gambar baru
         if ($request->hasFile('gambar')) { // Jika ada gambar baru
@@ -297,7 +299,7 @@ class LaptopController extends Controller
 
         $tipe = [
             'laptop_merek_id' => $request->merek,
-            'tipe' => $request->tipe,
+            'tipe' => strtoupper($request->tipe),
             'layar_size' => $request->layar_size,
             'layar_resolusi' => strtoupper($request->layar_resolusi),
             'gambar_1' => $gambar_nama_1,
@@ -321,5 +323,101 @@ class LaptopController extends Controller
         return view('laptop.tipe-laptop-lihat')
             ->with('laptop_merek', $laptop_merek)
             ->with('laptop_tipe', $laptop_tipe);
+    }
+    // tipe update
+    public function tipeupdate(Request $request, string $id)
+    {
+        $request->validate([
+            'merek' => 'required',
+            'tipe' => ['required',
+                Rule::unique('laptop_tipes', 'tipe')->ignore($id)], // Mengabaikan pemeriksaan pada ID yang sama (ID dari data yang sedang diedit).
+            'gambar_1' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
+            'gambar_2' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
+            'gambar_3' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
+            'gambar_4' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
+            'gambar_5' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048'
+        ]);
+
+        // Validasi gambar baru
+        if ($request->hasFile('gambar_1')) { // Jika ada gambar baru
+            // Lakukan validasi
+            $gambar_file = $request->file('gambar_1'); // mengambil file dari form
+            $gambar_nama_1 = '1-' . date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // penamaan file, antisipasi nama file double
+            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama_1); // memindahkan file ke folder public agar bisa diakses dengan nama yang unik
+            // Hapus foto lama
+            Storage::delete('public/gambar-laptop/' . $request->gambar_lama_1);
+            // Masukkan namanya ke dalam database
+            $data['gambar_1'] = $gambar_nama_1;
+            LaptopTipe::where('id', $id)->update($data);
+        } else {
+            $data['gambar_1'] = $request->gambar_lama_1;
+        }
+        // Validasi gambar baru
+        if ($request->hasFile('gambar_2')) { // Jika ada gambar baru
+            // Lakukan validasi
+            $gambar_file = $request->file('gambar_2'); // mengambil file dari form
+            $gambar_nama_2 = '2-' . date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // penamaan file, antisipasi nama file double
+            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama_2); // memindahkan file ke folder public agar bisa diakses dengan nama yang unik
+            // Hapus foto lama
+            Storage::delete('public/gambar-laptop/' . $request->gambar_lama_2);
+            // Masukkan namanya ke dalam database
+            $data['gambar_2'] = $gambar_nama_2;
+            LaptopTipe::where('id', $id)->update($data);
+        } else {
+            $data['gambar_2'] = $request->gambar_lama_2;
+        }
+        // Validasi gambar baru
+        if ($request->hasFile('gambar_3')) { // Jika ada gambar baru
+            // Lakukan validasi
+            $gambar_file = $request->file('gambar_3'); // mengambil file dari form
+            $gambar_nama_3 = '3-' . date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // penamaan file, antisipasi nama file double
+            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama_3); // memindahkan file ke folder public agar bisa diakses dengan nama yang unik
+            // Hapus foto lama
+            Storage::delete('public/gambar-laptop/' . $request->gambar_lama_3);
+            // Masukkan namanya ke dalam database
+            $data['gambar_3'] = $gambar_nama_3;
+            LaptopTipe::where('id', $id)->update($data);
+        } else {
+            $data['gambar_3'] = $request->gambar_lama_3;
+        }
+        // Validasi gambar baru
+        if ($request->hasFile('gambar_4')) { // Jika ada gambar baru
+            // Lakukan validasi
+            $gambar_file = $request->file('gambar_4'); // mengambil file dari form
+            $gambar_nama_4 = '4-' . date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // penamaan file, antisipasi nama file double
+            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama_4); // memindahkan file ke folder public agar bisa diakses dengan nama yang unik
+            // Hapus foto lama
+            Storage::delete('public/gambar-laptop/' . $request->gambar_lama_4);
+            // Masukkan namanya ke dalam database
+            $data['gambar_4'] = $gambar_nama_4;
+            LaptopTipe::where('id', $id)->update($data);
+        } else {
+            $data['gambar_4'] = $request->gambar_lama_4;
+        }
+        // Validasi gambar baru
+        if ($request->hasFile('gambar_5')) { // Jika ada gambar baru
+            // Lakukan validasi
+            $gambar_file = $request->file('gambar_5'); // mengambil file dari form
+            $gambar_nama_5 = '5-' . date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // penamaan file, antisipasi nama file double
+            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama_5); // memindahkan file ke folder public agar bisa diakses dengan nama yang unik
+            // Hapus foto lama
+            Storage::delete('public/gambar-laptop/' . $request->gambar_lama_5);
+            // Masukkan namanya ke dalam database
+            $data['gambar_5'] = $gambar_nama_5;
+            LaptopTipe::where('id', $id)->update($data);
+        } else {
+            $data['gambar_5'] = $request->gambar_lama_5;
+        }
+
+        $tipe = [
+            'laptop_merek_id' => $request->merek,
+            'tipe' => strtoupper($request->tipe),
+            'layar_size' => $request->layar_size,
+            'layar_resolusi' => strtoupper($request->layar_resolusi)
+        ];
+
+        LaptopTipe::where('id', $id)->update($tipe);
+
+        return redirect('/mt');
     }
 }

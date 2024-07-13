@@ -33,6 +33,7 @@ Route::delete('/merek/{id}', [LaptopController::class, 'hapusmerek']);
 Route::get('/tambah-tipe', [LaptopController::class, 'tambahtipe']);
 Route::get('/tambah-tipe/{id}', [LaptopController::class, 'lihattipe']);
 Route::post('/tambah-tipe', [LaptopController::class, 'tipestore']);
+Route::post('/update-tipe/{id}', [LaptopController::class, 'tipeupdate']);
 
 Route::resource('/laptop', LaptopController::class);
 Route::resource('/servisan', ServisanController::class);
