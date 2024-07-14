@@ -125,6 +125,9 @@
                 <div class="col-5">
                     <div class="mb-3">
                         <label class="form-label" for="tanggal">Layar</label>
+                        <div>
+                            <i style="font-size: 12px">* Untuk mengubah layar, masuk dibagian menu Merek & Tipe</i>
+                        </div>
                         <input class="form-control @error('layar_size') is-invalid @enderror mb-2" type="text"
                             name="size" id="size" value="{{ $laptop->laptoptipe->layar_size }}"
                             placeholder='example: 15,6"' disabled>
@@ -188,6 +191,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar Produk</label>
+                        <div>
+                            <i style="font-size: 12px">* Untuk menambah gambar produk, masuk dibagian menu Merek & Tipe</i>
+                        </div>
                         <div>
                             <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_1) }}"
                                 alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">

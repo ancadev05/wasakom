@@ -1,15 +1,17 @@
-@extends('template-dashboard.template-kaiadmin')
+{{-- @extends('template-dashboard.template-kaiadmin') --}}
+@extends('template-dashboard.template-stisla')
 
 @section('title')
     Laptop
 @endsection
 
 @section('content')
-    <div class="page-header">
-        <h4 class="page-title">Laptop</h4>
-    </div>
 
-    <div class="page-category">
+    <section class="section">
+        <div class="section-header">
+            <h1>Laptop</h1>
+        </div>
+
         <div class="shadow bg-white p-3">
             <a href="{{ url('laptop/create') }}" class="btn btn-sm btn-primary mb-3">Tambah Laptop</a>
             <div class="table-responsive">
@@ -54,14 +56,14 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ url('laptop/' . $laptop->id . '/edit') }}" class="btn btn-xs btn-secondary d-inline-block"
+                                    <a href="{{ url('laptop/' . $laptop->id . '/edit') }}" class="btn btn-sm btn-secondary d-inline-block"
                                         data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Detail"><i
                                             class="far fa-eye"></i></a>
                                     <form action="{{ url('laptop/' . $laptop->id) }}" method="POST" class="d-inline"
                                         onsubmit="return confirm('Yakin ingin hapus data?')">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-xs btn-danger d-inline-block"
+                                        <button type="submit" class="btn btn-sm btn-danger d-inline-block"
                                             data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Hapus"><i
                                                 class="far fa-trash-alt"></i></button>
                                     </form>
@@ -76,9 +78,9 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
-    </div>
+    </section>
+
 @endsection
 
 @section('script')

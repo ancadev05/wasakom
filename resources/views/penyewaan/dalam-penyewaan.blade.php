@@ -17,7 +17,7 @@
                         <tr>
                             <th>No</th>
                             <th>Tanggal</th>
-                            <th>SN</th>
+                            <th>Nama</th>
                             <th>Merek</th>
                             <th>Type</th>
                             <th>CPU</th>
