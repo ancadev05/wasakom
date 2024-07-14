@@ -9,13 +9,16 @@ class DisplayController extends Controller
 {
     public function index() 
     {
-        $laptop = Laptop::orderBy('id', 'desc')->get();
+        $laptop = Laptop::where('laptop_status_id', 1)->orderBy('id', 'desc')->get();
 
         return view('display.laptop')->with('laptop', $laptop);
     }
 
-    public function laptopdetail()
+    public function laptopdetail(string $id)
     {
-        return view('display.laptop-detail');
+        $laptop = Laptop::where('id', $id)->first();
+
+        return view('display.laptop-detail')
+            ->with('laptop', $laptop);
     }
 }

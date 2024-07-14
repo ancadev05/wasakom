@@ -171,7 +171,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="kelengkapan">kelengkapan</label>
+                        <label class="form-label" for="kelengkapan">Kelengkapan</label>
                         <textarea class="form-control @error('kelengkapan') is-invalid @enderror" type="text" name="kelengkapan"
                             id="kelengkapan" placeholder="masukkan kelengkapan tambahan" rows="3">{{ $laptop->kelengkapan }}</textarea>
                         @error('kelengkapan')

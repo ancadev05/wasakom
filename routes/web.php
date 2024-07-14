@@ -44,8 +44,9 @@ Route::resource('/servisan', ServisanController::class);
 Route::get('/wasakom/servisan/servisan-selesai', [ServisanController::class, 'servisanSelesai'])->name('servisanSelesai');
 Route::resource('/tipe-laptop', TipeLaptopController::class);
 
+// display produk
 Route::get('/display', [DisplayController::class, 'index']);
-Route::get('/display/1', [DisplayController::class, 'laptopdetail']);
+Route::get('/display/{id}', [DisplayController::class, 'laptopdetail']);
 
 // Penyewaan
 Route::get('/penyewaan', [PenyewaanController::class, 'index']);
