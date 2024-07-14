@@ -57,11 +57,8 @@
                                     <a href="{{ url('laptop/' . $laptop->id . '/edit') }}" class="btn btn-xs btn-secondary d-inline-block"
                                         data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Detail"><i
                                             class="far fa-eye"></i></a>
-                                    {{-- <a href="{{ url('laptop/' . $laptop->id . '/edit') }}"
-                                        class="btn btn-xs btn-warning d-inline-block" data-bs-toggle="tooltip"
-                                        data-bs-placment="top" data-bs-title="Edit"><i class="far fa-edit"></i></a> --}}
                                     <form action="{{ url('laptop/' . $laptop->id) }}" method="POST" class="d-inline"
-                                        onsubmit="confirm('Yakin ingin hapus data?')">
+                                        onsubmit="return confirm('Yakin ingin hapus data?')">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-xs btn-danger d-inline-block"

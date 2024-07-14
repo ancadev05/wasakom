@@ -174,16 +174,6 @@ class LaptopController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-
-        // Cari nama file di storage yang ingin dihapus
-        $gambar_nama = Laptop::where('id', $id)->first();
-
-        // dd($gambar_nama['gambar']);
-
-        // Hapus file di storage
-        Storage::delete('public/gambar-laptop/' . $gambar_nama['gambar']);
-
         // Hapus data di database
         Laptop::where('id', $id)->delete();
 
