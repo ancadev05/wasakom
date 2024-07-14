@@ -6,6 +6,8 @@ use App\Models\Laptop;
 use App\Models\LaptopTipe;
 use App\Models\LaptopMerek;
 use App\Models\GambarProduk;
+use App\Models\LaptopKondisi;
+use App\Models\LaptopStatus;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
@@ -21,7 +23,7 @@ class LaptopController extends Controller
         //
         $laptops = Laptop::orderBy('id', 'desc')->get();
 
-        return view('laptop.index')->with(('laptops'), $laptops);
+        return view('laptop.index')->with('laptops', $laptops);
     }
 
     /**
@@ -31,10 +33,14 @@ class LaptopController extends Controller
     {
         $laptop_merek = LaptopMerek::get();
         $laptop_tipe = LaptopTipe::get();
+        $laptop_status = LaptopStatus::get();
+        $laptop_kondisi = LaptopKondisi::get();
 
         return view('laptop.create')
             ->with('laptop_merek', $laptop_merek)
-            ->with('laptop_tipe', $laptop_tipe);
+            ->with('laptop_tipe', $laptop_tipe)
+            ->with('laptop_status', $laptop_status)
+            ->with('laptop_kondisi', $laptop_kondisi);
     }
 
     /**
@@ -54,7 +60,7 @@ class LaptopController extends Controller
                 'gpu' => 'required',
                 'ram' => 'required',
                 'storage' => 'required',
-                // 'interfaces_storage' => 'required',
+                'interfaces_storage' => 'required',
                 'status' => 'required',
                 'kondisi' => 'required'
             ]
@@ -69,11 +75,11 @@ class LaptopController extends Controller
             'ram' => strtoupper($request->ram),
             'storage' => strtoupper($request->storage),
             'interfaces_storage' => $request->interfaces_storage,
-            'status' => $request->status,
-            'kondisi' => $request->kondisi,
+            'keterangan' => $request->keterangan,
+            'laptop_status_id' => $request->status,
+            'laptop_kondisi_id' => $request->kondisi,
             'laptop_merek_id' => $request->merek,
             'laptop_tipe_id' => $request->tipe,
-            'keterangan' => $request->keterangan
         ];
 
         // Memasukkan data kedalam tabel
@@ -100,13 +106,17 @@ class LaptopController extends Controller
     public function edit(string $id)
     {
         //
-        $laptop = Laptop::where('id', $id)->first();
         $laptop_merek = LaptopMerek::get();
         $laptop_tipe = LaptopTipe::get();
+        $laptop_status = LaptopStatus::get();
+        $laptop_kondisi = LaptopKondisi::get();
+        $laptop = Laptop::where('id', $id)->first();
 
         return view('laptop.edit')
             ->with('laptop_merek', $laptop_merek)
             ->with('laptop_tipe', $laptop_tipe)
+            ->with('laptop_status', $laptop_status)
+            ->with('laptop_kondisi', $laptop_kondisi)
             ->with('laptop', $laptop);
     }
 
@@ -116,59 +126,36 @@ class LaptopController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $request->validate([
-            'tanggal' => 'required',
-            'merek' => 'required',
-            'type' => 'required',
-            'cpu' => 'required',
-            'ram' => 'required',
-            'storage' => 'required',
-            'status' => 'required',
-            'kondisi' => 'required',
-            'gambar' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048'
-        ], [
-            'tanggal' => 'Tanggal harus diisi',
-            'sn' => 'Serial Number sudah terdaftar',
-            'merek' => 'Masukkan merek laptop',
-            'type' => 'Masukkan tipe laptop',
-            'cpu' => 'Masukkan tipe procesor',
-            'ram' => 'Masukkan kapasitas dan jenis RAM',
-            'storage' => 'Masukkan kapasitas dan jenis SSD',
-            'status' => 'Status laptop sekarang',
-            'kondisi' => 'Kondisi laptop saat ini',
-            'gambar:mimes' => 'extensi gambar tidak sesuai',
-            'gambar:max' => 'Ukuran maksimal gambar 2MB'
-        ]);
-
-
-
-        // Validasi gambar baru
-        if ($request->hasFile('gambar')) { // Jika ada gambar baru
-
-            // Lakukan validasi
-            $gambar_file = $request->file('gambar'); // mengambil file dari form
-            $gambar_nama = date('ymdhis') . '.' . $gambar_file->getClientOriginalExtension(); // meriname file, antisipasi nama file double
-            $gambar_file->storeAs('public/gambar-laptop/', $gambar_nama); // memindahkan file ke folder public agar bisa diakses
-
-            // Hapus foto lama
-            Storage::delete('public/gambar-laptop/' . $request->gambar_lama);
-
-            // Masukkan namanya ke dalam database
-            $data['gambar'] = $gambar_nama;
-            Laptop::where('id', $id)->update($data);
-        } else {
-            $data['gambar'] = $request->gambar_lama;
-        }
+        $request->validate(
+            [
+                'tgl' => 'required',
+                'sn' => ['required', Rule::unique('laptops', 'kode_barang')->ignore($id)],
+                'kode_barang' => [Rule::unique('laptops', 'kode_barang')->ignore($id)],
+                'merek' => 'required',
+                'tipe' => 'required',
+                'cpu' => 'required',
+                'gpu' => 'required',
+                'ram' => 'required',
+                'storage' => 'required',
+                'interfaces_storage' => 'required',
+                'status' => 'required',
+                'kondisi' => 'required'
+            ]
+        );
 
         $data = [
-            'tanggal' => $request->tanggal,
+            'tgl' => $request->tgl,
             'sn' => strtoupper($request->sn),
             'kode_barang' => strtoupper($request->kode_barang),
             'cpu' => $request->cpu,
+            'gpu' => $request->gpu,
             'ram' => strtoupper($request->ram),
             'storage' => strtoupper($request->storage),
-            'status' => $request->status,
-            'kondisi' => $request->kondisi,
+            'interfaces_storage' => $request->interfaces_storage,
+            'kelengkapan' => $request->kelengkapan,
+            'keterangan' => $request->keterangan,
+            'laptop_status_id' => $request->status,
+            'laptop_kondisi_id' => $request->kondisi,
             'laptop_merek_id' => $request->merek,
             'laptop_tipe_id' => $request->tipe,
         ];

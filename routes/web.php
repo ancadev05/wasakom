@@ -36,7 +36,10 @@ Route::post('/tambah-tipe', [LaptopController::class, 'tipestore']);
 Route::post('/update-tipe/{id}', [LaptopController::class, 'tipeupdate']);
 Route::delete('/delete-tipe/{id}', [LaptopController::class, 'tipedelete']);
 
+// crud list laptop
 Route::resource('/laptop', LaptopController::class);
+
+// servisan
 Route::resource('/servisan', ServisanController::class);
 Route::get('/wasakom/servisan/servisan-selesai', [ServisanController::class, 'servisanSelesai'])->name('servisanSelesai');
 Route::resource('/tipe-laptop', TipeLaptopController::class);

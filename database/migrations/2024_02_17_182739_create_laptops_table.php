@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('storage');
             $table->integer('interfaces_storage')->nullable();
             $table->text('kelengkapan')->nullable();
-            $table->integer('status');
-            $table->integer('kondisi');
             $table->text('keterangan')->nullable();
+            $table->foreignId('laptop_status_id')->constrained();
+            $table->foreignId('laptop_kondisi_id')->constrained();
             $table->foreignId('laptop_merek_id')->constrained();
             $table->foreignId('laptop_tipe_id')->constrained();
             $table->timestamps();

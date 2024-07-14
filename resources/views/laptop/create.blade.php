@@ -7,12 +7,6 @@
 @section('content')
     <h3 class="border-bottom pb-1 mb-3">Tambah Laptop</h3>
 
-    <div class="border rounded shadow mb-3 p-3">
-        <span>Inport Data</span>
-        <input type="file" class="form-control">
-
-    </div>
-
     <div class="border rounded shadow bg-white p-3">
         <form action="{{ url('laptop') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -127,70 +121,59 @@
                 </div>
                 <div class="col-5">
                     <div class="mb-3">
+                        <label class="form-label" for="status">Status Laptop <span
+                                class="text-danger fw-bold">*</span></label>
+                        <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
+                            <option value="" selected>---</option>
+                            @foreach ($laptop_status as $item)
+                                <option value="{{ $item->id }}" {{ old('status') == $item->id ? 'selected' : '' }}>
+                                    {{ $item->status }}</option>
+                            @endforeach
+                        </select>
+                        @error('status')
+                            <small class="invalid-feedback"> {{ $message }} </small>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="kondisi">Kondisi <span
+                                class="text-danger fw-bold">*</span></label>
+                        <i style="font-size: 12px">* Pastikan kondisi laptop dalam keadaan normal</i>
+                        <select class="form-select @error('kondisi') is-invalid @enderror" name="kondisi"
+                            id="kondisi">
+                            <option value="" selected>---</option>
+                            @foreach ($laptop_kondisi as $item)
+                                <option value="{{ $item->id }}" {{ old('kondisi') == $item->id ? 'selected' : '' }}>
+                                    {{ $item->kondisi }}</option>
+                            @endforeach
+                        </select>
+                        @error('kondisi')
+                            <small class="invalid-feedback"> {{ $message }} </small>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="kelengkapan">Kelengkapan</label>
                         <textarea class="form-control @error('kelengkapan') is-invalid @enderror" type="text" name="kelengkapan"
-                            id="kelengkapan" placeholder="masukkan kelengkapan tambahan" value="{{ old('kelengkapan') }}" rows="5"></textarea>
+                            id="kelengkapan" placeholder="masukkan kelengkapan tambahan" rows="3">{{ old('kelengkapan') }}</textarea>
                         @error('kelengkapan')
                             <small class="invalid-feedback"> {{ $message }} </small>
-                            @en
-                            <div class="mb-3">
-                                <label class="form-label" for="tanggal">Layar</label>
-                                <input class="form-control @error('size') is-invalid @enderror mb-2" type="text"
-                                    name="size" id="size" value="{{ old('size') }}" placeholder='example: 15,6"'>
-                                @error('size')
-                                    <small class="invalid-feedback"> {{ $message }} </small>
-                                @enderror
-                                <input class="form-control @error('resolusi') is-invalid @enderror" type="text"
-                                    name="resolusi" id="resolusi" value="{{ old('resolusi') }}"
-                                    placeholder="example: FHD (1920x1080)">
-                                @error('resolusi')
-                                    <small class="invalid-feedback"> {{ $message }} </small>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="status">Status Laptop <span
-                                    class="text-danger fw-bold">*</span></label>
-                            <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
-                                <option value="" selected>---</option>
-                                <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Display</option>
-                                <option value="2" {{ old('status') == '2' ? 'selected' : '' }}>Penyewaan</option>
-                            </select>
-                            @error('status')
-                                <small class="invalid-feedback"> {{ $message }} </small>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="kondisi">Kondisi <span
-                                    class="text-danger fw-bold">*</span></label>
-                            <i style="font-size: 12px">* Pastikan kondisi laptop dalam keadaan normal</i>
-                            <select class="form-select @error('kondisi') is-invalid @enderror" name="kondisi"
-                                id="kondisi">
-                                <option value="" selected>---</option>
-                                <option value="1" {{ old('kondisi') == '1' ? 'selected' : '' }}>Normal</option>
-                                <option value="2" {{ old('kondisi') == '2' ? 'selected' : '' }}>Tidak Normal</option>
-                                <option value="3" {{ old('kondisi') == '3' ? 'selected' : '' }}>Rusak</option>
-                            </select>
-                            @error('kondisi')
-                                <small class="invalid-feedback"> {{ $message }} </small>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="keterangan">Keterangan</label>
-                            <textarea class="form-control @error('keterangan') is-invalid @enderror" type="text" name="keterangan"
-                                id="keterangan" placeholder="masukkan keterangan tambahan" value="{{ old('keterangan') }}" rows="5"></textarea>
-                            @error('keterangan')
-                                <small class="invalid-feedback"> {{ $message }} </small>
-                            @enderror
-                        </div>
+                        @enderror
                     </div>
-
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-sm btn-primary me-1">Tambah</button>
-                        <a href="{{ url('/laptop') }}" class="btn btn-sm btn-danger">Batal</a>
+                    <div class="mb-3">
+                        <label class="form-label" for="keterangan">Keterangan</label>
+                        <textarea class="form-control @error('keterangan') is-invalid @enderror" type="text" name="keterangan"
+                            id="keterangan" placeholder="masukkan keterangan tambahan" rows="5">{{ old('keterangan') }}</textarea>
+                        @error('keterangan')
+                            <small class="invalid-feedback"> {{ $message }} </small>
+                        @enderror
                     </div>
                 </div>
-            </form>
 
-        </div>
-    @endsection
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-sm btn-primary me-1">Tambah</button>
+                    <a href="{{ url('/laptop') }}" class="btn btn-sm btn-danger">Batal</a>
+                </div>
+            </div>
+        </form>
+
+    </div>
+@endsection

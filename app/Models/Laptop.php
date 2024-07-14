@@ -20,4 +20,14 @@ class Laptop extends Model
     {
         return $this->belongsTo(LaptopTipe::class, 'laptop_tipe_id', 'id');
     }
+
+    public function laptopstatus()
+    {
+        return $this->belongsTo(LaptopStatus::class, 'laptop_status_id', 'id');
+    }
+
+    public function laptopkondisi()
+    {
+        return $this->belongsTo(LaptopKondisi::class, 'laptop_kondisi_id', 'id');
+    }
 }

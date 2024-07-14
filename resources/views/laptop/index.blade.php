@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <div class="page-header">
         <h4 class="page-title">Laptop</h4>
     </div>
@@ -44,43 +43,23 @@
                                 <td>{{ $laptop->ram }}</td>
                                 <td>{{ $laptop->storage }}</td>
                                 <td>
-                                    @if ($laptop->status == 1)
-                                        <span>Display </span>
-                                        @if ($laptop->kondisi == 1)
-                                            <i class="fas fa-check-circle text-success" data-bs-toggle="tooltip"
-                                                data-bs-placment="top" data-bs-title="Normal"></i>
-                                        @elseif ($laptop->kondisi == 2)
-                                            <i class="fas fa-exclamation-circle text-warning" data-bs-toggle="tooltip"
-                                                data-bs-placment="top" data-bs-title="Tidak normal"></i>
-                                        @else
-                                            <i class="fas fa-times-circle text-danger" data-bs-toggle="tooltip"
-                                                data-bs-placment="top" data-bs-title="Rusak"></i>
-                                        @endif
-                                    @elseif ($laptop->status == 2)
-                                        <span>Penyewaan </span>
-                                        @if ($laptop->kondisi == 1)
-                                            <i class="fas fa-check-circle text-success" data-bs-toggle="tooltip"
-                                                data-bs-placment="top" data-bs-title="Normal"></i>
-                                        @elseif ($laptop->kondisi == 2)
-                                            <i class="fas fa-exclamation-circle text-warning" data-bs-toggle="tooltip"
-                                                data-bs-placment="top" data-bs-title="Tidak normal"></i>
-                                        @else
-                                            <i class="fas fa-times-circle text-danger" data-bs-toggle="tooltip"
-                                                data-bs-placment="top" data-bs-title="Rusak"></i>
-                                        @endif
+                                    {{ $laptop->laptopstatus->status . ' ' }}
+
+                                    @if ($laptop->laptop_kondisi_id == 1)
+                                        <i class="fas fa-check-circle text-success" data-bs-toggle="tooltip"
+                                            data-bs-placment="top" data-bs-title="Normal"></i>
                                     @else
-                                        <span class="text-secondary">Pengecekan 
-                                            <i class="fas fa-sync-alt text-secondary" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" data-bs-title="Dicek teknisi"></i></span>
+                                        <i class="fas fa-exclamation-circle text-warning" data-bs-toggle="tooltip"
+                                            data-bs-placment="top" data-bs-title="Minus"></i>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-xs btn-secondary d-inline-block"
+                                    <a href="{{ url('laptop/' . $laptop->id . '/edit') }}" class="btn btn-xs btn-secondary d-inline-block"
                                         data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Detail"><i
                                             class="far fa-eye"></i></a>
-                                    <a href="{{ url('laptop/' . $laptop->id . '/edit') }}"
+                                    {{-- <a href="{{ url('laptop/' . $laptop->id . '/edit') }}"
                                         class="btn btn-xs btn-warning d-inline-block" data-bs-toggle="tooltip"
-                                        data-bs-placment="top" data-bs-title="Edit"><i class="far fa-edit"></i></a>
+                                        data-bs-placment="top" data-bs-title="Edit"><i class="far fa-edit"></i></a> --}}
                                     <form action="{{ url('laptop/' . $laptop->id) }}" method="POST" class="d-inline"
                                         onsubmit="confirm('Yakin ingin hapus data?')">
                                         @csrf
@@ -92,7 +71,7 @@
                                 </td>
                             </tr>
                             @php
-                                $i++
+                                $i++;
                             @endphp
                         @empty
                             <div class="alert alert-danger">Belum ada data yang tersedia</div>
@@ -103,18 +82,17 @@
 
         </div>
     </div>
-
 @endsection
 
 @section('script')
     <script>
         $("#tbl").DataTable({
-                layout: {
-                    top: {
-                        buttons: ["excel", "pdf", "print"],
-                        // buttons: ["copy", "excel", "pdf", "colvis", "print"],
-                    },
-                }
-            });
+            layout: {
+                top: {
+                    buttons: ["excel", "pdf", "print"],
+                    // buttons: ["copy", "excel", "pdf", "colvis", "print"],
+                },
+            }
+        });
     </script>
 @endsection

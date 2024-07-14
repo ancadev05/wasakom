@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-
     <div class="border rounded shadow bg-white p-3">
-        <form action="{{ url('laptop') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('laptop/'.$laptop->id) }}" method="POST">
             @csrf
+            @method('put')
 
             <div class="row">
                 <p><u><span class="text-danger fw-bold">*</span><i> wajib diisi</u></i></p>
@@ -43,7 +43,8 @@
                         <select class="form-select @error('merek') is-invalid @enderror" name="merek" id="merek">
                             <option value="" selected>---</option>
                             @foreach ($laptop_merek as $item)
-                                <option value="{{ $item->id }}" {{ $laptop->laptop_merek_id == $item->id ? 'selected' : '' }}>
+                                <option value="{{ $item->id }}"
+                                    {{ $laptop->laptop_merek_id == $item->id ? 'selected' : '' }}>
                                     {{ $item->merek }}</option>
                             @endforeach
                         </select>
@@ -56,7 +57,8 @@
                         <select class="form-select @error('tipe') is-invalid @enderror" name="tipe" id="tipe">
                             <option value="" selected>---</option>
                             @foreach ($laptop_tipe as $item)
-                                <option value="{{ $item->id }}" {{ $laptop->laptop_tipe_id == $item->id ? 'selected' : '' }}>
+                                <option value="{{ $item->id }}"
+                                    {{ $laptop->laptop_tipe_id == $item->id ? 'selected' : '' }}>
                                     {{ $item->tipe }}</option>
                             @endforeach
                         </select>
@@ -124,13 +126,14 @@
                     <div class="mb-3">
                         <label class="form-label" for="tanggal">Layar</label>
                         <input class="form-control @error('layar_size') is-invalid @enderror mb-2" type="text"
-                            name="size" id="size" value="{{ old('size') }}" placeholder='example: 15,6"'>
+                            name="size" id="size" value="{{ $laptop->laptoptipe->layar_size }}"
+                            placeholder='example: 15,6"' disabled>
                         @error('size')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
                         <input class="form-control @error('layar_resolusi') is-invalid @enderror" type="text"
-                            name="resolusi" id="resolusi" value="{{ old('resolusi') }}"
-                            placeholder="example: FHD (1920x1080)">
+                            name="resolusi" id="resolusi" value="{{ $laptop->laptoptipe->layar_resolusi }}"
+                            placeholder="example: FHD (1920x1080)" disabled>
                         @error('resolusi')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -140,9 +143,11 @@
                                 class="text-danger fw-bold">*</span></label>
                         <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
                             <option value="" selected>---</option>
-                            <option value="1" {{ $laptop->status == '1' ? 'selected' : '' }}>Display</option>
-                            <option value="2" {{ $laptop->status == '2' ? 'selected' : '' }}>Penyewaan</option>
-                            <option value="3" {{ $laptop->status == '3' ? 'selected' : '' }}>Pengecekan</option>
+                            @foreach ($laptop_status as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ $laptop->laptop_status_id == $item->id ? 'selected' : '' }}>
+                                    {{ $item->status }}</option>
+                            @endforeach
                         </select>
                         @error('status')
                             <small class="invalid-feedback"> {{ $message }} </small>
@@ -155,36 +160,52 @@
                         <select class="form-select @error('kondisi') is-invalid @enderror" name="kondisi"
                             id="kondisi">
                             <option value="" selected>---</option>
-                            <option value="1" {{ $laptop->kondisi == '1' ? 'selected' : '' }}>Normal</option>
-                            <option value="2" {{ $laptop->kondisi == '2' ? 'selected' : '' }}>Tidak Normal</option>
-                            <option value="3" {{ $laptop->kondisi == '3' ? 'selected' : '' }}>Rusak</option>
+                            @foreach ($laptop_kondisi as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ $laptop->laptop_kondisi_id == $item->id ? 'selected' : '' }}>
+                                    {{ $item->kondisi }}</option>
+                            @endforeach
                         </select>
                         @error('kondisi')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="kelengkapan">kelengkapan</label>
+                        <textarea class="form-control @error('kelengkapan') is-invalid @enderror" type="text" name="kelengkapan"
+                            id="kelengkapan" placeholder="masukkan kelengkapan tambahan" rows="3">{{ $laptop->kelengkapan }}</textarea>
+                        @error('kelengkapan')
+                            <small class="invalid-feedback"> {{ $message }} </small>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="keterangan">Keterangan</label>
                         <textarea class="form-control @error('keterangan') is-invalid @enderror" type="text" name="keterangan"
-                            id="keterangan" placeholder="masukkan keterangan tambahan" value="{{ $laptop->keterangan }}" rows="5"></textarea>
+                            id="keterangan" placeholder="masukkan keterangan tambahan" rows="5">{{ $laptop->keterangan }}</textarea>
                         @error('keterangan')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
                     </div>
-                    {{-- <div class="mb-3">
-                        <label class="form-label" for="gambar">Gambar <span class="text-danger fw-bold">*</span></label>
-                        <input class="form-control @error('gambar') is-invalid @enderror" type="file" name="gambar"
-                            id="gambar">
-                        @error('gambar')
-                            <small class="invalid-feedback"> {{ $message }} </small>
-                        @enderror
-                        <img src="" alt="foto" class="mt-2" id="img-view" width="330px">
-                    </div> --}}
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">Gambar Produk</label>
+                        <div>
+                            <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_1) }}"
+                                alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">
+                            <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_2) }}"
+                                alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">
+                            <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_3) }}"
+                                alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">
+                            <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_4) }}"
+                                alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">
+                            <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_5) }}"
+                                alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-sm btn-primary me-1">Tambah</button>
+                <button type="submit" class="btn btn-sm btn-primary me-1">Simpan</button>
                 <a href="{{ url('/laptop') }}" class="btn btn-sm btn-danger">Batal</a>
             </div>
 

@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             LaptopMerekSeeder::class,
-            LaptopTipeSeeder::class
+            LaptopTipeSeeder::class,
+            LaptopStatusSeeder::class,
+            LaptopKondisiSeeder::class
         ]);
 
         Laptop::factory(20)->create();
