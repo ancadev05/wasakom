@@ -81,8 +81,8 @@
                                 <a href="{{ url('tambah-tipe/' . $item->id) }}" class="btn btn-xs btn-secondary"
                                         data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Detail"><i
                                             class="far fa-eye"></i></a>
-                                    <form action="{{ url('laptop/' . $item->id) }}" method="POST" class="d-inline"
-                                        onsubmit="confirm('Yakin ingin hapus data?')">
+                                    <form action="{{ url('/delete-tipe/' . $item->id) }}" method="POST" class="d-inline"
+                                        onsubmit="return confirm('Yakin ingin hapus data? Tipe laptop tidak bisa dihapus jika tipe yang bersangkutan masi ada dalam daftar laptop')">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-xs btn-danger"
@@ -298,5 +298,13 @@
                 }
             });
         });
+        $("#tbl").DataTable({
+                layout: {
+                    top: {
+                        buttons: ["excel", "pdf", "print"],
+                        // buttons: ["copy", "excel", "pdf", "colvis", "print"],
+                    },
+                }
+            });
     </script>
 @endsection

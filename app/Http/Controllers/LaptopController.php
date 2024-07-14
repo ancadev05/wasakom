@@ -420,4 +420,20 @@ class LaptopController extends Controller
 
         return redirect('/mt');
     }
+    // delete tipe
+    public function tipedelete(string $id)
+    {
+        // mencari nama file
+        $nama_file = LaptopTipe::where('id', $id)->first();
+        // Hapus file gambar di storage sesuai nama
+        Storage::delete('public/gambar-laptop/' . $nama_file['gambar_1']);
+        Storage::delete('public/gambar-laptop/' . $nama_file['gambar_2']);
+        Storage::delete('public/gambar-laptop/' . $nama_file['gambar_3']);
+        Storage::delete('public/gambar-laptop/' . $nama_file['gambar_4']);
+        Storage::delete('public/gambar-laptop/' . $nama_file['gambar_5']);
+
+        LaptopTipe::where('id', $id)->delete();
+
+        return redirect('/mt');
+    }
 }

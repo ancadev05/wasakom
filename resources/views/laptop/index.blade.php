@@ -14,8 +14,7 @@
         <div class="shadow bg-white p-3">
             <a href="{{ url('laptop/create') }}" class="btn btn-sm btn-primary mb-3">Tambah Laptop</a>
             <div class="table-responsive">
-                <span class="border-bottom">List Laptop</span>
-                <table class="table table-sm table-striped table-hover table-bordered">
+                <table class="table table-sm table-striped table-hover table-bordered" id="tbl">
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
                             <th>No</th>
@@ -105,4 +104,17 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script>
+        $("#tbl").DataTable({
+                layout: {
+                    top: {
+                        buttons: ["excel", "pdf", "print"],
+                        // buttons: ["copy", "excel", "pdf", "colvis", "print"],
+                    },
+                }
+            });
+    </script>
 @endsection
