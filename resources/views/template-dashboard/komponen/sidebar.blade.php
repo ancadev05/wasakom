@@ -152,6 +152,20 @@
               <p>Laptop</p>
             </a>
           </li>
+          <span>PENYEWAAN</span>
+          <li class="nav-item">
+            <a href="{{ url('/dalam-penyewaan') }}">
+              <i class="fas fa-laptop"></i>
+              <p>Dalam Penyewaan</p>
+            </a>
+          </li>
+          <span>PENJUALAN</span>
+          <li class="nav-item">
+            <a href="{{ url('/laptop-terjual') }}">
+              <i class="fas fa-laptop"></i>
+              <p>Laptop Terjual</p>
+            </a>
+          </li>
 
           {{-- menu bawaan --}}
           {{-- <li class="nav-item active">

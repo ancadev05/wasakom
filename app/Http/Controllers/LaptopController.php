@@ -21,7 +21,7 @@ class LaptopController extends Controller
     public function index()
     {
         //
-        $laptops = Laptop::orderBy('id', 'desc')->get();
+        $laptops = Laptop::whereNotIn('laptop_status_id', [5, 6])->orderBy('id', 'desc')->get();
 
         return view('laptop.index')->with('laptops', $laptops);
     }

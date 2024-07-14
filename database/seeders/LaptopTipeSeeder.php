@@ -16,23 +16,33 @@ class LaptopTipeSeeder extends Seeder
         $laptop_tipe = [
             [
                 'laptop_merek_id' => 1,
-                'tipe' => 'ROG'
+                'tipe' => 'ROG',
+                'gambar_1' => 'rog2.png',
+                'harga' => 1000000
             ],
             [
                 'laptop_merek_id' => 2,
-                'tipe' => 'Thinkpad T480'
+                'tipe' => 'Thinkpad T480',
+                'gambar_1' => 'thinkpad.png',
+                'harga' => 2000000
             ],
             [
                 'laptop_merek_id' => 3,
-                'tipe' => 'Travelmate'
+                'tipe' => 'Travelmate',
+                'gambar_1' => 'travelmate.png',
+                'harga' => 3000000
             ],
             [
                 'laptop_merek_id' => 4,
-                'tipe' => 'Probook'
+                'tipe' => 'Probook',
+                'gambar_1' => 'probook.png',
+                'harga' => 4000000
             ],
             [
                 'laptop_merek_id' => 5,
-                'tipe' => 'MacBook Pro'
+                'tipe' => 'MacBook Pro',
+                'gambar_1' => 'macbook.png',
+                'harga' => 5000000
             ]
         ];
 

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('gambar_3')->nullable();
             $table->string('gambar_4')->nullable();
             $table->string('gambar_5')->nullable();
+            $table->integer('harga')->nullable();
             $table->foreignId('laptop_merek_id')->constrained();
             $table->timestamps();
         });

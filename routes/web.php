@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\LaptopController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PenyewaanController;
 use App\Http\Controllers\ServisanController;
 use App\Http\Controllers\TipeLaptopController;
@@ -53,3 +54,7 @@ Route::get('/penyewaan', [PenyewaanController::class, 'index']);
 Route::get('/buat-penyewaan', function(){
     return view('penyewaan.create');
 });
+Route::get('/dalam-penyewaan', [PenyewaanController::class, 'dalampenyewaan']);
+
+// penjualan
+Route::get('/laptop-terjual', [PenjualanController::class, 'laptopterjual']);
