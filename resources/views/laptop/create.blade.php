@@ -1,18 +1,21 @@
-@extends('template-dashboard.template-kaiadmin')
+@extends('template-dashboard.template-stisla')
 
 @section('title')
     Tambah Laptop
 @endsection
 
 @section('content')
-    <h3 class="border-bottom pb-1 mb-3">Tambah Laptop</h3>
+<section class="section">
+    <div class="section-header">
+        <h1>Tambah Laptop</h1>
+    </div>
 
     <div class="border rounded shadow bg-white p-3">
         <form action="{{ url('laptop') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <p><u><span class="text-danger fw-bold">*</span><i> wajib diisi</u></i></p>
                 <div class="col-5">
+                    <p><u><span class="text-danger fw-bold">*</span><i> wajib diisi</u></i></p>
                     <div class="mb-3">
                         <label class="form-label" for="tgl">Tanggal <span class="text-danger fw-bold">*</span></label>
                         <input class="form-control @error('tgl') is-invalid @enderror" type="date" name="tgl"
@@ -176,4 +179,5 @@
         </form>
 
     </div>
+</section>
 @endsection

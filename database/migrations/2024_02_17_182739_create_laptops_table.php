@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('ram');
             $table->string('storage');
             $table->integer('interfaces_storage')->nullable();
+            $table->string('os');
             $table->text('kelengkapan')->nullable();
             $table->text('keterangan')->nullable();
             $table->foreignId('laptop_status_id')->constrained();

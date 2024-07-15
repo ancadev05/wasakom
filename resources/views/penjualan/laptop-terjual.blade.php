@@ -1,15 +1,15 @@
-@extends('template-dashboard.template-kaiadmin')
+@extends('template-dashboard.template-stisla')
 
 @section('title')
     Laptop
 @endsection
 
 @section('content')
-    <div class="page-header">
-        <h4 class="page-title">Laptop Terjual</h4>
-    </div>
+    <section class="section">
+        <div class="section-header">
+            <h1>Laptop Terjual</h1>
+        </div>
 
-    <div class="page-category">
         <div class="shadow bg-white p-3">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover table-bordered" id="tbl">
@@ -53,9 +53,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ url('laptop/' . $laptop->id . '/edit') }}" class="btn btn-xs btn-secondary d-inline-block"
-                                        data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Detail"><i
-                                            class="far fa-eye"></i></a>
+                                    <a href="{{ url('laptop/' . $laptop->id . '/edit') }}"
+                                        class="btn btn-xs btn-secondary d-inline-block" data-bs-toggle="tooltip"
+                                        data-bs-placment="top" data-bs-title="Detail"><i class="far fa-eye"></i></a>
                                     <form action="{{ url('laptop/' . $laptop->id) }}" method="POST" class="d-inline"
                                         onsubmit="return confirm('Yakin ingin hapus data?')">
                                         @csrf
@@ -77,7 +77,7 @@
             </div>
 
         </div>
-    </div>
+    </section>
 @endsection
 
 @section('script')

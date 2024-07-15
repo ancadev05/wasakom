@@ -48,23 +48,23 @@
                                     {{ $laptop->laptopstatus->status . ' ' }}
 
                                     @if ($laptop->laptop_kondisi_id == 1)
-                                        <i class="fas fa-check-circle text-success" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" data-bs-title="Normal"></i>
+                                        <i class="fas fa-check-circle text-success" data-toggle="tooltip"
+                                            data-placment="top" title="Normal"></i>
                                     @else
-                                        <i class="fas fa-exclamation-circle text-warning" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" data-bs-title="Minus"></i>
+                                        <i class="fas fa-exclamation-circle text-warning" data-toggle="tooltip"
+                                            data-placment="top" title="Minus"></i>
                                     @endif
                                 </td>
                                 <td>
                                     <a href="{{ url('laptop/' . $laptop->id . '/edit') }}" class="btn btn-sm btn-secondary d-inline-block"
-                                        data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Detail"><i
+                                        data-toggle="tooltip" data-placment="top" title="Detail"><i
                                             class="far fa-eye"></i></a>
                                     <form action="{{ url('laptop/' . $laptop->id) }}" method="POST" class="d-inline"
                                         onsubmit="return confirm('Yakin ingin hapus data?')">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-sm btn-danger d-inline-block"
-                                            data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Hapus"><i
+                                            data-toggle="tooltip" data-placment="top" title="Hapus"><i
                                                 class="far fa-trash-alt"></i></button>
                                     </form>
                                 </td>
@@ -80,6 +80,10 @@
             </div>
         </div>
     </section>
+
+      <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+        On top
+      </button>
 
 @endsection
 

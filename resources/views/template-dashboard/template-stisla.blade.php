@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>General Dashboard &mdash; Stisla</title>
+    <title>@yield('title')</title>
+
+    {{-- favicon --}}
+    <link rel="icon" href="{{ asset('assets/img/logo-wana.png') }}" type="image/x-icon" />
+
+    {{-- bootstrap 5 --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/bootstrap5/css/bootstrap.min.css') }}"> --}}
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('stisla/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -84,6 +90,11 @@
     <!-- Template JS File -->
     <script src="{{ asset('stisla/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('stisla/assets/js/custom.js') }}"></script>
+
+    {{-- bootstrap 5 --}}
+    {{-- <script src="{{ asset('assets/bootstrap5/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap5/js/bootstrap.js') }}"></script> --}}
+    <script src="{{ asset('assets/bootstrap5/js/bootstrap.bundle.min.js') }}"></script>
 
     {{-- script costum --}}
     @yield('script')
