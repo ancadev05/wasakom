@@ -1,16 +1,16 @@
-@extends('template-dashboard.template-kaiadmin')
+@extends('template-dashboard.template-niceadmin')
 
 @section('title')
     Merek & Tipe Laptop
 @endsection
 
 @section('content')
-    {{-- continer content --}}
-    <div class="page-category">
+    <div class="pagetitle">
+        <h1>Tipe Laptop</h1>
+    </div><!-- End Page Title -->
+    <section class="section">
+        {{-- continer content --}}
         <div class="card p-3">
-            <div class="page-header">
-                <h4 class="page-title">Merek & Tipe Laptop</h4>
-            </div>
             <form action="{{ url('tambah-tipe') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3 row">
@@ -71,7 +71,8 @@
                                 @error('gambar_1')
                                     <small class="invalid-feedback"> {{ $message }} </small>
                                 @enderror
-                                <img id="preview_1" src="#" alt="Image Preview" style="display: none; width: 200px; height: auto;" class="mt-2">
+                                <img id="preview_1" src="#" alt="Image Preview"
+                                    style="display: none; width: 200px; height: auto;" class="mt-2">
                             </div>
                             <div class="mb-2">
                                 <label for="gambar_2" class="form-label">Gambar 2</label>
@@ -80,7 +81,8 @@
                                 @error('gambar_2')
                                     <small class="invalid-feedback"> {{ $message }} </small>
                                 @enderror
-                                <img id="preview_2" src="#" alt="Image Preview" style="display: none; width: 200px; height: auto;" class="mt-2">
+                                <img id="preview_2" src="#" alt="Image Preview"
+                                    style="display: none; width: 200px; height: auto;" class="mt-2">
                             </div>
                             <div class="mb-2">
                                 <label for="gambar_3" class="form-label">Gambar 3</label>
@@ -89,7 +91,8 @@
                                 @error('gambar_3')
                                     <small class="invalid-feedback"> {{ $message }} </small>
                                 @enderror
-                                <img id="preview_3" src="#" alt="Image Preview" style="display: none; width: 200px; height: auto;" class="mt-2">
+                                <img id="preview_3" src="#" alt="Image Preview"
+                                    style="display: none; width: 200px; height: auto;" class="mt-2">
                             </div>
                         </div>
                         <div class="col-6">
@@ -100,7 +103,8 @@
                                 @error('gambar_4')
                                     <small class="invalid-feedback"> {{ $message }} </small>
                                 @enderror
-                                <img id="preview_4" src="#" alt="Image Preview" style="display: none; width: 200px; height: auto;" class="mt-2">
+                                <img id="preview_4" src="#" alt="Image Preview"
+                                    style="display: none; width: 200px; height: auto;" class="mt-2">
                             </div>
                             <div class="mb-2">
                                 <label for="gambar_5" class="form-label">Gambar 5</label>
@@ -109,7 +113,8 @@
                                 @error('gambar_5')
                                     <small class="invalid-feedback"> {{ $message }} </small>
                                 @enderror
-                                <img id="preview_5" src="#" alt="Image Preview" style="display: none; width: 200px; height: auto;" class="mt-2">
+                                <img id="preview_5" src="#" alt="Image Preview"
+                                    style="display: none; width: 200px; height: auto;" class="mt-2">
                             </div>
                         </div>
                     </div>
@@ -121,7 +126,7 @@
             </form>
         </div>
 
-    </div> {{-- /ccontainer content --}}
+    </section>
 @endsection
 
 {{-- script --}}

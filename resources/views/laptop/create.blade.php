@@ -1,20 +1,21 @@
-@extends('template-dashboard.template-stisla')
+@extends('template-dashboard.template-niceadmin')
 
 @section('title')
     Tambah Laptop
 @endsection
 
 @section('content')
+
+<div class="pagetitle">
+    <h1>Tambah Laptop</h1>
+  </div><!-- End Page Title -->
 <section class="section">
-    <div class="section-header">
-        <h1>Tambah Laptop</h1>
-    </div>
 
     <div class="border rounded shadow bg-white p-3">
         <form action="{{ url('laptop') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-5">
+                <div class="col-sm-12 col-md-5">
                     <p><u><span class="text-danger fw-bold">*</span><i> wajib diisi</u></i></p>
                     <div class="mb-3">
                         <label class="form-label" for="tgl">Tanggal <span class="text-danger fw-bold">*</span></label>
@@ -122,12 +123,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-5">
+                <div class="col-sm-12 col-md-5">
+                    <div class="mb-3">
+                        <label class="form-label" for="os">System Operasi:</label>
+                        <input class="form-control @error('os') is-invalid @enderror" type="text" name="os"
+                            id="os" placeholder="..." value="{{ old('os') }}">
+                        @error('os')
+                            <small class="invalid-feedback"> {{ $message }} </small>
+                        @enderror
+                    </div>
                     <div class="mb-3">
                         <label class="form-label" for="status">Status Laptop <span
                                 class="text-danger fw-bold">*</span></label>
                         <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
-                            <option value="" selected>---</option>
+                            <option value="" selected>...</option>
                             @foreach ($laptop_status as $item)
                                 <option value="{{ $item->id }}" {{ old('status') == $item->id ? 'selected' : '' }}>
                                     {{ $item->status }}</option>

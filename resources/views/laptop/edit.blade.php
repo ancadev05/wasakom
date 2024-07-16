@@ -1,10 +1,14 @@
-@extends('template-dashboard.template-kaiadmin')
+@extends('template-dashboard.template-niceadmin')
 
 @section('title')
     Edit Laptop
 @endsection
 
 @section('content')
+<div class="pagetitle">
+    <h1>{{ $laptop->laptopmerek->merek . '-' . $laptop->laptoptipe->tipe }}</h1>
+</div>
+<section class="section">
     <div class="border rounded shadow bg-white p-3">
         <form action="{{ url('laptop/'.$laptop->id) }}" method="POST">
             @csrf
@@ -124,8 +128,16 @@
 
                 <div class="col-5">
                     <div class="mb-3">
-                        <label class="form-label" for="tanggal">Layar</label>
-                        <div>
+                        <label class="form-label" for="os">System Operasi:</label>
+                        <input class="form-control @error('os') is-invalid @enderror" type="text" name="os"
+                            id="os" placeholder="System operasi yang digunakan" value="{{ $laptop->os }}">
+                        @error('os')
+                            <small class="invalid-feedback"> {{ $message }} </small>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="tanggal">Layar:</label>
+                        <div class="text-info">
                             <i style="font-size: 12px">* Untuk mengubah layar, masuk dibagian menu Merek & Tipe</i>
                         </div>
                         <input class="form-control @error('layar_size') is-invalid @enderror mb-2" type="text"
@@ -218,4 +230,5 @@
         </form>
 
     </div>
+</section>
 @endsection

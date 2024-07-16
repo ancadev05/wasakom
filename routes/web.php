@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', function () {
-    return view('dashboard.index');
+    return view('dashboard.coba2');
 });
 
 
