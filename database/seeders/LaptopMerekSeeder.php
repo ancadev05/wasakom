@@ -15,19 +15,19 @@ class LaptopMerekSeeder extends Seeder
     {
         $laptop_merek = [
             [
-                'merek' => 'Asus'
+                'merek' => 'ASUS'
             ],
             [
-                'merek' => 'Lenovo'
+                'merek' => 'LENOVO'
             ],
             [
-                'merek' => 'Acer'
+                'merek' => 'ACER'
             ],
             [
                 'merek' => 'HP'
             ],
             [
-                'merek' => 'Mac'
+                'merek' => 'MAC'
             ]
         ];
 

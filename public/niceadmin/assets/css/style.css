@@ -42,7 +42,8 @@ h6 {
 # Main
 --------------------------------------------------------------*/
 #main {
-  margin-top: 60px;
+  margin-top: 36px;
+  /* margin-top: 60px; */
   padding: 20px 30px;
   transition: all 0.3s;
 }
@@ -360,7 +361,8 @@ h6 {
 
 @media (min-width: 1200px) {
   .logo {
-    width: 280px;
+    width: 210px;
+    /* width: 280px; */
   }
 }
 
@@ -602,7 +604,8 @@ h6 {
   top: 60px;
   left: 0;
   bottom: 0;
-  width: 300px;
+  width: 235px;
+  /* width: 300px; */
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
@@ -633,7 +636,8 @@ h6 {
 
   #main,
   #footer {
-    margin-left: 300px;
+    margin-left: 235px;
+    /* margin-left: 300px; */
   }
 }
 

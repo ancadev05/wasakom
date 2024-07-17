@@ -18,7 +18,7 @@
                             class="text-danger fw-bold">*</span></label>
                     <div class="col-sm-9">
                         <select class="form-select @error('merek') is-invalid @enderror" name="merek" id="merek">
-                            <option value="" selected>---</option>
+                            <option value="" selected>...</option>
                             @foreach ($laptop_merek as $item)
                                 <option value="{{ $item->id }}" {{ old('merek') == $item->id ? 'selected' : '' }}>
                                     {{ $item->merek }}</option>
@@ -61,9 +61,29 @@
                         @enderror
                     </div>
                 </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label" for="hpp">HPP</label>
+                    <div class="col-sm-9">
+                        <input class="form-control @error('hpp') is-invalid @enderror" type="number" name="hpp"
+                            id="hpp" value="{{ old('hpp') }}" placeholder="Rp...">
+                        @error('hpp')
+                            <small class="invalid-feedback"> {{ $message }} </small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label" for="harga">Harga</label>
+                    <div class="col-sm-9">
+                        <input class="form-control @error('harga') is-invalid @enderror" type="number" name="harga"
+                            id="harga" value="{{ old('harga') }}" placeholder="Rp...">
+                        @error('harga')
+                            <small class="invalid-feedback"> {{ $message }} </small>
+                        @enderror
+                    </div>
+                </div>
                 <div class="mb-3">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-sm-12 col-lg-6">
                             <div class="mb-2">
                                 <label for="gambar_1" class="form-label">Gambar 1</label>
                                 <input class="form-control @error('gambar_1') is-invalid @enderror" id="gambar_1"
@@ -95,7 +115,7 @@
                                     style="display: none; width: 200px; height: auto;" class="mt-2">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-sm-12 col-lg-6">
                             <div class="mb-2">
                                 <label for="gambar_4" class="form-label">Gambar 4</label>
                                 <input class="form-control @error('gambar_4') is-invalid @enderror" id="gambar_4"

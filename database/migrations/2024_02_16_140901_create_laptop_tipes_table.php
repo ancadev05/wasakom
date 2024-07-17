@@ -16,12 +16,13 @@ return new class extends Migration
             $table->string('tipe')->unique();
             $table->string('layar_size')->nullable();
             $table->string('layar_resolusi')->nullable();
+            $table->integer('hpp')->nullable();
+            $table->integer('harga')->nullable();
             $table->string('gambar_1')->nullable();
             $table->string('gambar_2')->nullable();
             $table->string('gambar_3')->nullable();
             $table->string('gambar_4')->nullable();
             $table->string('gambar_5')->nullable();
-            $table->integer('harga')->nullable();
             $table->foreignId('laptop_merek_id')->constrained();
             $table->timestamps();
         });

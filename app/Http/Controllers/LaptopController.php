@@ -75,6 +75,8 @@ class LaptopController extends Controller
             'ram' => strtoupper($request->ram),
             'storage' => strtoupper($request->storage),
             'interfaces_storage' => $request->interfaces_storage,
+            'os' => $request->os,
+            'kelengkapan' => $request->kelengkapan,
             'keterangan' => $request->keterangan,
             'laptop_status_id' => $request->status,
             'laptop_kondisi_id' => $request->kondisi,
@@ -152,6 +154,7 @@ class LaptopController extends Controller
             'ram' => strtoupper($request->ram),
             'storage' => strtoupper($request->storage),
             'interfaces_storage' => $request->interfaces_storage,
+            'os' => $request->os,
             'kelengkapan' => $request->kelengkapan,
             'keterangan' => $request->keterangan,
             'laptop_status_id' => $request->status,
@@ -279,6 +282,8 @@ class LaptopController extends Controller
             'tipe' => strtoupper($request->tipe),
             'layar_size' => $request->layar_size,
             'layar_resolusi' => strtoupper($request->layar_resolusi),
+            'hpp' => $request->hpp,
+            'harga' => $request->harga,
             'gambar_1' => $gambar_nama_1,
             'gambar_2' => $gambar_nama_2,
             'gambar_3' => $gambar_nama_3,
@@ -390,7 +395,9 @@ class LaptopController extends Controller
             'laptop_merek_id' => $request->merek,
             'tipe' => strtoupper($request->tipe),
             'layar_size' => $request->layar_size,
-            'layar_resolusi' => strtoupper($request->layar_resolusi)
+            'layar_resolusi' => strtoupper($request->layar_resolusi),
+            'hpp' => $request->hpp,
+            'harga' => $request->harga
         ];
 
         LaptopTipe::where('id', $id)->update($tipe);

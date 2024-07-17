@@ -10,10 +10,8 @@
     </div><!-- End Page Title -->
 
     <section class="section">
+        <a href="{{ url('laptop/create') }}" class="btn btn-sm btn-primary mb-3"><i class="bi bi-plus-lg"></i> Laptop</a>
         <div class="card p-3">
-            <div>
-            <a href="{{ url('laptop/create') }}" class="btn btn-sm btn-primary mb-3">Tambah Laptop</a>
-        </div>
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover" id="tbl">
                     <thead class="bg-secondary text-bg-dark text-center">
