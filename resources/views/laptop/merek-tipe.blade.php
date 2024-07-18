@@ -33,12 +33,10 @@
                             <td>{{ $i }}</td>
                             <td>{{ strtoupper($item->merek) }}</td>
                             <td>
-                                <button type="submit" class="btn btn-sm btn-warning edit-merek" data-bs-toggle="tooltip"
-                                    data-bs-placment="top" title="Edit" data-id="{{ $item->id }}"
-                                    data-bs-toggle="modal" data-bs-target="#edit-merek"><i
-                                        class="bi bi-pencil-square"></i></button>
+                                <a href="{{ url('merek/' . $item->id) }}" class="btn btn-sm btn-warning">
+                                    <i class="bi bi-pencil-square"></i></a>
                                 <form action="{{ url('merek/' . $item->id) }}" method="POST" class="d-inline"
-                                    onclick="return alerthapus()">
+                                    onclick="return confirm('Hapus Merek ?')">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"

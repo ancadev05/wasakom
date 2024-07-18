@@ -205,10 +205,10 @@ class LaptopController extends Controller
         return redirect('/mt');
     }
     // edit merek
-    public function lihatmerek(string $id)
+    public function editmerek(string $id)
     {
         $merek = LaptopMerek::where('id', $id)->first();
-        return response()->json(['merek' => $merek]);
+        return view('laptop.merek-edit')->with('merek', $merek);
     }
     // update merek
     public function updatemerek(Request $request, string $id)

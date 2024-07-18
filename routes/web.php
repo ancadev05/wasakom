@@ -31,9 +31,10 @@ Route::get('/login', function () {
 
 
 Route::get('/mt', [LaptopController::class, 'mt']);
+
 Route::post('/tambah-merek', [LaptopController::class, 'tambahmerek']);
-Route::get('/merek/{id}', [LaptopController::class, 'lihatmerek']);
-Route::post('/merek/{id}', [LaptopController::class, 'updatetmerek']);
+Route::get('/merek/{id}', [LaptopController::class, 'editmerek']);
+Route::post('/merek/{id}', [LaptopController::class, 'updatemerek']);
 Route::delete('/merek/{id}', [LaptopController::class, 'hapusmerek']);
 
 Route::get('/tambah-tipe', [LaptopController::class, 'tambahtipe']);
