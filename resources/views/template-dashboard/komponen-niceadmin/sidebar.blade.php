@@ -10,7 +10,7 @@
             </a>
         </li>
 
-         <li class="nav-heading">Laptop</li>
+         <li class="nav-heading">Stok Laptop</li>
          
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('mt') }}">
@@ -28,20 +28,20 @@
          <li class="nav-heading">Penyewaan</li>
 
          <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ url('/dalam-penyewaan') }}">
+            <a class="nav-link collapsed" href="{{ url('/penyewaan') }}">
                 <i class="fas fa-laptop"></i>
-                <span>Dalam Penyewaan</span>
+                <span>Laptop Penyewaan</span>
             </a>
         </li>
 
-        <li class="nav-heading">Penjualan</li>
+        {{-- <li class="nav-heading">Penjualan</li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/laptop-terjual') }}">
                 <i class="fas fa-laptop"></i>
                 <span>Laptop Terjual</span>
             </a>
-        </li>
+        </li> --}}
 
          
 

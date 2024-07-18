@@ -204,6 +204,23 @@ class LaptopController extends Controller
 
         return redirect('/mt');
     }
+    // edit merek
+    public function lihatmerek(string $id)
+    {
+        $merek = LaptopMerek::where('id', $id)->first();
+        return response()->json(['merek' => $merek]);
+    }
+    // update merek
+    public function updatemerek(Request $request, string $id)
+    {
+        $merek = [
+            'merek' => strtoupper($request->merek)
+        ];
+
+        LaptopMerek::where('id', $id)->update($merek);
+
+        return redirect('/mt');
+    }
     // hapus merek
     public function hapusmerek(string $id)
     {
@@ -211,6 +228,8 @@ class LaptopController extends Controller
 
         return redirect('/mt');
     }
+
+    // ######################################################
 
     // tambah tipe
     public function tambahtipe()

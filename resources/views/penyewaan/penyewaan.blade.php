@@ -1,24 +1,26 @@
 @extends('template-dashboard.template-niceadmin')
 
 @section('title')
-    Laptop
+    Penyewaan
 @endsection
 
 @section('content')
-    <div class="pagetitle">
-        <h1>Laptop</h1>
-    </div><!-- End Page Title -->
+<div class="pagetitle">
+    <h1>Laptop Penyewaan</h1>
+</div>
 
     <section class="section">
-        <a href="{{ url('laptop/create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Laptop</a>
+
+        <a href="{{ url('/penyewaan-buat') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Penyewaan</a>
+
         <div class="card p-3">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover table-bordered datatable" id="tbl">
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
-                            <th>#id</th>
+                            <th>No</th>
                             <th>Tanggal</th>
-                            <th>SN</th>
+                            <th>Nama</th>
                             <th>Merek</th>
                             <th>Type</th>
                             <th>CPU</th>
@@ -29,12 +31,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @php
+                        @php
                             $i = 1;
-                        @endphp --}}
-                        @forelse ($laptops as $laptop)
+                        @endphp
+                        @forelse ($laptop as $laptop)
                             <tr>
-                                <td>{{ $laptop->id }}</td>
+                                <td>{{ $i }}</td>
                                 <td>{{ $laptop->tgl }}</td>
                                 <td>{{ $laptop->sn }}</td>
                                 <td>{{ $laptop->laptopmerek->merek }}</td>
@@ -56,32 +58,27 @@
                                 <td>
                                     <a href="{{ url('laptop/' . $laptop->id . '/edit') }}"
                                         class="btn btn-sm btn-secondary d-inline-block" data-bs-toggle="tooltip"
-                                        data-bs-placment="top" title="Detail"><i class="bi bi-eye"></i></a>
+                                        data-bs-placment="top" data-bs-title="Detail"><i class="bi bi-eye"></i></a>
                                     <form action="{{ url('laptop/' . $laptop->id) }}" method="POST" class="d-inline"
                                         onsubmit="return confirm('Yakin ingin hapus data?')">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-sm btn-danger d-inline-block"
-                                            data-bs-toggle="tooltip" data-bs-placment="top" title="Hapus"><i
+                                            data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Hapus"><i
                                                 class="bi bi-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
-                            {{-- @php
+                            @php
                                 $i++;
-                            @endphp --}}
+                            @endphp
                         @empty
                             <div class="alert alert-danger">Belum ada data yang tersedia</div>
                         @endforelse
                     </tbody>
                 </table>
             </div>
+
         </div>
     </section>
-@endsection
-
-@section('script')
-    
-<script>
-</script>
 @endsection

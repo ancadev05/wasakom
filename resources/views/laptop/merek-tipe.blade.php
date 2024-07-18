@@ -5,13 +5,14 @@
 @endsection
 
 @section('content')
-<div class="pagetitle">
-    <h1>Merek & Tipe Laptop</h1>
-</div>
+    <div class="pagetitle">
+        <h1>Merek & Tipe Laptop</h1>
+    </div>
 
-<section class="section">
+    <section class="section">
         {{-- tabel merek laptop --}}
-        <button type="button" class="btn btn-sm btn-primary mb-3" data-bs-bs-toggle="modal" data-bs-bs-target="#laptop-merek">
+        <button type="button" class="btn btn-sm btn-primary mb-3 shadow-sm" data-bs-toggle="modal"
+            data-bs-target="#laptop-merek">
             <i class="bi bi-plus-lg"></i> Merek</button>
 
         <div class="card p-3 mb-3">
@@ -32,16 +33,16 @@
                             <td>{{ $i }}</td>
                             <td>{{ strtoupper($item->merek) }}</td>
                             <td>
-                                <button type="submit" class="btn btn-sm btn-warning"
-                                        data-bs-toggle="tooltip" data-bs-placment="top" title="Edit"><i
-                                            class="bi bi-pencil-square"></i></button>
+                                <button type="submit" class="btn btn-sm btn-warning edit-merek" data-bs-toggle="tooltip"
+                                    data-bs-placment="top" title="Edit" data-id="{{ $item->id }}"
+                                    data-bs-toggle="modal" data-bs-target="#edit-merek"><i
+                                        class="bi bi-pencil-square"></i></button>
                                 <form action="{{ url('merek/' . $item->id) }}" method="POST" class="d-inline"
                                     onclick="return alerthapus()">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        data-bs-toggle="tooltip" data-bs-placment="top" title="Hapus"><i
-                                            class="bi bi-trash"></i></button>
+                                    <button type="submit" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
+                                        data-bs-placment="top" title="Hapus"><i class="bi bi-trash"></i></button>
                                 </form>
                             </td>
                         </tr>
@@ -54,7 +55,7 @@
         </div>
 
         {{-- tabel tipe laptop --}}
-        <a href="{{ url('/tambah-tipe') }}" class="btn btn-sm btn-primary my-3"><i class="bi bi-plus-lg"></i>
+        <a href="{{ url('/tambah-tipe') }}" class="btn btn-sm btn-primary my-3 shadow-sm"><i class="bi bi-plus-lg"></i>
             Tipe</a>
         <div class="card p-3 mb-3">
             <div class="table-responsive">
@@ -109,7 +110,7 @@
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{ url('/tambah-merek') }}" method="post">
+                <form action="{{ url('/tambah-merek') }}" method="post" id="form-2">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Merek Laptop</h1>
@@ -132,16 +133,57 @@
         </div>
     </div>
     {{-- /modal tambah merek --}}
+
+    {{-- merek edit --}}
+    <div class="modal fade" id="edit-merek" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Merek</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3 row">
+                            <label for="merek" class="col-sm-3 col-form-label">Merek Laptop</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="merek-2" name="merek">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-sm btn-primary" id="update-merek">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 {{-- script --}}
 @section('script')
     <script>
-        const myModal = document.getElementById('laptop-merek')
-        const myInput = document.getElementById('myInput')
+        // edit data
+        $('body').on('click', '.edit-merek', function(e) {
+            let id = $(this).data('id');
+            $.ajax({
+                url: 'merek/' + id,
+                type: 'GET',
+                success: function(response) {
+                    $('#edit-merek').modal('show');
+                    $('#merek-2').val(response.merek.merek);
+                    console.log(response.merek.merek);
+                }
+            })
+            on('click', '#update-merek', function() {
+                $.ajax({
+                    url: 'merek/' + id,
+                    type: 'POST'  
+                })
+            })
 
-        myModal.addEventListener('shown.bs.modal', () => {
-            myInput.focus()
         })
     </script>
 @endsection

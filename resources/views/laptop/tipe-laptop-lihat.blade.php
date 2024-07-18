@@ -154,8 +154,8 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-sm btn-primary me-2">Simpan</button>
-                    <a href="{{ url('/mt') }}" type="submit" class="btn btn-sm btn-danger me-2">Batal</a>
+                    <button type="submit" class="btn btn-sm btn-primary me-2 shadow-sm">Simpan</button>
+                    <a href="{{ url('/mt') }}" type="submit" class="btn btn-sm btn-danger me-2 shadow-sm">Batal</a>
                     {{-- <button type="button" class="btn btn-sm btn-danger" onclick="window.history.back()">Batal</button> --}}
                 </div>
             </form>

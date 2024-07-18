@@ -27,6 +27,9 @@ class LaptopMerekSeeder extends Seeder
                 'merek' => 'HP'
             ],
             [
+                'merek' => 'DELL'
+            ],
+            [
                 'merek' => 'MAC'
             ]
         ];

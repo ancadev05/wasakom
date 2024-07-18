@@ -25,10 +25,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard.index');
 });
+Route::get('/login', function () {
+    return view('login');
+});
 
 
 Route::get('/mt', [LaptopController::class, 'mt']);
 Route::post('/tambah-merek', [LaptopController::class, 'tambahmerek']);
+Route::get('/merek/{id}', [LaptopController::class, 'lihatmerek']);
+Route::post('/merek/{id}', [LaptopController::class, 'updatetmerek']);
 Route::delete('/merek/{id}', [LaptopController::class, 'hapusmerek']);
 
 Route::get('/tambah-tipe', [LaptopController::class, 'tambahtipe']);
@@ -51,9 +56,8 @@ Route::get('/display/{id}', [DisplayController::class, 'laptopdetail']);
 
 // Penyewaan
 Route::get('/penyewaan', [PenyewaanController::class, 'index']);
-Route::get('/buat-penyewaan', function(){
-    return view('penyewaan.create');
-});
+Route::get('/penyewaan-buat', [PenyewaanController::class, 'penyewaanbuat']);
+
 Route::get('/dalam-penyewaan', [PenyewaanController::class, 'dalampenyewaan']);
 
 // penjualan

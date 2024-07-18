@@ -223,8 +223,8 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-sm btn-primary me-1">Simpan</button>
-                <a href="{{ url('/laptop') }}" class="btn btn-sm btn-danger">Batal</a>
+                <button type="submit" class="btn btn-sm btn-primary me-2 shadow-sm">Simpan</button>
+                <a href="{{ url('/laptop') }}" class="btn btn-sm btn-danger shadow-sm">Batal</a>
             </div>
 
         </form>

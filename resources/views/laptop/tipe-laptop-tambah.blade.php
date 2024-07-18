@@ -140,8 +140,8 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-sm btn-primary me-2">Tambah</button>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="window.history.back()">Batal</button>
+                    <button type="submit" class="btn btn-sm btn-primary me-2 shadow-sm">Tambah</button>
+                    <button type="button" class="btn btn-sm btn-danger shadow-sm" onclick="window.history.back()">Batal</button>
                 </div>
             </form>
         </div>
