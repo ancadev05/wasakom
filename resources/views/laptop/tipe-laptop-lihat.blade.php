@@ -97,7 +97,7 @@
                 </div>
                 <div class="mb-3">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-sm-12 col-lg-6">
                             <div class="mb-2">
                                 <label for="gambar_1" class="form-label">Gambar 1</label>
                                 <input class="form-control @error('gambar_1') is-invalid @enderror" id="gambar_1"
@@ -129,7 +129,7 @@
                                     alt="Image Preview" style="width: 200px; height: auto;" class="mt-2">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-sm-12 col-lg-6">
                             <div class="mb-2">
                                 <label for="gambar_4" class="form-label">Gambar 4</label>
                                 <input class="form-control @error('gambar_4') is-invalid @enderror" id="gambar_4"

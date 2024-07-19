@@ -16,7 +16,7 @@
             @csrf
             <div class="row">
                 <p><u><span class="text-danger fw-bold">*</span><i> wajib diisi</u></i></p>
-                <div class="col-sm-12 col-md-5">
+                <div class="col-sm-12 col-lg-6">
                     <div class="mb-3">
                         <label class="form-label" for="tgl">Tanggal <span class="text-danger fw-bold">*</span></label>
                         <input class="form-control @error('tgl') is-invalid @enderror" type="date" name="tgl"
@@ -123,7 +123,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-5">
+                <div class="col-sm-12 col-lg-6">
                     <div class="mb-3">
                         <label class="form-label" for="os">System Operasi:</label>
                         <input class="form-control @error('os') is-invalid @enderror" type="text" name="os"
