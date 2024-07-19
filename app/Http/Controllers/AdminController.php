@@ -13,10 +13,13 @@ class AdminController extends Controller
         $laptops_display = Laptop::where('laptop_status_id', 'display')->get();
         $laptops_penyewaan = Laptop::where('laptop_status_id', 'penyewaan')->get();
 
-        $laptops = Laptop::select('id_laptop_tipe', DB::raw('count(*) as total'))
-            ->groupBy('id_laptop_tipe')
+        $laptops = Laptop::select('laptop_tipe_id', 'laptop_merek_id', DB::raw('count(*) as total'))
+            ->groupBy('laptop_tipe_id', 'laptop_merek_id')
             ->get();
+
+            // $data = Laptop::all();
         
-        return view('dahsboard.index')->with('laptops', $laptops);
+            // dd($data);
+        return view('dashboard.index')->with('laptops', $laptops);
     }
 }

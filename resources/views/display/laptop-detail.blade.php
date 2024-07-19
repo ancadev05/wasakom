@@ -77,8 +77,8 @@
 								</div>
 							</div>
 							<div>
-								<h3 class="product-price">Rp{{ format_uang($laptop->laptoptipe->harga) . ',-' }} <del class="product-old-price">$990.00</del></h3>
-								<span class="product-available">In Stock</span>
+								<h3 class="product-price">Rp{{ format_uang($laptop->laptoptipe->harga) . ',-' }}</h3>
+								<span class="product-available">Ready</span>
 							</div>
 							
 							<table class="mt-3 table">
@@ -108,12 +108,13 @@
 								</tr>
 							</table>
 
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
+							{{-- <div class="add-to-cart"> --}}
+								{{-- <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button> --}}
+							{{-- </div> --}}
 
 						
 						</div>
+
 					</div>
 					<!-- /Product details -->
 

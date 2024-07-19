@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\PenjualanController;
@@ -22,9 +23,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
-    return view('dashboard.index');
-});
+Route::get('/', [AdminController::class, 'index']);
 Route::get('/login', function () {
     return view('login');
 });

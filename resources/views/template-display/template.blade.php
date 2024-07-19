@@ -6,7 +6,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Display</title>
+		<meta name="author" content="Hamzah">
+		<meta name="keywords" content="wana satria komputer, wana, laptop, laptop bekas, penyewaan, wana satria, garansi 6 bulan, enam, garansi, makassar">
+		<meta name="description" content="pusat penjualan laptop bekas dengan garansi 6 bulan dan tempat penyewaan laptop terpercaya di kota makassar">
+
+		<title>Display Laptop</title>
+
+		{{-- bootstrap 5 --}}
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap5/css/bootstrap.min.css') }}">
 
 		{{-- Favicon --}}
 		<link rel="icon" href="{{ asset('kaiadmin/assets/img/logo-wana.png') }}" type="image/x-icon" />
@@ -35,63 +42,13 @@
 		<![endif]-->
 
     </head>
-	<body>
+	<body class="bg-light">
 		<!-- HEADER -->
-		<header>
-
-			<!-- MAIN HEADER -->
-			<div id="header">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row align-items-center">
-						<!-- LOGO -->
-						<div class="col-md-3">
-							<div class="header-logo">
-								<a href="#" class="logo">
-									<img src="{{ asset('kaiadmin/assets/img/logo-wana.png') }}" alt="" height="100px">
-								</a>
-							</div>
-						</div>
-						<!-- /LOGO -->
-
-						<!-- SEARCH BAR -->
-						<div class="col-md-6 align-items-center">
-               				<h1 class="text-light">WANA SATRIA KOMPUTER</h1>
-						</div>
-						<!-- /SEARCH BAR -->
-
-					</div>
-					<!-- row -->
-				</div>
-				<!-- container -->
-			</div>
-			<!-- /MAIN HEADER -->
-		</header>
+		@include('template-display.header.header2')
 		<!-- /HEADER -->
 
 		<!-- NAVIGATION -->
-		<nav id="navigation">
-			<!-- container -->
-			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
-					</ul>
-					<!-- /NAV -->
-				</div>
-				<!-- /responsive-nav -->
-			</div>
-			<!-- /container -->
-		</nav>
+		{{-- @include('template-display.navigation.nav') --}}
 		<!-- /NAVIGATION -->
 		
 		@yield('product-laptop-detail')
