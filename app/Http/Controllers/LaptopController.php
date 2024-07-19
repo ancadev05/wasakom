@@ -69,7 +69,8 @@ class LaptopController extends Controller
         $data = [
             'tgl' => $request->tgl,
             'sn' => strtoupper($request->sn),
-            'kode_barang' => strtoupper($request->kode_barang),
+            // 'kode_barang' => strtoupper($request->kode_barang),
+            'kode_barang' => date('ymdhis'),
             'cpu' => $request->cpu,
             'gpu' => $request->gpu,
             'ram' => strtoupper($request->ram),
