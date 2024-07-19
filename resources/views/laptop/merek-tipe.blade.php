@@ -16,7 +16,7 @@
             <i class="bi bi-plus-lg"></i> Merek</button>
 
         <div class="card p-3 mb-3">
-            <table class="table table-sm">
+            <table class="table table-sm datatable">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -27,6 +27,7 @@
                 <tbody>
                     @php
                         $i = 1;
+                        // $i = $laptop_merek->firstItem();
                     @endphp
                     @foreach ($laptop_merek as $item)
                         <tr>
@@ -50,6 +51,8 @@
                     @endforeach
                 </tbody>
             </table>
+            {{-- Agar paginasi berfungsi dengan baik saat melakukan pencarian --}}
+            {{-- {{ $laptop_merek->withQueryString()->links() }} --}}
         </div>
 
         {{-- tabel tipe laptop --}}
@@ -57,7 +60,7 @@
             Tipe</a>
         <div class="card p-3 mb-3">
             <div class="table-responsive">
-                <table class="table table-sm">
+                <table class="table table-sm datatable">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -69,7 +72,8 @@
                     </thead>
                     <tbody>
                         @php
-                            $i = 1;
+                        //    $i = $laptop_tipe->firstItem();
+                        $i=1;
                         @endphp
                         @foreach ($laptop_tipe as $item)
                             <tr>
@@ -98,6 +102,7 @@
                     </tbody>
                 </table>
             </div>
+            {{-- {{ $laptop_tipe->withQueryString()->paginate() }} --}}
         </div>
     </section>
 
@@ -178,7 +183,7 @@
             on('click', '#update-merek', function() {
                 $.ajax({
                     url: 'merek/' + id,
-                    type: 'POST'  
+                    type: 'POST'
                 })
             })
 
