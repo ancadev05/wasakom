@@ -207,15 +207,15 @@
                             <i style="font-size: 12px">* Untuk menambah gambar produk, masuk dibagian menu Merek & Tipe</i>
                         </div>
                         <div>
-                            <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_1) }}"
+                            <img class="me-2" src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_1) }}"
                                 alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">
-                            <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_2) }}"
+                            <img class="me-2" src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_2) }}"
                                 alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">
-                            <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_3) }}"
+                            <img class="me-2" src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_3) }}"
                                 alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">
-                            <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_4) }}"
+                            <img class="me-2" src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_4) }}"
                                 alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">
-                            <img src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_5) }}"
+                            <img class="me-2" src="{{ asset('storage/gambar-laptop/' . $laptop->laptoptipe->gambar_5) }}"
                                 alt="Image Preview" style="width: 150px; height: auto;" class="mt-2">
                         </div>
                     </div>
