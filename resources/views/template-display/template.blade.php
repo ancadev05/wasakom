@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ asset('assets/bootstrap5/css/bootstrap.min.css') }}">
 
 		{{-- Favicon --}}
-		<link rel="icon" href="{{ asset('kaiadmin/assets/img/logo-wana.png') }}" type="image/x-icon" />
+		<link rel="icon" href="{{ asset('assets/img/logo-wana.png') }}" type="image/x-icon" />
 
  		<!-- Bootstrap -->
  		<link type="text/css" rel="stylesheet" href="{{ asset('electro/css/bootstrap.min.css') }}"/>

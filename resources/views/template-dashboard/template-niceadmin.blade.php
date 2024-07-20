@@ -6,12 +6,12 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>@yield('title')</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <meta content="Aplikasi untuk mengelola data laptop" name="description">
+  <meta content="teknisi, laptop, teknisi laptop, teknisi_ku, biner, biner komputer, biner_komputer" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ asset('assets/img/logo-wana.png') }}" rel="icon">
-  <link href="{{ asset('niceadmin/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  <link href="{{ asset('assets/img/logo-biner.png') }}" rel="icon">
+  <link href="{{ asset('assets/img/logo-biner.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
