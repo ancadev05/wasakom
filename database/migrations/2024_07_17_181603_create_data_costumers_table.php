@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('data_costumers', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('alamat');
+            $table->integer('no_wa');
+            $table->string('foto_ktp')->nullable();
             $table->timestamps();
         });
     }

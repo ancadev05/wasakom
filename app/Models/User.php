@@ -19,8 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'user',
         'password',
+        'no_wa',
+        'level_akun_id'
     ];
 
     /**
@@ -42,4 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function levelakun()
+    {
+        return $this->belongsTo(LevelAkun::class, 'level_akun_id', 'id');
+    }
 }

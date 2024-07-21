@@ -84,26 +84,32 @@
 							<table class="mt-3 table">
 								<tr>
 									<td>CPU</td>
+									<td>:</td>
 									<td>{{ $laptop->cpu }}</td>
 								</tr>
 								<tr>
 									<td>GPU</td>
+									<td>:</td>
 									<td>{{ $laptop->gpu }}</td>
 								</tr>
 								<tr>
 									<td>RAM</td>
+									<td>:</td>
 									<td>{{ $laptop->ram }}</td>
 								</tr>
 								<tr>
 									<td>Storage</td>
+									<td>:</td>
 									<td>{{ $laptop->storage }} {{ $laptop->interfaces_storage == 1 ? ' (SATA)' : ' (NvMe)' }}</td>
 								</tr>
 								<tr>
 									<td>Display</td>
+									<td>:</td>
 									<td>{{ $laptop->laptoptipe->layar_size . ', ' . $laptop->laptoptipe->layar_resolusi }}</td>
 								</tr>
 								<tr>
 									<td>Kelengkapan</td>
+									<td>:</td>
 									<td>{{ $laptop->kelengkapan }}</td>
 								</tr>
 							</table>

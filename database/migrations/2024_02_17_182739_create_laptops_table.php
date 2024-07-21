@@ -28,6 +28,7 @@ return new class extends Migration
             $table->foreignId('laptop_kondisi_id')->constrained();
             $table->foreignId('laptop_merek_id')->constrained();
             $table->foreignId('laptop_tipe_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

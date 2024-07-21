@@ -23,11 +23,13 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             LaptopMerekSeeder::class,
-            // LaptopTipeSeeder::class,
+            LaptopTipeSeeder::class,
             LaptopStatusSeeder::class,
-            LaptopKondisiSeeder::class
+            LaptopKondisiSeeder::class,
+            LevelAkunSeeder::class,
+            UserSedeer::class
         ]);
 
-        // Laptop::factory(200)->create();
+        Laptop::factory(200)->create();
     }
 }

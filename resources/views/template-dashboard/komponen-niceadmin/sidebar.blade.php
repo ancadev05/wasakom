@@ -4,7 +4,7 @@
      <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ url('/') }}">
+            <a class="nav-link collapsed" href="{{ url('/dashboard') }}">
                 <i class="bi bi-laptop"></i>
                 <span>Dashboard</span>
             </a>
@@ -31,6 +31,12 @@
             <a class="nav-link collapsed" href="{{ url('/penyewaan') }}">
                 <i class="fas fa-laptop"></i>
                 <span>Laptop Penyewaan</span>
+            </a>
+        </li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ url('/penyewaan') }}">
+                <i class="bi bi-users"></i>
+                <span>Akun</span>
             </a>
         </li>
 

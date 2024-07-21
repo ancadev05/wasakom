@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('servisans', function (Blueprint $table) {
+        Schema::create('level_akuns', function (Blueprint $table) {
             $table->id();
-            $table->date('tgl_masuk');
-            $table->string('nama');
-            $table->integer('hp');
-            $table->text('alamat');
-            $table->string('penerima');
-            $table->text('keluhan');
-            $table->string('kelengkapan');
+            $table->string('level');
             $table->timestamps();
         });
     }
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('servisans');
+        Schema::dropIfExists('level_akuns');
     }
 };

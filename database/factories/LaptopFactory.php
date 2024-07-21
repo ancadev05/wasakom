@@ -30,7 +30,8 @@ class LaptopFactory extends Factory
             'laptop_status_id' => $this->faker->randomElement(['1', '2', '3', '4', '5', '6', '7']),
             'laptop_kondisi_id' => $this->faker->randomElement(['1', '2']),
             'laptop_merek_id' => $this->faker->randomElement(['1', '2', '3', '4', '5']),
-            'laptop_tipe_id' => $this->faker->randomElement(['1', '2', '3', '4', '5'])
+            'laptop_tipe_id' => $this->faker->randomElement(['1', '2', '3', '4', '5']),
+            'user_id' => $this->faker->randomElement(['1', '2', '3']),
         ];
     }
 }

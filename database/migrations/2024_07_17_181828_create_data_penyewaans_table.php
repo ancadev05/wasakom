@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('data_penyewaans', function (Blueprint $table) {
             $table->id();
+            $table->date("tgl_buat");
+            $table->date("tgl_mulai");
+            $table->date("tgl_selesai");
+            $table->string('keterangan');
+            $table->foreignId('laptop_id')->constrained();
+            $table->foreignId('data_costumer_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
