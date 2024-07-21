@@ -33,12 +33,16 @@
                 <span>Laptop Penyewaan</span>
             </a>
         </li>
-         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ url('/penyewaan') }}">
-                <i class="bi bi-users"></i>
-                <span>Akun</span>
-            </a>
-        </li>
+        
+        @if ($user->level_akun_id == 1)
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('/penyewaan') }}">
+                    <i class="bi bi-users"></i>
+                    <span>Akun</span>
+                </a>
+            </li>
+        @endif
+         
 
         {{-- <li class="nav-heading">Penjualan</li>
 

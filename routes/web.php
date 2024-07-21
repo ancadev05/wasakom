@@ -33,14 +33,11 @@ Route::middleware(['guest'])->group(function () {
 
 // route yang hanya bisa diakses setelah login
 Route::middleware(['auth'])->group(function () {
+    // route untuk logout
     Route::get('/logout', [SesiController::class, 'logout']);
-
 
     // dashboard
     Route::get('/dashboard', [AdminController::class, 'index']);
-
-
-
 
     Route::get('/mt', [LaptopController::class, 'mt']);
 
