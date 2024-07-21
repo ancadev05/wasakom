@@ -29,8 +29,8 @@ class AdminController extends Controller
         
             // dd($data);
         return view('dashboard.index')
-            ->with('user', $user)
-            ->with('level', $level)
+            // ->with('user', $user)
+            // ->with('level', $level)
             ->with('laptops', $laptops);
     }
 }

@@ -29,9 +29,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @php
-                            $i = 1;
-                        @endphp --}}
                         @forelse ($laptops as $laptop)
                             <tr>
                                 <td>{{ $laptop->id }}</td>
@@ -67,9 +64,6 @@
                                     </form>
                                 </td>
                             </tr>
-                            {{-- @php
-                                $i++;
-                            @endphp --}}
                         @empty
                             <div class="alert alert-danger">Belum ada data yang tersedia</div>
                         @endforelse
@@ -78,10 +72,4 @@
             </div>
         </div>
     </section>
-@endsection
-
-@section('script')
-    
-<script>
-</script>
 @endsection

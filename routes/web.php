@@ -8,6 +8,7 @@ use App\Http\Controllers\PenyewaanController;
 use App\Http\Controllers\ServisanController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\TipeLaptopController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,4 +73,7 @@ Route::middleware(['auth'])->group(function () {
 
     // penjualan
     Route::get('/laptop-terjual', [PenjualanController::class, 'laptopterjual']);
+
+    // profil
+    Route::get('/profil', [UserController::class, 'profil']);
 });
