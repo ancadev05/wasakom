@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('laptop_mereks', function (Blueprint $table) {
             $table->id();
-            $table->string('merek')->unique();
+            $table->string('merek')->unique()->nullable();
+            $table->foreignId('user_id')->constrained()->default(1);
             $table->timestamps();
         });
     }

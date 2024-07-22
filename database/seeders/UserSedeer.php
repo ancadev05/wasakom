@@ -16,8 +16,8 @@ class UserSedeer extends Seeder
         $users = [
             [
                 'name' => "Hamzah",
-                'username' => 'ham123',
-                'password' => 123,
+                'username' => '1',
+                'password' => 1,
                 'no_wa' => 1111,
                 'level_akun_id' => 1
             ],

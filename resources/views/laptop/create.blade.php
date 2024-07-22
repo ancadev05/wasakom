@@ -75,6 +75,9 @@
                                 Loading...
                             </span>
 
+                            <small class="d-block text-secondary" style="font-size: 12px"></small>
+                            <i class="d-block" style="font-size: 12px">* Jika tipe tidak muncul, tambahkan di menu Merek & Tipe</i>
+
                             <select class="form-select @error('tipe') is-invalid @enderror" name="tipe" id="tipe">
                                 <option value="" selected>---</option>
                                 {{-- @foreach ($laptop_tipe as $item) --}}

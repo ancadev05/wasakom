@@ -9,6 +9,7 @@ use App\Models\GambarProduk;
 use App\Models\LaptopKondisi;
 use App\Models\LaptopStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
@@ -98,6 +99,7 @@ class LaptopController extends Controller
             'laptop_kondisi_id' => $request->kondisi,
             'laptop_merek_id' => $request->merek,
             'laptop_tipe_id' => $request->tipe,
+            'user_id' => Auth::user()->id,
         ];
 
         // Memasukkan data kedalam tabel
@@ -177,6 +179,7 @@ class LaptopController extends Controller
             'laptop_kondisi_id' => $request->kondisi,
             'laptop_merek_id' => $request->merek,
             'laptop_tipe_id' => $request->tipe,
+            'user_id' => Auth::user()->id
         ];
 
 
@@ -213,7 +216,8 @@ class LaptopController extends Controller
     public function tambahmerek(Request $request)
     {
         $merek = [
-            'merek' => $request->merek
+            'merek' => $request->merek,
+            'user_id' => Auth::user()->id
         ];
 
         LaptopMerek::create($merek);
@@ -230,7 +234,8 @@ class LaptopController extends Controller
     public function updatemerek(Request $request, string $id)
     {
         $merek = [
-            'merek' => $request->merek
+            'merek' => $request->merek,
+            'user_id' => Auth::user()->id
         ];
 
         LaptopMerek::where('id', $id)->update($merek);
@@ -324,6 +329,7 @@ class LaptopController extends Controller
             'gambar_3' => $gambar_nama_3,
             'gambar_4' => $gambar_nama_4,
             'gambar_5' => $gambar_nama_5,
+            'user_id' => Auth::user()->id
         ];
 
         LaptopTipe::create($tipe);
@@ -434,7 +440,8 @@ class LaptopController extends Controller
             'layar_size' => $request->layar_size,
             'layar_resolusi' => strtoupper($request->layar_resolusi),
             'hpp' => $request->hpp,
-            'harga' => $request->harga
+            'harga' => $request->harga,
+            'user_id' => Auth::user()->id
         ];
 
         LaptopTipe::where('id', $id)->update($tipe);

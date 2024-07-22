@@ -15,22 +15,28 @@ class LaptopMerekSeeder extends Seeder
     {
         $laptop_merek = [
             [
-                'merek' => 'ASUS'
+                'merek' => 'Asus',
+                'user_id' => '1'
             ],
             [
-                'merek' => 'LENOVO'
+                'merek' => 'Lenovo',
+                'user_id' => '1'
             ],
             [
-                'merek' => 'ACER'
+                'merek' => 'Acer',
+                'user_id' => '1'
             ],
             [
-                'merek' => 'HP'
+                'merek' => 'HP',
+                'user_id' => '1'
             ],
             [
-                'merek' => 'DELL'
+                'merek' => 'Dell',
+                'user_id' => '1'
             ],
             [
-                'merek' => 'MAC'
+                'merek' => 'Mac',
+                'user_id' => '1'
             ]
         ];
 
@@ -38,6 +44,4 @@ class LaptopMerekSeeder extends Seeder
             LaptopMerek::create($value);
         }
     }
-
-
 }

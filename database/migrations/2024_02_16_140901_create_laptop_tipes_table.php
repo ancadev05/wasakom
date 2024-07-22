@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('gambar_4')->nullable();
             $table->string('gambar_5')->nullable();
             $table->foreignId('laptop_merek_id')->constrained();
+            $table->foreignId('user_id')->constrained()->default(1);
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Laptop</h1>
+        <h1>Laptop Keseluruhan</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
