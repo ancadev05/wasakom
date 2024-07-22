@@ -55,6 +55,10 @@ Route::middleware(['auth'])->group(function () {
 
     // crud list laptop
     Route::resource('/laptop', LaptopController::class);
+    // route untuk ambil tipe laptop format json
+    // data ini digunakan untuk kebutuhan create data 
+    // memilih otomatis tipe setelah pilih merek laptop
+    Route::get('/tipe-laptops', [LaptopController::class, 'getTipeLaptops']);
 
     // servisan
     Route::resource('/servisan', ServisanController::class);

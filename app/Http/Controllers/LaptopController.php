@@ -11,6 +11,7 @@ use App\Models\LaptopStatus;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class LaptopController extends Controller
@@ -29,18 +30,32 @@ class LaptopController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $laptop_merek = LaptopMerek::get();
         $laptop_tipe = LaptopTipe::get();
         $laptop_status = LaptopStatus::get();
         $laptop_kondisi = LaptopKondisi::get();
 
+        // mengambil id merek untuk kebutuhan select
+        $merekId = $request->input('merek');
+        $tipeLaptops = LaptopTipe::where('laptop_merek_id', $merekId)->get();
+
+        if ($request->wantsJson()) {
+            return response()->json($tipeLaptops);
+        };
+
         return view('laptop.create')
             ->with('laptop_merek', $laptop_merek)
             ->with('laptop_tipe', $laptop_tipe)
             ->with('laptop_status', $laptop_status)
             ->with('laptop_kondisi', $laptop_kondisi);
+
+        // return response()->json([
+        //     'tipeLaptops' => $tipeLaptops,
+        //     'laptop_status' => $laptop_status,
+        //     'laptop_kondisi' => $laptop_kondisi,
+        // ]);
     }
 
     /**
@@ -331,8 +346,10 @@ class LaptopController extends Controller
     {
         $request->validate([
             'merek' => 'required',
-            'tipe' => ['required',
-                Rule::unique('laptop_tipes', 'tipe')->ignore($id)], // Mengabaikan pemeriksaan pada ID yang sama (ID dari data yang sedang diedit).
+            'tipe' => [
+                'required',
+                Rule::unique('laptop_tipes', 'tipe')->ignore($id)
+            ], // Mengabaikan pemeriksaan pada ID yang sama (ID dari data yang sedang diedit).
             'gambar_1' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
             'gambar_2' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
             'gambar_3' => 'file|image|mimes:jpg,jpeg,png,JPG,JPEG,PNG|max:2048',
@@ -439,5 +456,18 @@ class LaptopController extends Controller
         LaptopTipe::where('id', $id)->delete();
 
         return redirect('/mt');
+    }
+
+    // mengambil data format json
+    public function getTipeLaptops(Request $request)
+    {
+        $merekId = $request->input('merek');
+        $tipeLaptops = LaptopTipe::where('laptop_merek_id', $merekId)->get();
+
+        Log::info('Tipe Laptops:', $tipeLaptops->toArray());
+        
+        return response()->json([
+            'tipeLaptops' => $tipeLaptops
+        ]);
     }
 }
