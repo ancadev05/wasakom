@@ -198,7 +198,7 @@ class LaptopController extends Controller
     public function tambahmerek(Request $request)
     {
         $merek = [
-            'merek' => strtoupper($request->merek)
+            'merek' => $request->merek
         ];
 
         LaptopMerek::create($merek);
@@ -215,7 +215,7 @@ class LaptopController extends Controller
     public function updatemerek(Request $request, string $id)
     {
         $merek = [
-            'merek' => strtoupper($request->merek)
+            'merek' => $request->merek
         ];
 
         LaptopMerek::where('id', $id)->update($merek);
@@ -299,7 +299,7 @@ class LaptopController extends Controller
 
         $tipe = [
             'laptop_merek_id' => $request->merek,
-            'tipe' => strtoupper($request->tipe),
+            'tipe' => $request->tipe,
             'layar_size' => $request->layar_size,
             'layar_resolusi' => strtoupper($request->layar_resolusi),
             'hpp' => $request->hpp,
@@ -413,7 +413,7 @@ class LaptopController extends Controller
 
         $tipe = [
             'laptop_merek_id' => $request->merek,
-            'tipe' => strtoupper($request->tipe),
+            'tipe' => $request->tipe,
             'layar_size' => $request->layar_size,
             'layar_resolusi' => strtoupper($request->layar_resolusi),
             'hpp' => $request->hpp,
