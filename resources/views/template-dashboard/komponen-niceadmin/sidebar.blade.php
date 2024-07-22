@@ -5,7 +5,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/dashboard') }}">
-                <i class="bi bi-laptop"></i>
+                <i class="bi bi-house"></i>
                 <span>Dashboard</span>
             </a>
         </li>

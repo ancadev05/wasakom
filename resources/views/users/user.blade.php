@@ -33,7 +33,7 @@
                                 <td>{{ $i }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->username }}</td>
-                                <td>{{ $item->password }}</td>
+                                <td>{{ $item->sandi }}</td>
                                 <td>{{ $item->level_akun_id . '-' . $item->levelakun->level }}</td>
 
                                 <td>

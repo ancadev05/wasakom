@@ -18,6 +18,7 @@ class UserSedeer extends Seeder
                 'name' => "Hamzah",
                 'username' => '1',
                 'password' => 1,
+                'sandi' => 1,
                 'no_wa' => 1111,
                 'level_akun_id' => 1
             ],
@@ -25,6 +26,7 @@ class UserSedeer extends Seeder
                 'name' => "Resky",
                 'username' => 're123',
                 'password' => 123,
+                'sandi' => 123,
                 'no_wa' => 222,
                 'level_akun_id' => 6
             ],
@@ -32,6 +34,7 @@ class UserSedeer extends Seeder
                 'name' => "Abdi",
                 'username' => 'ab123',
                 'password' => 123,
+                'sandi' => 123,
                 'no_wa' => 333,
                 'level_akun_id' => 5
             ]
