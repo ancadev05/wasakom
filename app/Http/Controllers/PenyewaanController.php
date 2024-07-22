@@ -27,7 +27,7 @@ class PenyewaanController extends Controller
         $laptops = Laptop::where('laptop_status_id', 2)
             ->where('laptop_kondisi_id', 1)->get();
 
-        return view('penyewaan.penyewaan-buat')
+        return view('development')
         ->with('laptops', $laptops);
     }
 }
