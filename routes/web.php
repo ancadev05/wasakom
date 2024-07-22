@@ -80,4 +80,10 @@ Route::middleware(['auth'])->group(function () {
 
     // profil
     Route::get('/profil', [UserController::class, 'profil']);
+
+    // user
+    Route::get('/user', [UserController::class, 'user'])->middleware('userAkses');
+    Route::get('/user-create', [UserController::class, 'usercreate'])->middleware('userAkses:1');
+    Route::post('/user-create', [UserController::class, 'userstore'])->middleware('userAkses:1');
+    Route::delete('/user-delete/{id}', [UserController::class, 'userdelete'])->middleware('userAkses:1');
 });

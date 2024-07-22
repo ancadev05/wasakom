@@ -18,7 +18,7 @@
 
                         <img src="{{ asset('storage/foto-user/anca.png') }}" alt="Profile" class="rounded-circle">
                         <h2>{{ $user->name }}</h2>
-                        <h3>{{ $user->levelakun->level }}</h3>
+                        {{-- <h3>{{ $user->levelakun->level }}</h3> --}}
                         {{-- <div class="social-links mt-2">
                             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -75,7 +75,7 @@
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Company</div>
-                                    <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                                    <div class="col-lg-9 col-md-8">Wana Satria Komputer</div>
                                 </div>
 
                                 <div class="row">

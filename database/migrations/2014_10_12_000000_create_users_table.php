@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('username')->unique();
             $table->string('password');
+            $table->string('sandi')->nullable();
             $table->integer('no_wa')->unique();
             $table->foreignId('level_akun_id')->constrained();
             $table->string('foto')->nullable();

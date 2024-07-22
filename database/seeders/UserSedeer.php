@@ -23,7 +23,7 @@ class UserSedeer extends Seeder
             ],
             [
                 'name' => "Resky",
-                'username' => 'res123',
+                'username' => 're123',
                 'password' => 123,
                 'no_wa' => 222,
                 'level_akun_id' => 6

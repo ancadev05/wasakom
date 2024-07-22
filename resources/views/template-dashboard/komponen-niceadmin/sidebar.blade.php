@@ -36,7 +36,7 @@
         
         @if ($user->level_akun_id == 1)
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('/penyewaan') }}">
+                <a class="nav-link collapsed" href="{{ url('/user') }}">
                     <i class="bi bi-users"></i>
                     <span>Akun</span>
                 </a>
