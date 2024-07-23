@@ -33,6 +33,11 @@
   <!-- Template Main CSS File -->
   <link href="{{ asset('niceadmin/assets/css/style.css') }}" rel="stylesheet">
 
+  {{-- datatables --}}
+  <link rel="stylesheet" href="{{ asset('assets/datatables/datatables.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/datatables/Buttons-2.4.2/css/buttons.dataTables.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/datatables/Buttons-2.4.2/css/buttons.bootstrap5.css') }}">
+
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Nov 17 2023 with Bootstrap v5.3.2
@@ -78,6 +83,20 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('niceadmin/assets/js/main.js') }}"></script>
+
+  {{-- datatables --}}
+  <script src="{{ asset('assets/datatables/datatables.js') }}"></script>
+  <script src="{{ asset('assets/datatables/datatables-button.js') }}"></script>
+  <script src="{{ asset('assets/datatables/Buttons-2.4.2/js/dataTables.buttons.js') }}"></script>
+  <script src="{{ asset('assets/datatables/Buttons-2.4.2/js/buttons.dataTables.js') }}"></script>
+  <script src="{{ asset('assets/datatables/Buttons-2.4.2/js/buttons.bootstrap5.js') }}"></script>
+  <script src="{{ asset('assets/datatables/Buttons-2.4.2/js/buttons.html5.min.js') }}"></script>
+  <script src="{{ asset('assets/datatables/Buttons-2.4.2/js/buttons.print.min.js') }}"></script>
+  <script src="{{ asset('assets/datatables/Buttons-2.4.2/js/buttons.colVis.min.js') }}"></script>
+  <script src="{{ asset('assets/datatables/JSZip-3.10.1/jszip.min.js') }}"></script>
+  <script src="{{ asset('assets/datatables/pdfmake-0.2.7/pdfmake.min.js') }}"></script>
+  <script src="{{ asset('assets/datatables/pdfmake-0.2.7/vfs_fonts.js') }}"></script>
+
 
   {{-- script costum --}}
   @yield('script')

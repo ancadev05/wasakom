@@ -13,7 +13,7 @@
         <a href="{{ url('laptop/create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Laptop</a>
         <div class="card p-3">
             <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover table-bordered datatable" id="tbl">
+                <table class="table table-sm table-striped table-hover table-bordered" id="datatables">
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
                             <th>#id</th>
@@ -72,4 +72,12 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#datatables').DataTable();
+        });
+    </script>
 @endsection

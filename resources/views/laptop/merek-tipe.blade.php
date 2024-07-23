@@ -16,7 +16,7 @@
             <i class="bi bi-plus-lg"></i> Merek</button>
 
         <div class="card p-3 mb-3">
-            <table class="table table-sm datatable">
+            <table class="table table-sm" id="datatables">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -60,7 +60,7 @@
             Tipe</a>
         <div class="card p-3 mb-3">
             <div class="table-responsive">
-                <table class="table table-sm datatable">
+                <table class="table table-sm" id="datatables2">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -165,28 +165,11 @@
     </div>
 @endsection
 
-{{-- script --}}
 @section('script')
     <script>
-        // edit data
-        $('body').on('click', '.edit-merek', function(e) {
-            let id = $(this).data('id');
-            $.ajax({
-                url: 'merek/' + id,
-                type: 'GET',
-                success: function(response) {
-                    $('#edit-merek').modal('show');
-                    $('#merek-2').val(response.merek.merek);
-                    console.log(response.merek.merek);
-                }
-            })
-            on('click', '#update-merek', function() {
-                $.ajax({
-                    url: 'merek/' + id,
-                    type: 'POST'
-                })
-            })
-
-        })
+        $(document).ready(function() {
+            $('#datatables').DataTable();
+            $('#datatables2').DataTable();
+        });
     </script>
 @endsection
