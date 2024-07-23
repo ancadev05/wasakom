@@ -37,7 +37,7 @@
                                 <td>{{ $item->level_akun_id . '-' . $item->levelakun->level }}</td>
 
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-secondary d-inline-block"
+                                    <a href="{{ url('/user-edit/' . $item->id) }}" class="btn btn-sm btn-secondary d-inline-block"
                                         data-bs-toggle="tooltip" data-bs-placment="top" title="Detail"><i
                                             class="bi bi-eye"></i></a>
                                     <form action="{{ url('/user-delete/' . $item->id) }}" method="POST" class="d-inline"

@@ -6,6 +6,7 @@ use App\Models\LevelAkun;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -31,6 +32,16 @@ class UserController extends Controller
     // store user
     public function userstore(Request $request)
     {
+        // dd($request);
+        $request->validate(
+            [
+                'name' => 'required',
+                'username' => 'required',
+                'password' => 'required',
+                'level_akun_id' => 'required'
+            ]
+        );
+
         $user = [
             'name' => $request->name,
             'username' => $request->username,
@@ -40,10 +51,30 @@ class UserController extends Controller
             'no_wa' => date('mdhis'),
         ];
 
-        // dd($user);
+
 
         User::create($user);
 
+        return redirect('/user');
+    }
+    // edit user
+    public function useredit(string $id)
+    {
+        $level_akun = LevelAkun::get();
+        $user = User::where('id', $id)->first();
+        return view('users.user-edit', compact('user', 'level_akun'));
+    }
+    // user update
+    public function userupdate(Request $request, string $id)
+    {
+        $user = [
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'sandi' => $request->password,
+            'level_akun_id' => $request->level_akun_id,
+        ];
+        User::where('id', $id)->update($user);
         return redirect('/user');
     }
     // hapus user
@@ -53,5 +84,4 @@ class UserController extends Controller
 
         return redirect('/user');
     }
-
 }
