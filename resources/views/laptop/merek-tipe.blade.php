@@ -32,7 +32,7 @@
                     @foreach ($laptop_merek as $item)
                         <tr>
                             <td>{{ $i }}</td>
-                            <td>{{ strtoupper($item->merek) }}</td>
+                            <td>{{ $item->merek }}</td>
                             <td>
                                 <a href="{{ url('merek/' . $item->id) }}" class="btn btn-sm btn-warning">
                                     <i class="bi bi-pencil-square"></i></a>
@@ -80,7 +80,7 @@
                                 <td>{{ $i }}</td>
                                 <td><img src="{{ asset('storage/gambar-laptop/' . $item->gambar_1) }}" alt=""
                                         width="100px"></td>
-                                <td>{{ strtoupper($item->tipe) }}</td>
+                                <td>{{ $item->tipe }}</td>
                                 <td>{{ $item->laptopmerek->merek }}</td>
                                 <td>
                                     <a href="{{ url('tambah-tipe/' . $item->id) }}" class="btn btn-sm btn-secondary"
