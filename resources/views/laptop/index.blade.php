@@ -31,7 +31,7 @@
                     <tbody>
                         @forelse ($laptops as $laptop)
                             <tr>
-                                <td>{{ $laptop->id }}</td>
+                                <td>#{{ $laptop->id }}</td>
                                 <td>{{ $laptop->tgl }}</td>
                                 <td>{{ $laptop->sn }}</td>
                                 <td>{{ $laptop->laptopmerek->merek }}</td>
