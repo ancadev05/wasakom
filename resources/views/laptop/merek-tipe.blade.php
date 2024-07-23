@@ -34,7 +34,8 @@
                             <td>{{ $i }}</td>
                             <td>{{ $item->merek }}</td>
                             <td>
-                                <a href="{{ url('merek/' . $item->id) }}" class="btn btn-sm btn-warning">
+                                <a href="{{ url('merek/' . $item->id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
+                                    data-bs-placment="top" title="Edit">
                                     <i class="bi bi-pencil-square"></i></a>
                                 <form action="{{ url('merek/' . $item->id) }}" method="POST" class="d-inline"
                                     onclick="return confirm('Hapus Merek ?')">
