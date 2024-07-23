@@ -32,11 +32,10 @@ class UserController extends Controller
     // store user
     public function userstore(Request $request)
     {
-        // dd($request);
         $request->validate(
             [
                 'name' => 'required',
-                'username' => 'required',
+                'username' => 'required|unique:users,username',
                 'password' => 'required',
                 'level_akun_id' => 'required'
             ]
