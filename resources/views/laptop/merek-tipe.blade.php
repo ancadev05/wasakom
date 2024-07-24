@@ -16,7 +16,7 @@
             <i class="bi bi-plus-lg"></i> Merek</button>
 
         <div class="card p-3 mb-3">
-            <table class="table table-sm" id="datatables">
+            <table class="table table-sm w-100" id="datatables">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -61,7 +61,7 @@
             Tipe</a>
         <div class="card p-3 mb-3">
             <div class="table-responsive">
-                <table class="table table-sm" id="datatables2">
+                <table class="table table-sm w-100" id="datatables2">
                     <thead>
                         <tr>
                             <th>No.</th>

@@ -14,9 +14,10 @@
             Laptop</a>
         <div class="card p-3">
             <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover w-100" id="datatables">
+                <table class="table table-sm table-striped table-hover nowrap w-100" id="datatables">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>#id</th>
                             <th>Tanggal</th>
                             <th>SN</th>
@@ -32,7 +33,8 @@
                     <tbody>
                         @forelse ($laptops as $laptop)
                             <tr>
-                                <td>#{{ $laptop->id }}</td>
+                                <td class="text-end" width="5px">#</td>
+                                <td>{{ $laptop->id }}</td>
                                 <td>{{ $laptop->tgl }}</td>
                                 <td>{{ $laptop->sn }}</td>
                                 <td>{{ $laptop->laptopmerek->merek }}</td>
