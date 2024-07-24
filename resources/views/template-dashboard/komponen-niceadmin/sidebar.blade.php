@@ -36,7 +36,7 @@
 
          <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/laptop-terjual') }}">
-                <i class="bi bi-cash"></i>
+                <i class="bi bi-cart"></i>
                 <span>Laptop Terjual</span>
             </a>
         </li>

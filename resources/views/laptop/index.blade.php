@@ -10,11 +10,12 @@
     </div><!-- End Page Title -->
 
     <section class="section">
-        <a href="{{ url('laptop/create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Laptop</a>
+        <a href="{{ url('laptop/create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i>
+            Laptop</a>
         <div class="card p-3">
             <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover" id="datatables">
-                    <thead class="bg-secondary text-bg-dark text-center">
+                <table class="table table-sm table-striped table-hover w-100" id="datatables">
+                    <thead>
                         <tr>
                             <th>#id</th>
                             <th>Tanggal</th>
@@ -77,7 +78,13 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#datatables').DataTable();
+            $('#datatables').DataTable({
+                // responsive: true
+            });
+
+        // new DataTable('#datatables', {
+            // responsive: true
+        // });
         });
     </script>
 @endsection

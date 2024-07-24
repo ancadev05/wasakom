@@ -37,6 +37,8 @@
   <link rel="stylesheet" href="{{ asset('assets/datatables/datatables.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/datatables/Buttons-2.4.2/css/buttons.dataTables.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/datatables/Buttons-2.4.2/css/buttons.bootstrap5.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/datatables/DataTables-1.13.8/css/dataTables.bootstrap5.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/datatables/Responsive-2.5.0/css/responsive.bootstrap5.css') }}">
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -96,6 +98,9 @@
   <script src="{{ asset('assets/datatables/JSZip-3.10.1/jszip.min.js') }}"></script>
   <script src="{{ asset('assets/datatables/pdfmake-0.2.7/pdfmake.min.js') }}"></script>
   <script src="{{ asset('assets/datatables/pdfmake-0.2.7/vfs_fonts.js') }}"></script>
+  {{-- <script src="{{ asset('assets/datatables/DataTables-1.13.8/js/dataTables.bootstrap5.js') }}"></script> --}}
+  <script src="{{ asset('assets/datatables/Responsive-2.5.0/js/dataTables.responsive.js') }}"></script>
+  <script src="{{ asset('assets/datatables/Responsive-2.5.0/js/responsive.bootstrap5.js') }}"></script>
 
 
   {{-- script costum --}}
