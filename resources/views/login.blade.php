@@ -55,7 +55,7 @@
                             <div class="d-flex justify-content-center py-4">
                                 <a href="#" class="logo d-flex flex-column align-items-center w-auto ">
                                     <img src="assets/img/logo-biner.png" alt="" class="mb-2" id="logo-login">
-                                    <span class="d-none d-lg-block">Teknisi_ta'</span>
+                                    <span class="d-lg-block">Teknisi_ta'</span>
                                 </a>
                             </div><!-- End Logo -->
 

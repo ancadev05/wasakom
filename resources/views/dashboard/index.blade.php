@@ -49,7 +49,7 @@
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     {{-- <i class="bi bi-laptop"></i> --}}
                                     <a href="{{ asset('storage/gambar-laptop/' . $item->laptoptipe->gambar_1) }}" target="_blank">
-                                        <img src="{{ asset('storage/gambar-laptop/' . $item->laptoptipe->gambar_1) }}" alt="">
+                                        <img src="{{ asset('storage/gambar-laptop/' . $item->laptoptipe->gambar_1) }}" alt="" class="rounded-circle shadow">
                                     </a>
                                 </div>
                                 <div class="ps-3">
