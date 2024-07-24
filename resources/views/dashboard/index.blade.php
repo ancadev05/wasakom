@@ -42,14 +42,19 @@
                 <div class="col-sm-12 col-md-4">
                     <div class="card info-card sales-card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $item->laptopmerek->merek }}</h5>
+                            <a href="{{ url('/laptop-tipe-list/' . $item->laptop_tipe_id . '/' . $item->laptoptipe->tipe) }}">
+                                <h5 class="card-title">{{ $item->laptoptipe->tipe }}</h5>
+                            </a>
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-laptop"></i>
+                                    {{-- <i class="bi bi-laptop"></i> --}}
+                                    <a href="{{ asset('storage/gambar-laptop/' . $item->laptoptipe->gambar_1) }}" target="_blank">
+                                        <img src="{{ asset('storage/gambar-laptop/' . $item->laptoptipe->gambar_1) }}" alt="">
+                                    </a>
                                 </div>
                                 <div class="ps-3">
                                     <h6>{{ $item->total }} Unit</h6>
-                                    <span class="text-success small pt-1 fw-bold">{{ $item->laptoptipe->tipe }}</span>
+                                    <span class="text-success small pt-1 fw-bold">{{ $item->laptopmerek->merek }}</span>
                                     {{-- <span class="text-muted small pt-2 ps-1">increase</span> --}}
                                 </div>
                             </div>

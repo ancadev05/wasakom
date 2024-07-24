@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
     // dashboard
     Route::get('/dashboard', [AdminController::class, 'index']);
+    Route::get('/laptop-tipe-list/{id}/{tipe}', [AdminController::class, 'laptoptipelist']);
 
     Route::get('/mt', [LaptopController::class, 'mt']);
 
@@ -88,4 +89,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user-edit/{id}', [UserController::class, 'useredit'])->middleware('userAkses:1');
     Route::post('/user-edit/{id}', [UserController::class, 'userupdate'])->middleware('userAkses:1');
     Route::delete('/user-delete/{id}', [UserController::class, 'userdelete'])->middleware('userAkses:1');
+
+    // page 404
+    Route::get('/404', function() {
+        return view('development');
+    });
 });

@@ -33,4 +33,13 @@ class AdminController extends Controller
             // ->with('level', $level)
             ->with('laptops', $laptops);
     }
+    // menampilkan list laptop dengan tipe tertentu
+    public function laptoptipelist(string $id, $tipe)
+    {
+        $laptops = Laptop::where('laptop_tipe_id', $id)->get();
+
+        return view('laptop.laptop-list-tipe')
+            ->with('tipe', $tipe)
+            ->with('laptops', $laptops);
+    }
 }

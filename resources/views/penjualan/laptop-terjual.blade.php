@@ -1,94 +1,63 @@
-@extends('template-dashboard.template-stisla')
+@extends('template-dashboard.template-niceadmin')
 
 @section('title')
-    Laptop
+    Laptop Terjaul
 @endsection
 
 @section('content')
-    <section class="section">
-        <div class="section-header">
-            <h1>Laptop Terjual</h1>
-        </div>
+    <div class="pagetitle">
+        <h1>Laptop Terjual</h1>
+    </div><!-- End Page Title -->
 
-        <div class="shadow bg-white p-3">
+    <section class="section">
+        <a href="{{ url('404') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Buat</a>
+        <div class="card p-3">
             <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover table-bordered" id="tbl">
+                <table class="table table-sm table-striped table-hover" id="datatables">
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
-                            <th>No</th>
                             <th>Tanggal</th>
-                            <th>SN</th>
-                            <th>Merek</th>
-                            <th>Type</th>
-                            <th>CPU</th>
-                            <th>RAM</th>
-                            <th>Storage</th>
+                            <th>Costumer</th>
+                            <th>#id:SN</th>
+                            <th>Merek-Type</th>
+                            <th>Spek</th>
                             <th>Status</th>
-                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
                         @forelse ($laptops as $laptop)
                             <tr>
-                                <td>{{ $i }}</td>
-                                <td>{{ $laptop->tgl }}</td>
-                                <td>{{ $laptop->sn }}</td>
-                                <td>{{ $laptop->laptopmerek->merek }}</td>
-                                <td>{{ $laptop->laptoptipe->tipe }}</td>
-                                <td>{{ $laptop->cpu }}</td>
-                                <td>{{ $laptop->ram }}</td>
-                                <td>{{ $laptop->storage }}</td>
+                                <td>{{ $laptop->updated_at }}</td>
+                                <td></td>
+                                <td>#{{ $laptop->id }}:{{ $laptop->sn }}</td>
+                                <td>{{ $laptop->laptopmerek->merek }}-{{ $laptop->laptoptipe->tipe }}</td>
+                                <td>{{ $laptop->cpu }}/{{ $laptop->ram }}/{{ $laptop->storage }}</td>
                                 <td>
                                     {{ $laptop->laptopstatus->status . ' ' }}
 
                                     @if ($laptop->laptop_kondisi_id == 1)
-                                        <i class="fas fa-check-circle text-success" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" data-bs-title="Normal"></i>
+                                        <i class="bi bi-check-circle-fill text-success" data-bs-toggle="tooltip"
+                                            data-bs-placment="top" title="Normal"></i>
                                     @else
-                                        <i class="fas fa-exclamation-circle text-warning" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" data-bs-title="Minus"></i>
+                                        <i class="bi bi-exclamation-circle-fill text-warning" data-bs-toggle="tooltip"
+                                            data-bs-placment="top" title="Minus"></i>
                                     @endif
                                 </td>
-                                <td>
-                                    <a href="{{ url('laptop/' . $laptop->id . '/edit') }}"
-                                        class="btn btn-xs btn-secondary d-inline-block" data-bs-toggle="tooltip"
-                                        data-bs-placment="top" data-bs-title="Detail"><i class="far fa-eye"></i></a>
-                                    <form action="{{ url('laptop/' . $laptop->id) }}" method="POST" class="d-inline"
-                                        onsubmit="return confirm('Yakin ingin hapus data?')">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-xs btn-danger d-inline-block"
-                                            data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Hapus"><i
-                                                class="far fa-trash-alt"></i></button>
-                                    </form>
-                                </td>
                             </tr>
-                            @php
-                                $i++;
-                            @endphp
                         @empty
                             <div class="alert alert-danger">Belum ada data yang tersedia</div>
                         @endforelse
                     </tbody>
                 </table>
             </div>
-
         </div>
     </section>
 @endsection
 
 @section('script')
     <script>
-        $("#tbl").DataTable({
-            layout: {
-                top: {
-                    buttons: ["excel", "pdf", "print"],
-                    // buttons: ["copy", "excel", "pdf", "colvis", "print"],
-                },
-            }
+        $(document).ready(function() {
+            $('#datatables').DataTable();
         });
     </script>
 @endsection

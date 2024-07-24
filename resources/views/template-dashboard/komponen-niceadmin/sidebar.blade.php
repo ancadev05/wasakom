@@ -5,7 +5,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/dashboard') }}">
-                <i class="bi bi-house"></i>
+                <i class="bi bi-columns-gap"></i>
                 <span>Dashboard</span>
             </a>
         </li>
@@ -29,15 +29,22 @@
 
          <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/penyewaan') }}">
-                <i class="fas fa-laptop"></i>
-                <span>Laptop Penyewaan</span>
+                <i class="bi bi-hourglass-split"></i>
+                <span>Dipenyewan</span>
+            </a>
+        </li>
+
+         <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ url('/laptop-terjual') }}">
+                <i class="bi bi-cash"></i>
+                <span>Laptop Terjual</span>
             </a>
         </li>
         
         @if ($user->level_akun_id == 1)
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ url('/user') }}">
-                    <i class="bi bi-users"></i>
+                    <i class="bi bi-person-gear"></i>
                     <span>Akun</span>
                 </a>
             </li>

@@ -6,16 +6,16 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Laptop Penyewaan</h1>
+    <h1>Penyewaan</h1>
 </div>
 
     <section class="section">
 
-        <a href="{{ url('/penyewaan-buat') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Penyewaan</a>
+        <a href="{{ url('/404') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Penyewaan</a>
 
         <div class="card p-3">
             <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover table-bordered datatable" id="tbl">
+                <table class="table table-sm table-striped table-hover" id="datatables">
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
                             <th>No</th>
@@ -81,4 +81,12 @@
 
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#datatables').DataTable();
+        });
+    </script>
 @endsection
