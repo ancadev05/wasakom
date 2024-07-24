@@ -8,9 +8,9 @@
 
     <section class="section">
         <div class="card p-3">
-            <h3 class="card-title">{{ $tipe }}</h3>
-            <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover" id="datatables">
+            <h2 class="card-title">{{ $tipe }}</h2>
+            <div class="table-responsive mb-3">
+                <table class="table table-sm table-striped table-hover w-100" id="datatables">
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
                             <th>#id</th>
@@ -66,6 +66,9 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-sm btn-danger shadow-sm" onclick="window.history.back()">Kembali </button>
             </div>
         </div>
     </section>
