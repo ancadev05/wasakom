@@ -66,10 +66,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/wasakom/servisan/servisan-selesai', [ServisanController::class, 'servisanSelesai'])->name('servisanSelesai');
     Route::resource('/tipe-laptop', TipeLaptopController::class);
 
-    // display produk
-    Route::get('/display', [DisplayController::class, 'index']);
-    Route::get('/display/{id}', [DisplayController::class, 'laptopdetail']);
-
     // Penyewaan
     Route::get('/penyewaan', [PenyewaanController::class, 'index']);
     Route::get('/penyewaan-buat', [PenyewaanController::class, 'penyewaanbuat']);
@@ -95,3 +91,7 @@ Route::middleware(['auth'])->group(function () {
         return view('development');
     });
 });
+
+// display produk
+Route::get('/display', [DisplayController::class, 'index']);
+Route::get('/display/{id}', [DisplayController::class, 'laptopdetail']);
