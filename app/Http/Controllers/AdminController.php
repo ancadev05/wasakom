@@ -18,25 +18,17 @@ class AdminController extends Controller
         $user = Auth::user();
         $level = LevelAkun::get();
 
-        // dd($user->levelakun);
-        // dd($user->levelakun->level);
-
-        $laptops = Laptop::select('laptop_tipe_id', 'laptop_merek_id', DB::raw('count(*) as total'))
+        $laptops = Laptop::whereNotIn('laptop_status_id', [6])->select('laptop_tipe_id', 'laptop_merek_id', DB::raw('count(*) as total'))
             ->groupBy('laptop_tipe_id', 'laptop_merek_id')
             ->get();
 
-            // $data = Laptop::all();
-        
-            // dd($data);
         return view('dashboard.index')
-            // ->with('user', $user)
-            // ->with('level', $level)
             ->with('laptops', $laptops);
     }
     // menampilkan list laptop dengan tipe tertentu
     public function laptoptipelist(string $id, $tipe)
     {
-        $laptops = Laptop::where('laptop_tipe_id', $id)->get();
+        $laptops = Laptop::where('laptop_tipe_id', $id)->whereNotIn('laptop_status_id', [6])->get();
 
         return view('laptop.laptop-list-tipe')
             ->with('tipe', $tipe)
