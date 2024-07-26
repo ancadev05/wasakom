@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CostumerController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\PenjualanController;
@@ -60,6 +61,14 @@ Route::middleware(['auth'])->group(function () {
     // data ini digunakan untuk kebutuhan create data 
     // memilih otomatis tipe setelah pilih merek laptop
     Route::get('/tipe-laptops', [LaptopController::class, 'getTipeLaptops']);
+
+    // costumer
+    Route::get('/costumer', [CostumerController::class, 'costumer']);
+    Route::get('/costumer-create', [CostumerController::class, 'costumercreate']);
+    Route::post('/costumer-create', [CostumerController::class, 'costumerstore']);
+    Route::get('/costumer-edit/{id}', [CostumerController::class, 'costumeredit']);
+    Route::post('/costumer-update/{id}', [CostumerController::class, 'costumerupdate']);
+    Route::delete('/costumer-delete/{id}', [CostumerController::class, 'costumerdelete']);
 
     // servisan
     Route::resource('/servisan', ServisanController::class);

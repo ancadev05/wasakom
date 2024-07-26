@@ -28,11 +28,18 @@
          <li class="nav-heading">Penyewaan</li>
 
          <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ url('/costumer') }}">
+                <i class="bi bi-person"></i>
+                <span>Costumer</span>
+            </a>
+        </li>
+
+         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/penyewaan') }}">
                 <i class="bi bi-hourglass-split"></i>
                 <span>Penyewan</span>
             </a>
-        </li>
+        </li>         
 
          <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/laptop-terjual') }}">
