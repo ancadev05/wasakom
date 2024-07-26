@@ -69,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
     // Penyewaan
     Route::get('/penyewaan', [PenyewaanController::class, 'index']);
     Route::get('/penyewaan-buat', [PenyewaanController::class, 'penyewaanbuat']);
+    Route::post('/penyewaan-buat', [PenyewaanController::class, 'penyewaanstore']);
 
     Route::get('/dalam-penyewaan', [PenyewaanController::class, 'dalampenyewaan']);
 

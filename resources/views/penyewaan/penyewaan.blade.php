@@ -11,7 +11,7 @@
 
     <section class="section">
 
-        <a href="{{ url('/404') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Penyewaan</a>
+        <a href="{{ url('/penyewaan-buat') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Penyewaan</a>
 
         <div class="card p-3">
             <div class="table-responsive">
@@ -20,13 +20,10 @@
                         <tr>
                             <th>No</th>
                             <th>Tanggal</th>
-                            <th>Nama</th>
-                            <th>Merek</th>
-                            <th>Type</th>
-                            <th>CPU</th>
-                            <th>RAM</th>
-                            <th>Storage</th>
-                            <th>Status</th>
+                            <th>Nama Custumer</th>
+                            <th>Mulai</th>
+                            <th>Selesai</th>
+                            <th>Item</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -34,40 +31,15 @@
                         @php
                             $i = 1;
                         @endphp
-                        @forelse ($laptop as $laptop)
+                        @forelse ($penyewaan as $item)
                             <tr>
                                 <td>{{ $i }}</td>
-                                <td>{{ $laptop->tgl }}</td>
-                                <td>{{ $laptop->sn }}</td>
-                                <td>{{ $laptop->laptopmerek->merek }}</td>
-                                <td>{{ $laptop->laptoptipe->tipe }}</td>
-                                <td>{{ $laptop->cpu }}</td>
-                                <td>{{ $laptop->ram }}</td>
-                                <td>{{ $laptop->storage }}</td>
-                                <td>
-                                    {{ $laptop->laptopstatus->status . ' ' }}
-
-                                    @if ($laptop->laptop_kondisi_id == 1)
-                                        <i class="bi bi-check-circle-fill text-success" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" title="Normal"></i>
-                                    @else
-                                        <i class="bi bi-exclamation-circle-fill text-warning" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" title="Minus"></i>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ url('laptop/' . $laptop->id . '/edit') }}"
-                                        class="btn btn-sm btn-secondary d-inline-block" data-bs-toggle="tooltip"
-                                        data-bs-placment="top" data-bs-title="Detail"><i class="bi bi-eye"></i></a>
-                                    <form action="{{ url('laptop/' . $laptop->id) }}" method="POST" class="d-inline"
-                                        onsubmit="return confirm('Yakin ingin hapus data?')">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-sm btn-danger d-inline-block"
-                                            data-bs-toggle="tooltip" data-bs-placment="top" data-bs-title="Hapus"><i
-                                                class="bi bi-trash"></i></button>
-                                    </form>
-                                </td>
+                                <td>{{ $item->created_at }}</td>
+                                <td>{{ $item->nama_costumer }}</td>
+                                <td>{{ $item->tgl_mulai }}</td>
+                                <td>{{ $item->tgl_selesai }}</td>
+                                <td>{{ $item->laptop_id }}</td>
+                                <td><button class="btn btn-sm btn-danger">Proses</button></td>
                             </tr>
                             @php
                                 $i++;

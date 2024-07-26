@@ -30,7 +30,7 @@
          <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/penyewaan') }}">
                 <i class="bi bi-hourglass-split"></i>
-                <span>Dipenyewan</span>
+                <span>Penyewan</span>
             </a>
         </li>
 
