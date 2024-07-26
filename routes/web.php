@@ -63,12 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tipe-laptops', [LaptopController::class, 'getTipeLaptops']);
 
     // costumer
-    Route::get('/costumer', [CostumerController::class, 'costumer']);
-    Route::get('/costumer-create', [CostumerController::class, 'costumercreate']);
-    Route::post('/costumer-create', [CostumerController::class, 'costumerstore']);
-    Route::get('/costumer-edit/{id}', [CostumerController::class, 'costumeredit']);
-    Route::post('/costumer-update/{id}', [CostumerController::class, 'costumerupdate']);
-    Route::delete('/costumer-delete/{id}', [CostumerController::class, 'costumerdelete']);
+    Route::resource('/costumer', CostumerController::class);
 
     // servisan
     Route::resource('/servisan', ServisanController::class);

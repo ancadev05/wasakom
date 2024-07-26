@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('costumers', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('alamat');
-            $table->integer('no_wa');
-            $table->string('foto_ktp');
+            $table->string('alamat')->nullable();
+            $table->bigInteger('no_wa')->nullable();
+            $table->string('foto_ktp')->nullable();
             $table->timestamps();
         });
     }

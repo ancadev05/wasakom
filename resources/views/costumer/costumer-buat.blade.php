@@ -11,7 +11,7 @@
 
     <section class="section">
         <div class="card p-3">
-            <form action="{{ url('costumer-create') }}" method="post">
+            <form action="{{ url('costumer') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-12 col-md-6">
@@ -30,7 +30,7 @@
                             <label class="form-label" for="no_wa">No_Wa <span
                                     class="text-danger fw-bold">*</span></label>
                             <input class="form-control @error('no_wa') is-invalid @enderror" type="number" name="no_wa"
-                                id="no_wa" value="{{ old('no_wa') }}">
+                                id="no_wa" value="{{ old('no_wa') }}" maxlength="13">
                             @error('no_wa')
                                 <small class="invalid-feedback"> {{ $message }} </small>
                             @enderror

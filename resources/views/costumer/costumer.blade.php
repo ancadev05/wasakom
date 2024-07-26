@@ -10,7 +10,7 @@
     </div>
 
     <section class="section">
-        <a href="{{ url('costumer-create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i>
+        <a href="{{ url('costumer/create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i>
             Costumer</a>
         <div class="card p-3">
             <div class="table-responsive">
@@ -35,10 +35,10 @@
                                 <td>{{ $item->no_wa }}</td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>
-                                    <a href="{{ url('costumer-edit/' . $item->id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
+                                    <a href="{{ url('costumer/' . $item->id . '/edit') }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
                                         data-bs-placment="top" title="Edit">
                                         <i class="bi bi-pencil-square"></i></a>
-                                    <form action="{{ url('costumer-delete/' . $item->id) }}" method="POST" class="d-inline"
+                                    <form action="{{ url('costumer/' . $item->id) }}" method="POST" class="d-inline"
                                         onclick="return confirm('Yakin ingin hapus data?')">
                                         @csrf
                                         @method('delete')
