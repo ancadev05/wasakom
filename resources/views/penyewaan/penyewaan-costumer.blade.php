@@ -11,39 +11,40 @@
 
     <section class="section">
 
-        <a href="{{ url('/penyewaan-buat') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Penyewaan</a>
 
         <div class="card p-3">
+            <table class="table table-sm mb-3">
+                <tr>
+                    <td>Nama</td>
+                    <td>: {{ $costumer->costumer->nama }}</td>
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <td>: {{ $costumer->costumer->alamat }}</td>
+                </tr>
+                <tr>
+                    <td>No. WA</td>
+                    <td>: {{ $costumer->costumer->no_wa }}</td>
+                </tr>
+            </table>
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover" id="datatables">
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
                             <th>No</th>
-                            <th>Tanggal</th>
-                            <th>Nama Custumer</th>
-                            <th>Mulai</th>
-                            <th>Selesai</th>
-                            <th>Item</th>
-                            <th>Aksi</th>
+                            <th>Merek-Tipe</th>
+                            <th>Spesifikasi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                             $i = 1;
                         @endphp
-                        @forelse ($penyewaan as $item)
+                        @forelse ($penyewaans as $item)
                             <tr>
                                 <td>{{ $i }}</td>
-                                <td>{{ $item->created_at }}</td>
-                                <td>{{ $item->costumer->nama }}</td>
+                                <td>{{ $item->laptops->merek->merek }}</td>
                                 <td>{{ $item->tgl_mulai }}</td>
-                                <td>{{ $item->tgl_selesai }}</td>
-                                <td>
-                                    <a href="{{ url('penyewaan-costumer/' . $item->costumer_id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
-                                        data-bs-placment="top" title="Edit">
-                                        <i class="bi bi-pencil-square"></i></a>
-                                </td>
-                                <td><button class="btn btn-sm btn-danger">Proses</button></td>
                             </tr>
                             @php
                                 $i++;

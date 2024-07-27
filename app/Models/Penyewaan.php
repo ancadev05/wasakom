@@ -10,4 +10,15 @@ class Penyewaan extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function costumer()
+    {
+        return $this->belongsTo(Costumer::class);
+    }
+
+    // relasi ke tabel laptop
+    public function laptop()
+    {
+        return $this->belongsTo(Laptop::class);
+    }
 }

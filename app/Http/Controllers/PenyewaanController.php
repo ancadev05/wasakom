@@ -65,7 +65,7 @@ class PenyewaanController extends Controller
                 'costumer_id' => $request->costumer_id,
                 'laptop_id' => $laptop_id[$i],
                 'user_id' => $user_id
-                ];
+            ];
         }
 
         foreach ($list_laptop as $key => $value) {
@@ -73,7 +73,35 @@ class PenyewaanController extends Controller
         }
 
         return redirect('/penyewaan');
+    }
 
+    // untuk melihat item dan status penyewaan costumer
+    public function penyewaancostumer(string $id)
+    {
+        $costumer = Penyewaan::where('costumer_id', $id)->first();
+        // $penyewaans = Penyewaan::where('costumer_id', $id)->get();
+        // $penyewaans = Penyewaan::with('laptops.merek')->where('penyewaans.laptop_id', 'merek')->get();
+
+        $item = [];
+        $item_sewa = Penyewaan::where('costumer_id', $id)->get();
+
+        foreach ($item_sewa as $key => $value) {
+            $item = [
+                'laptop_id' => $value->laptop_id
+            ];
+        }
+
+        dd($item);
+
+        // $laptop_id = [];
+
+        foreach ($item_sewa as $key => $value) {
+            $laptop_id = Laptop::where('id', $item)->first();
+        }
+
+        dd($laptop_id);
+
+        return view('penyewaan.penyewaan-costumer', compact('costumer', 'penyewaans'));
     }
 
     public function penyewaanselesai(string $id)

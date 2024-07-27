@@ -30,4 +30,10 @@ class Laptop extends Model
     {
         return $this->belongsTo(LaptopKondisi::class, 'laptop_kondisi_id', 'id');
     }
+
+    // relasi ke tabel penyewaan
+    public function penyewaans()
+    {
+        return $this->hasMany(Penyewaan::class);
+    }
 }

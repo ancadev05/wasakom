@@ -10,4 +10,9 @@ class Costumer extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function penyewaans()
+    {
+        return $this->hasMany(Penyewaan::class);
+    }
 }

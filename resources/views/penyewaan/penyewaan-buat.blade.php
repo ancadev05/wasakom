@@ -92,6 +92,8 @@
                                     <td>{{ $item->cpu . '/' . $item->ram . '/' . $item->storage }}</td>
                                     <td>
                                         <div class="form-check">
+                                            <input class="" type="hidden" name="merek_tipe[]" id="merek_tipe" value="{{ $item->laptopmerek->merek . '-' . $item->laptoptipe->tipe }}">
+                                            <input class="" type="hidden" name="spek[]" id="spek" value="{{ $item->cpu . '/' . $item->ram . '/' . $item->storage }} }}">
                                             <input class="" type="checkbox" name="laptop_id[]" id="laptop_id" value="{{ $item->id }}">
                                         </div>
                                     </td>
