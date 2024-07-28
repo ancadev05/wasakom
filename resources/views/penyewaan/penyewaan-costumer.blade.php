@@ -43,7 +43,7 @@
                         @forelse ($penyewaans as $item)
                             <tr>
                                 <td>{{ $i }}</td>
-                                <td>{{ $item->laptops->merek->merek }}</td>
+                                <td>{{ $item->id }}</td>
                                 <td>{{ $item->tgl_mulai }}</td>
                             </tr>
                             @php
@@ -54,6 +54,11 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            <div class="d-flex justify-content-center mt-3">
+                {{-- <button type="submit" class="btn btn-sm btn-primary me-1 shadow-sm">Tambah</button> --}}
+                <a href="{{ url('/costumer') }}" class="btn btn-sm btn-success shadow-sm">Selesai</a>
             </div>
 
         </div>

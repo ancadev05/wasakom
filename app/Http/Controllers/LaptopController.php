@@ -6,13 +6,14 @@ use App\Models\Laptop;
 use App\Models\LaptopTipe;
 use App\Models\LaptopMerek;
 use App\Models\GambarProduk;
-use App\Models\LaptopKondisi;
 use App\Models\LaptopStatus;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\LaptopKondisi;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class LaptopController extends Controller
@@ -476,5 +477,16 @@ class LaptopController extends Controller
         return response()->json([
             'tipeLaptops' => $tipeLaptops
         ]);
+    }
+
+    // fungsi untuk menampilkan list laptop type beserta jumlahnya
+    public function laptoptotal()
+    {
+        $laptops = Laptop::whereNotIn('laptop_status_id', [6])->select('laptop_tipe_id', 'laptop_merek_id', DB::raw('count(*) as total'))
+            ->groupBy('laptop_merek_id', 'laptop_tipe_id')->orderBy('laptop_merek_id', 'asc')
+            ->get();
+
+        return view('laptop.laptop-total')
+            ->with('laptops', $laptops);
     }
 }

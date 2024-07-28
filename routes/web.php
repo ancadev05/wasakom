@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
     // data ini digunakan untuk kebutuhan create data 
     // memilih otomatis tipe setelah pilih merek laptop
     Route::get('/tipe-laptops', [LaptopController::class, 'getTipeLaptops']);
+    Route::get('/laptop-total', [LaptopController::class, 'laptoptotal']);
 
     // costumer
     Route::resource('/costumer', CostumerController::class);

@@ -79,19 +79,19 @@ class PenyewaanController extends Controller
     public function penyewaancostumer(string $id)
     {
         $costumer = Penyewaan::where('costumer_id', $id)->first();
-        // $penyewaans = Penyewaan::where('costumer_id', $id)->get();
+        $penyewaans = Penyewaan::where('costumer_id', $id)->get();
         // $penyewaans = Penyewaan::with('laptops.merek')->where('penyewaans.laptop_id', 'merek')->get();
 
         $item = [];
         $item_sewa = Penyewaan::where('costumer_id', $id)->get();
 
+        // dd($item_sewa);
+
         foreach ($item_sewa as $key => $value) {
-            $item = [
-                'laptop_id' => $value->laptop_id
-            ];
+            $item = $value->laptop_id;
         }
 
-        dd($item);
+        // dd($item);
 
         // $laptop_id = [];
 
@@ -99,7 +99,7 @@ class PenyewaanController extends Controller
             $laptop_id = Laptop::where('id', $item)->first();
         }
 
-        dd($laptop_id);
+        // dd($laptop_id);
 
         return view('penyewaan.penyewaan-costumer', compact('costumer', 'penyewaans'));
     }
