@@ -75,15 +75,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/penyewaan', [PenyewaanController::class, 'index']);
     Route::get('/penyewaan-buat', [PenyewaanController::class, 'penyewaanbuat']);
     Route::post('/penyewaan-buat', [PenyewaanController::class, 'penyewaanstore']);
-
-    Route::get('/dalam-penyewaan', [PenyewaanController::class, 'dalampenyewaan']);
+    Route::delete('/penyewaan-hapus-unit/{idcostumer}/{idunit}', [PenyewaanController::class, 'penyewaanhapusunit']);
+    Route::get('/penyewaan-edit/{idcostumer}', [PenyewaanController::class, 'penyewaanedit']);
+    Route::post('/penyewaan-update/{idcostumer}', [PenyewaanController::class, 'penyewaanupdate']);
     Route::get('/penyewaan-costumer/{id}', [PenyewaanController::class, 'penyewaancostumer']);
+    Route::post('/penyewaan-selesai/{id}', [PenyewaanController::class, 'penyewaanselesai']);
+    
+    Route::get('/dalam-penyewaan', [PenyewaanController::class, 'dalampenyewaan']);
 
     // penjualan
     Route::get('/laptop-terjual', [PenjualanController::class, 'laptopterjual']);
 
     // profil
     Route::get('/profil', [UserController::class, 'profil']);
+    Route::post('/profile-update/{id}', [UserController::class, 'profileupdate']);
 
     // user
     Route::get('/user', [UserController::class, 'user'])->middleware('userAkses');

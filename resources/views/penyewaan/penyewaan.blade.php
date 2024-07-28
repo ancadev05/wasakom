@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Penyewaan</h1>
+    <h1>Daftar Penyewaan</h1>
 </div>
 
     <section class="section">
@@ -23,8 +23,8 @@
                             <th>Nama Custumer</th>
                             <th>Mulai</th>
                             <th>Selesai</th>
-                            <th>Item</th>
                             <th>Aksi</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,11 +39,20 @@
                                 <td>{{ $item->tgl_mulai }}</td>
                                 <td>{{ $item->tgl_selesai }}</td>
                                 <td>
-                                    <a href="{{ url('penyewaan-costumer/' . $item->costumer_id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
-                                        data-bs-placment="top" title="Edit">
+                                    <a href="{{ url('penyewaan-costumer/' . $item->costumer_id) }}" class="btn btn-sm btn-warning shadow-sm" data-bs-toggle="tooltip"
+                                        data-bs-placment="top" title="Cek">
                                         <i class="bi bi-pencil-square"></i></a>
                                 </td>
-                                <td><button class="btn btn-sm btn-danger">Proses</button></td>
+                                <td>
+                                    @if ($item->tgl_selesai >= date('Y-m-d'))
+                                        <div class="spinner-grow spinner-grow-sm text-danger" role="status"></div>
+                                    @else
+                                        <div class="spinner-border spinner-border-sm text-success" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    @endif
+                                    
+                                </td>
                             </tr>
                             @php
                                 $i++;
@@ -54,7 +63,10 @@
                     </tbody>
                 </table>
             </div>
-
+            @php
+                $tgl = date('Y-m-d');
+            @endphp
+            <h1>{{ $tgl }}</h1>
         </div>
     </section>
 @endsection

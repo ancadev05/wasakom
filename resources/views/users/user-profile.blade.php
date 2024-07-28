@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                        <img src="{{ asset('storage/foto-user/anca.png') }}" alt="Profile" class="rounded-circle">
+                        <img src="{{ asset('storage/foto-user/' . $user->foto) }}" alt="Profile" class="rounded-circle">
                         <h2>{{ $user->name }}</h2>
                         {{-- <h3>{{ $user->levelakun->level }}</h3> --}}
                         {{-- <div class="social-links mt-2">
@@ -96,15 +96,22 @@
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                 <!-- Profile Edit Form -->
-                                <form>
+                                <form action="{{ url('/profile-update/' . $user->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row mb-3">
-                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile
+                                        <label for="foto" class="col-md-4 col-lg-3 col-form-label">Profile
                                             Image</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <img src="assets/img/profile-img.jpg" alt="Profile">
+                                            {{-- foto lama --}}
+                                            <input type="hidden" name="foto_lama" value="{{ $user->foto }}">
+                                            {{-- username --}}
+                                            <input type="hidden" name="username" value="{{ $user->username }}">
+                                            <img id="preview_1" src="{{ asset('storage/foto-user/' . $user->foto) }}" alt="Image Preview"
+                                    style="display: none; width: 200px; height: auto;" class="mt-2">
                                             <div class="pt-2">
-                                                <a href="#" class="btn btn-primary btn-sm"
-                                                    title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                                                <input type="file" name="foto" id="foto-user" class="d-none">
+                                                <button class="btn btn-primary btn-sm"
+                                                    title="Upload new profile image" id="tombol-upload"><i class="bi bi-upload"></i></button>
                                                 <a href="#" class="btn btn-danger btn-sm"
                                                     title="Remove my profile image"><i class="bi bi-trash"></i></a>
                                             </div>
@@ -112,9 +119,9 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                                        <label for="name" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="fullName" type="text" class="form-control" id="fullName"
+                                            <input name="name" type="text" class="form-control" id="fullName"
                                                 value="{{ $user->name }}">
                                         </div>
                                     </div>
@@ -122,7 +129,7 @@
                                     <div class="row mb-3">
                                         <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
+                                            <textarea name="about" class="form-control" id="about" style="height: 100px" disabled></textarea>
                                         </div>
                                     </div>
 
@@ -130,7 +137,7 @@
                                         <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="company" type="text" class="form-control" id="company"
-                                                value="Lueilwitz, Wisoky and Leuschke">
+                                                value="Wana Satria Komputer" disabled>
                                         </div>
                                     </div>
 
@@ -138,7 +145,7 @@
                                         <label for="Job" class="col-md-4 col-lg-3 col-form-label">Jabatan</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="job" type="text" class="form-control" id="Job"
-                                                value="Web Designer">
+                                                value="" disabled>
                                         </div>
                                     </div>
 
@@ -146,7 +153,7 @@
                                         <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="address" type="text" class="form-control" id="Address"
-                                                value="A108 Adam Street, New York, NY 535022">
+                                                value="" disabled>
                                         </div>
                                     </div>
 
@@ -154,7 +161,7 @@
                                         <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="phone" type="text" class="form-control" id="Phone"
-                                                value="(436) 486-3538 x29071">
+                                                value="" disabled>
                                         </div>
                                     </div>
 
@@ -162,12 +169,12 @@
                                         <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="email" type="email" class="form-control" id="Email"
-                                                value="k.anderson@example.com">
+                                                value="" disabled>
                                         </div>
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
                                     </div>
                                 </form><!-- End Profile Edit Form -->
 
@@ -175,14 +182,28 @@
 
                             <div class="tab-pane fade pt-3" id="profile-change-password">
                                 <!-- Change Password Form -->
-                                <form>
+                                <form action="{{ url('/profile-update/' . $user->id) }}" method="POST">
+                                    @csrf
+                                    <div class="row mb-3">
+                                        <label for="username" class="col-md-4 col-lg-3 col-form-label">Username</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="name" type="hidden" class="form-control" id="username" value="{{ $user->name }}">
+                                            <input name="username" type="text" class="form-control @error('username') is-invalid @enderror" id="username" value="{{ $user->username }}" required>
+                                            @error('username')
+                                                <small class="invalid-feedback"> {{ $message }} </small>
+                                            @enderror
+                                        </div>
+                                    </div>
 
                                     <div class="row mb-3">
                                         <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current
                                             Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="password" type="password" class="form-control"
+                                            <input name="password" type="password" class="form-control @error('password') is-invalid @enderror"
                                                 id="currentPassword">
+                                                @error('password')
+                                                <small class="invalid-feedback"> {{ $message }} </small>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -219,4 +240,28 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        let btn = $('#tombol-upload');
+        let fileInput = $('#foto-user');
+
+        btn.click( () => {
+            event.preventDefault();
+            fileInput.click();
+        });
+
+        fileInput.change(function() {
+            event.preventDefault();
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#preview_1').attr('src', e.target.result).show();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+    </script>
 @endsection

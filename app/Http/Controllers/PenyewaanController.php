@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Costumer;
 use App\Models\Laptop;
+use App\Models\LaptopMerek;
+use App\Models\LaptopTipe;
 use App\Models\Penyewaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +18,7 @@ class PenyewaanController extends Controller
 
         // $penyewaan = Penyewaan::get();
         $penyewaan = Penyewaan::select('created_at', 'costumer_id', 'tgl_mulai', 'tgl_selesai')
-            ->groupBy('created_at', 'costumer_id', 'tgl_mulai', 'tgl_selesai')->get();
+            ->groupBy('created_at', 'costumer_id', 'tgl_mulai', 'tgl_selesai')->orderBy('created_at', 'desc')->get();
 
         return view('penyewaan.penyewaan')
             ->with('penyewaan', $penyewaan);
@@ -46,6 +48,13 @@ class PenyewaanController extends Controller
     {
         $user_id = Auth::user()->id;
 
+        $request->validate([
+            'costumer_id' => 'required',
+            'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required',
+            'laptop_id' => 'required',
+        ]);
+
         // menangkap kedalam sebuah arry laptop yang di pilih
         $laptop_id = $request->input('laptop_id');
         $count = count($laptop_id) - 1; // menghitung berapa laptop dalam array
@@ -74,39 +83,166 @@ class PenyewaanController extends Controller
 
         return redirect('/penyewaan');
     }
+    // hapus unit yang batal disewap
+    public function penyewaanhapusunit(string $idcostumer, $idunit)
+    {
+        // dd($idcostumer, $idunit);
+        // menghapus unit yang dipilih dari tabel penyewaan
+        Penyewaan::where('laptop_id', $idunit)->delete();
+
+        // mengubah kembali status laptop ke penyewaan (kembali ketoko)
+        $status_laptop = [
+            'laptop_status_id' => 2
+        ];
+
+        Laptop::where('id', $idunit)->update($status_laptop);
+
+        // mencari costumer id apa masi ada atau tidak
+        $costumer_id = Penyewaan::where('costumer_id', $idcostumer)->first();
+        
+        // redirest kembali kehalaman jika masi ada item yang disewa oleh costumer
+        if($costumer_id) {
+            return redirect('/penyewaan-costumer/' . $idcostumer);
+        } 
+        
+        // redirect kehalaman penyewaan jika costumer sudah tidak ada
+        return redirect('/penyewaan');
+    }
+    // penyewaan edit
+    public function penyewaanedit(string $idcostumer)
+    {
+        $costumer = Costumer::get();
+        $penyewaan = Penyewaan::where('costumer_id', $idcostumer)->first();
+        $laptops = Laptop::where('laptop_status_id', 2)
+            ->where('laptop_kondisi_id', 1)->get();
+        return view('penyewaan.penyewaan-edit', compact('costumer', 'penyewaan', 'laptops'));
+    }
+    // penyewaan update
+    public function penyewaanupdate(Request $request, string $idcostumer)
+    {
+        $user_id = Auth::user()->id;
+
+        $request->validate([
+            'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required',
+        ]);
+
+        // menangkap kedalam sebuah arry laptop yang di pilih
+        $laptop_id = $request->input('laptop_id');
+
+        if ($laptop_id) {
+
+
+            $count = count($laptop_id) - 1; // menghitung berapa laptop dalam array
+            $list_laptop = []; // membuat variabel data list laptop kadalam sebuah variabel array
+
+            // mengubah status laptop ke penyewaan
+            $status_laptop = ['laptop_status_id' => 5];
+
+            // memasukkan data dengan perulangan
+            for ($i = 0; $i <= $count; $i++) {
+
+                Laptop::where('id', $laptop_id[$i])->update($status_laptop); // mengubah status laptop yang dipilih ke penyewaaan
+
+                $list_laptop[] = [
+                    'tgl_mulai' => $request->tgl_mulai,
+                    'tgl_selesai' => $request->tgl_selesai,
+                    'costumer_id' => $request->costumer_id,
+                    'laptop_id' => $laptop_id[$i],
+                    'user_id' => $user_id
+                ];
+            }
+
+            foreach ($list_laptop as $key => $value) {
+                Penyewaan::where('costumer_id', $idcostumer)->update($value);
+            }
+        }
+
+        $data = [
+            'tgl_mulai' => $request->tgl_mulai,
+            'tgl_selesai' => $request->tgl_selesai,
+            'costumer_id' => $request->costumer_id,
+            'user_id' => $user_id
+        ];
+
+        Penyewaan::where('costumer_id', $idcostumer)->update($data);
+
+        return redirect('/penyewaan-costumer/' . $idcostumer);
+    }
 
     // untuk melihat item dan status penyewaan costumer
     public function penyewaancostumer(string $id)
     {
         $costumer = Penyewaan::where('costumer_id', $id)->first();
         $penyewaans = Penyewaan::where('costumer_id', $id)->get();
-        // $penyewaans = Penyewaan::with('laptops.merek')->where('penyewaans.laptop_id', 'merek')->get();
+        $jumlahunitsewa = count($penyewaans) - 1;
 
-        $item = [];
-        $item_sewa = Penyewaan::where('costumer_id', $id)->get();
+        // dd($costumer);
+        // mengambil semua id laptop yang disewa
+        for ($i = 0; $i <= $jumlahunitsewa; $i++) {
+            $id_laptop[] = $penyewaans[$i]->laptop_id;
+        }
+        $jumlahunit = count($id_laptop); // menghitung jumlah unit untuk perulangan
 
-        // dd($item_sewa);
+        // 
+        for ($i = 0; $i < $jumlahunit; $i++) {
+            // mencari id laptop pertama
+            $id = $id_laptop[$i];
+            $laptop = Laptop::where('id', $id)->first(); // spek laptop yang di dapat sesuai id
 
-        foreach ($item_sewa as $key => $value) {
-            $item = $value->laptop_id;
+            $mrk = LaptopMerek::where('id', $laptop->laptop_merek_id)->first();
+            $tp = LaptopTipe::where('id', $laptop->laptop_tipe_id)->first();
+
+            // memasukkan spek laptop sesuai id 
+            $speklaptop[] = [
+                'id' => $laptop->id,
+                'mt' => $mrk->merek . '-' . $tp->tipe,
+                'spek' => $laptop->cpu . '/' . $laptop->gpu . '/' . $laptop->ram . '/' . $laptop->storage
+            ];
         }
 
-        // dd($item);
-
-        // $laptop_id = [];
-
-        foreach ($item_sewa as $key => $value) {
-            $laptop_id = Laptop::where('id', $item)->first();
+        foreach ($speklaptop as $key => $value) {
+            $laptop = $value;
         }
 
-        // dd($laptop_id);
+        // dd($penyewaans);
+        // dd($laptop);
+        // dd($id_laptop);
+        // dd($mrk_id);
+        // dd($mrk);
+        // dd($merek2);
+        // dd($speklaptop);
 
-        return view('penyewaan.penyewaan-costumer', compact('costumer', 'penyewaans'));
+        $laptops = Laptop::where('id', $id)->first();
+
+        return view('penyewaan.penyewaan-costumer')
+            ->with('costumer', $costumer)
+            ->with('speklaptop', $speklaptop);
     }
 
     public function penyewaanselesai(string $id)
     {
-        Penyewaan::where('id', $id)->delete();
+        // mencari laptop yang disewa oleh custumer
+        $penyewaans = Penyewaan::where('costumer_id', $id)->get();
+        $jumlahunitsewa = count($penyewaans) - 1;
+
+        // mengambil semua id laptop yang disewa
+        for ($i = 0; $i <= $jumlahunitsewa; $i++) {
+            $id_laptop[] = $penyewaans[$i]->laptop_id;
+        }
+        $jumlahunit = count($id_laptop); // menghitung jumlah unit untuk perulangan
+
+        // mengubah status laptop dari dipenyewaan kembali ke toko (stok penyewaan)
+        $status_laptop = [
+            'laptop_status_id' => 2
+        ];
+        // mengubah kembali status semua laptop yang sudah penyewaan
+        for ($i = 0; $i < $jumlahunit; $i++) {
+            Laptop::where('id', $id_laptop[$i])->update($status_laptop);
+        }
+
+        // menghapus data penyewaan pada tabel penyewaan yang sudah selesai
+        Penyewaan::where('costumer_id', $id)->delete();
 
         return redirect('/penyewaan');
     }

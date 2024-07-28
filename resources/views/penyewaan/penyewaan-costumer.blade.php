@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Penyewaan</h1>
+    <h1>Penyewaan Costumer</h1>
 </div>
 
     <section class="section">
@@ -26,26 +26,41 @@
                     <td>No. WA</td>
                     <td>: {{ $costumer->costumer->no_wa }}</td>
                 </tr>
+                <tr>
+                    <td>Keterangan</td>
+                    <td>: {{ $costumer->costumer->no_wa }}</td>
+                </tr>
             </table>
             <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover" id="datatables">
-                    <thead class="bg-secondary text-bg-dark text-center">
+                <table class="table table-sm table-striped table-hover w-100" id="datatables">
+                    <thead>
                         <tr>
                             <th>No</th>
+                            <th>ID Laptop</th>
                             <th>Merek-Tipe</th>
                             <th>Spesifikasi</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                             $i = 1;
                         @endphp
-                        @forelse ($penyewaans as $item)
-                            <tr>
-                                <td>{{ $i }}</td>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->tgl_mulai }}</td>
-                            </tr>
+                        @forelse ($speklaptop as $item)
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>#{{ $item['id'] }}</td>
+                                    <td>{{ $item['mt'] }}</td>
+                                    <td>{{ $item['spek'] }}</td>
+                                    <td>
+                                        <form action="{{ url('/penyewaan-hapus-unit/' . $costumer->costumer_id . '/' . $item['id']) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
+                                                data-bs-placment="top" title="Hapus"><i class="bi bi-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @php
                                 $i++;
                             @endphp
@@ -57,8 +72,12 @@
             </div>
 
             <div class="d-flex justify-content-center mt-3">
-                {{-- <button type="submit" class="btn btn-sm btn-primary me-1 shadow-sm">Tambah</button> --}}
-                <a href="{{ url('/costumer') }}" class="btn btn-sm btn-success shadow-sm">Selesai</a>
+                <a href="{{ url('/penyewaan-edit/' . $costumer->costumer_id) }}" class="btn btn-sm btn-warning shadow-sm ms-2">Edit</a>
+                <form action="{{ url('/penyewaan-selesai/' . $costumer->costumer_id) }}" method="post" onsubmit="return confirm('Penyewaan sudah selesai?')" class="mx-2">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-success shadow-sm">Selesai</button>
+                </form>
+                <a href="{{ url('/penyewaan') }}" class="btn btn-sm btn-danger shadow-sm">Kembali</a>
             </div>
 
         </div>

@@ -14,4 +14,9 @@ class PenjualanController extends Controller
         return view('penjualan.laptop-terjual')
             ->with('laptops', $laptops);
     }
+
+    public function laptopjual(string $id)
+    {
+        
+    }
 }

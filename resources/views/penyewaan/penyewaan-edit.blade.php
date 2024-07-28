@@ -6,14 +6,14 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Buat Penyewaan</h1>
+        <h1>Edit Penyewaan</h1>
     </div>
 
     <section class="section">
 
 
         <div class="card p-3">
-            <form action="{{ url('penyewaan-buat') }}" method="post">
+            <form action="{{ url('penyewaan-update/' . $penyewaan->costumer_id) }}" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">
@@ -21,8 +21,8 @@
                             <label class="form-label" for="costumer_id">costumer_id User:</label>
                             <select class="form-select @error('costumer_id') is-invalid @enderror" name="costumer_id" id="costumer_id">
                                 <option value="" selected>---</option>
-                                @foreach ($costumers as $item)
-                                    <option value="{{ $item->id }}" {{ old('costumer_id') == $item->id ? 'selected' : '' }}>
+                                @foreach ($costumer as $item)
+                                    <option value="{{ $item->id }}" {{ $penyewaan->costumer_id == $item->id ? 'selected' : '' }}>
                                         {{ $item->nama }}</option>
                                 @endforeach
                             </select>
@@ -31,31 +31,11 @@
                             @enderror
                         </div>
                     </div>
-                    {{-- <div class="col-sm-12 col-md-5">
-                        <div class="mb-3">
-                            <label class="form-label" for="no_wa">no_wa User:</label>
-                            <input class="form-control @error('no_wa') is-invalid @enderror" type="number" name="no_wa"
-                                id="no_wa" placeholder="..." value="{{ old('no_wa') }}">
-                            @error('no_wa')
-                                <small class="invalid-feedback"> {{ $message }} </small>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-10">
-                        <div class="mb-3">
-                            <label class="form-label" for="no_wa">Alamat:</label>
-                            <input class="form-control @error('no_wa') is-invalid @enderror" type="text" name="no_wa"
-                                id="no_wa" placeholder="..." value="{{ old('no_wa') }}">
-                            @error('no_wa')
-                                <small class="invalid-feedback"> {{ $message }} </small>
-                            @enderror
-                        </div>
-                    </div> --}}
                     <div class="col-sm-12 col-md-3">
                         <div class="mb-3">
                             <label class="form-label" for="tgl_mulai">tgl_mulai User:</label>
                             <input class="form-control @error('tgl_mulai') is-invalid @enderror" type="date" name="tgl_mulai"
-                                id="tgl_mulai" placeholder="..." value="{{ old('tgl_mulai') }}">
+                                id="tgl_mulai" placeholder="..." value="{{ $penyewaan->tgl_mulai }}">
                             @error('tgl_mulai')
                                 <small class="invalid-feedback"> {{ $message }} </small>
                             @enderror
@@ -65,7 +45,7 @@
                         <div class="mb-3">
                             <label class="form-label" for="tgl_selesai">tgl_selesai User:</label>
                             <input class="form-control @error('tgl_selesai') is-invalid @enderror" type="date" name="tgl_selesai"
-                                id="tgl_selesai" placeholder="..." value="{{ old('tgl_selesai') }}">
+                                id="tgl_selesai" placeholder="..." value="{{ $penyewaan->tgl_selesai }}">
                             @error('tgl_selesai')
                                 <small class="invalid-feedback"> {{ $message }} </small>
                             @enderror
@@ -94,10 +74,7 @@
                                         <div class="form-check">
                                             <input class="" type="hidden" name="merek_tipe[]" id="merek_tipe" value="{{ $item->laptopmerek->merek . '-' . $item->laptoptipe->tipe }}">
                                             <input class="" type="hidden" name="spek[]" id="spek" value="{{ $item->cpu . '/' . $item->ram . '/' . $item->storage }} }}">
-                                            <input class="@error('laptop_id') is-invalid @enderror" type="checkbox" name="laptop_id[]" id="laptop_id" value="{{ $item->id }}">
-                                            @error('laptop_id')
-                                                <small class="invalid-feedback"> {{ $message }} </small>
-                                            @enderror
+                                            <input class="" type="checkbox" name="laptop_id[]" id="laptop_id" value="{{ $item->id }}">
                                         </div>
                                     </td>
                                 </tr>
@@ -107,7 +84,7 @@
                 </div>
 
                 <div class="d-flex justify-content-end my-3">
-                    <button type="submit" class="btn btn-sm btn-primary me-2 shadow-sm">Buat</button>
+                    <button type="submit" class="btn btn-sm btn-primary me-2 shadow-sm">Simpan</button>
                     <a href="{{ url('/penyewaan') }}" class="btn btn-sm btn-danger shadow-sm">Batal</a>
                 </div>
             </form>

@@ -43,15 +43,17 @@
                                 <td>{{ $laptop->ram }}</td>
                                 <td>{{ $laptop->storage }}</td>
                                 <td>
-                                    {{ $laptop->laptopstatus->status . ' ' }}
+                                    <div class="d-flex justify-content-between">
+                                        {{ $laptop->laptopstatus->status . ' ' }}
 
-                                    @if ($laptop->laptop_kondisi_id == 1)
-                                        <i class="bi bi-check-circle-fill text-success" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" title="Normal"></i>
-                                    @else
-                                        <i class="bi bi-exclamation-circle-fill text-warning" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" title="Minus"></i>
-                                    @endif
+                                        @if ($laptop->laptop_kondisi_id == 1)
+                                            <i class="bi bi-check-circle-fill text-success" data-bs-toggle="tooltip"
+                                                data-bs-placment="top" title="Normal"></i>
+                                        @else
+                                            <i class="bi bi-exclamation-circle-fill text-warning" data-bs-toggle="tooltip"
+                                                data-bs-placment="top" title="Minus"></i>
+                                        @endif
+                                    </div>
                                 </td>
                                 <td>
                                     <a href="{{ url('laptop/' . $laptop->id . '/edit') }}"

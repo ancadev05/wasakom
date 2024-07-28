@@ -13,7 +13,7 @@
         <a href="{{ url('user-create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> User</a>
         <div class="card p-3">
             <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover table-bordered datatable" id="tbl">
+                <table class="table table-sm table-striped table-hover w-100" id="datatables">
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
                             <th>No</th>
@@ -33,7 +33,7 @@
                                 <td>{{ $i }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->username }}</td>
-                                <td>{{ $item->sandi }}</td>
+                                <td>********</td>
                                 <td>{{ $item->level_akun_id . '-' . $item->levelakun->level }}</td>
 
                                 <td>
@@ -61,4 +61,13 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#datatables').DataTable({
+                // responsive: true
+            });
+        });
+    </script>
 @endsection
