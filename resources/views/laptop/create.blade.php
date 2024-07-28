@@ -134,13 +134,13 @@
                                 <div class="form-check me-3">
                                     <input class="form-check-input @error('interfaces_storage') is-invalid @enderror"
                                         type="radio" name="interfaces_storage" id="interfaces_storage1" value="1"
-                                        {{ old('checked') }}>
+                                        {{ old('interfaces_storage') == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="interfaces_storage1">SATA</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input @error('interfaces_storage') is-invalid @enderror"
                                         type="radio" name="interfaces_storage" id="interfaces_storage2" value="2"
-                                        {{ old('checked') }}>
+                                        {{ old('interfaces_storage') == 2 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="interfaces_storage2">NVME</label>
                                 </div>
                                 @error('interfaces_storage')

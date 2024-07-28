@@ -63,10 +63,6 @@
                     </tbody>
                 </table>
             </div>
-            @php
-                $tgl = date('Y-m-d');
-            @endphp
-            <h1>{{ $tgl }}</h1>
         </div>
     </section>
 @endsection
