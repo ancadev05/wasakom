@@ -8,9 +8,11 @@
 
 		<meta name="author" content="Hamzah">
 		<meta name="keywords" content="wana satria komputer, wana, laptop, laptop bekas, penyewaan, wana satria, garansi 6 bulan, enam, garansi, makassar">
-		<meta name="description" content="pusat penjualan laptop bekas dengan garansi 6 bulan dan tempat penyewaan laptop terpercaya di kota makassar">
+		<meta name="description" content="Pusat penjualan laptop bekas dengan garansi 6 bulan dan tempat penyewaan laptop terpercaya di kota makassar">
+		<meta property="og:image" content="@yield('thumbnail')">
+    	<meta property="og:url" content="https://wasakom.hdev.my.id/display">
 
-		<title>Display Laptop</title>
+		<title>@yield('title')</title>
 
 		{{-- bootstrap 5 --}}
     <link rel="stylesheet" href="{{ asset('assets/bootstrap5/css/bootstrap.min.css') }}">
@@ -81,6 +83,6 @@
 		<script src="{{ asset('electro/js/nouislider.min.js') }}"></script>
 		<script src="{{ asset('electro/js/jquery.zoom.min.js') }}"></script>
 		<script src="{{ asset('electro/js/main.js') }}"></script>
-
+		@yield('script')
 	</body>
 </html>
