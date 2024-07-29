@@ -75,11 +75,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/penyewaan', [PenyewaanController::class, 'index']);
     Route::get('/penyewaan-buat', [PenyewaanController::class, 'penyewaanbuat']);
     Route::post('/penyewaan-buat', [PenyewaanController::class, 'penyewaanstore']);
-    Route::delete('/penyewaan-hapus-unit/{idcostumer}/{idunit}', [PenyewaanController::class, 'penyewaanhapusunit']);
+    Route::delete('/penyewaan-hapus-unit/{idcostumer}/{idunit}/{tglmulai}', [PenyewaanController::class, 'penyewaanhapusunit']);
     Route::get('/penyewaan-edit/{idcostumer}', [PenyewaanController::class, 'penyewaanedit']);
-    Route::post('/penyewaan-update/{idcostumer}', [PenyewaanController::class, 'penyewaanupdate']);
-    Route::get('/penyewaan-costumer/{id}', [PenyewaanController::class, 'penyewaancostumer']);
-    Route::post('/penyewaan-selesai/{id}', [PenyewaanController::class, 'penyewaanselesai']);
+    Route::post('/penyewaan-update/{idcostumer}/{tglmulai}/{tglselesai}', [PenyewaanController::class, 'penyewaanupdate']);
+    Route::get('/penyewaan-costumer/{id}/{tglmulai}/{tglselesai}', [PenyewaanController::class, 'penyewaancostumer']);
+    Route::post('/penyewaan-selesai/{idcostumer}/{tglselesai}', [PenyewaanController::class, 'penyewaanselesai']);
     
     Route::get('/dalam-penyewaan', [PenyewaanController::class, 'dalampenyewaan']);
 

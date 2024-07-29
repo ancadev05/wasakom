@@ -19,7 +19,7 @@
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
                             <th>No</th>
-                            <th>Tanggal</th>
+                            {{-- <th>Timestime</th> --}}
                             <th>Nama Custumer</th>
                             <th>Mulai</th>
                             <th>Selesai</th>
@@ -34,17 +34,17 @@
                         @forelse ($penyewaan as $item)
                             <tr>
                                 <td>{{ $i }}</td>
-                                <td>{{ $item->created_at }}</td>
+                                {{-- <td>{{ $item->created_at }}</td> --}}
                                 <td>{{ $item->costumer->nama }}</td>
-                                <td>{{ $item->tgl_mulai }}</td>
-                                <td>{{ $item->tgl_selesai }}</td>
+                                <td>{{ tanggalIndonesia($item->tgl_mulai) }}</td>
+                                <td>{{ tanggalIndonesia($item->tgl_selesai) }}</td>
                                 <td>
-                                    <a href="{{ url('penyewaan-costumer/' . $item->costumer_id) }}" class="btn btn-sm btn-warning shadow-sm" data-bs-toggle="tooltip"
+                                    <a href="{{ url('penyewaan-costumer/' . $item->costumer_id . '/' . $item->tgl_mulai . '/' . $item->tgl_selesai) }}" class="btn btn-sm btn-warning shadow-sm" data-bs-toggle="tooltip"
                                         data-bs-placment="top" title="Cek">
                                         <i class="bi bi-pencil-square"></i></a>
                                 </td>
                                 <td>
-                                    @if ($item->tgl_selesai >= date('Y-m-d'))
+                                    @if ($item->tgl_selesai <= date('Y-m-d'))
                                         <div class="spinner-grow spinner-grow-sm text-danger" role="status"></div>
                                     @else
                                         <div class="spinner-border spinner-border-sm text-success" role="status">

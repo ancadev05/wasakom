@@ -9,7 +9,7 @@ class DisplayController extends Controller
 {
     public function index() 
     {
-        $laptop = Laptop::where('laptop_status_id', 1)->orderBy('id', 'desc')->get();
+        $laptop = Laptop::where('laptop_status_id', 1)->where('laptop_kondisi_id', 1)->orderBy('id', 'asc')->get();
 
         return view('display.laptop')->with('laptop', $laptop);
     }

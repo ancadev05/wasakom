@@ -27,6 +27,14 @@
                     <td>: {{ $costumer->costumer->no_wa }}</td>
                 </tr>
                 <tr>
+                    <td>Tanggal Mulai</td>
+                    <td>: {{ tanggalIndonesia($costumer->tgl_mulai) }}</td>
+                </tr>
+                <tr>
+                    <td>Tanggal Selesai</td>
+                    <td>: {{ tanggalIndonesia($costumer->tgl_selesai) }}</td>
+                </tr>
+                <tr>
                     <td>Keterangan</td>
                     <td>: {{ $costumer->costumer->no_wa }}</td>
                 </tr>
@@ -53,7 +61,7 @@
                                     <td>{{ $item['mt'] }}</td>
                                     <td>{{ $item['spek'] }}</td>
                                     <td>
-                                        <form action="{{ url('/penyewaan-hapus-unit/' . $costumer->costumer_id . '/' . $item['id']) }}" method="post">
+                                        <form action="{{ url('/penyewaan-hapus-unit/' . $costumer->costumer_id . '/' . $item['id'] . '/' . $costumer->tgl_mulai) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
@@ -73,7 +81,7 @@
 
             <div class="d-flex justify-content-center mt-3">
                 <a href="{{ url('/penyewaan-edit/' . $costumer->costumer_id) }}" class="btn btn-sm btn-warning shadow-sm ms-2">Edit</a>
-                <form action="{{ url('/penyewaan-selesai/' . $costumer->costumer_id) }}" method="post" onsubmit="return confirm('Penyewaan sudah selesai?')" class="mx-2">
+                <form action="{{ url('/penyewaan-selesai/' . $costumer->costumer_id . '/' . $costumer->tgl_selesai) }}" method="post" onsubmit="return confirm('Penyewaan sudah selesai?')" class="mx-2">
                     @csrf
                     <button type="submit" class="btn btn-sm btn-success shadow-sm">Selesai</button>
                 </form>

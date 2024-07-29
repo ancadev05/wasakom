@@ -13,7 +13,7 @@
 
 
         <div class="card p-3">
-            <form action="{{ url('penyewaan-update/' . $penyewaan->costumer_id) }}" method="post">
+            <form action="{{ url('penyewaan-update/' . $penyewaan->costumer_id . '/' . $penyewaan->tgl_mulai . '/' . $penyewaan->tgl_selesai) }}" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">

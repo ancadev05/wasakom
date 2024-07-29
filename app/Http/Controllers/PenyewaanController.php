@@ -17,8 +17,8 @@ class PenyewaanController extends Controller
         $laptop = Laptop::where('laptop_status_id', 5)->get();
 
         // $penyewaan = Penyewaan::get();
-        $penyewaan = Penyewaan::select('created_at', 'costumer_id', 'tgl_mulai', 'tgl_selesai')
-            ->groupBy('created_at', 'costumer_id', 'tgl_mulai', 'tgl_selesai')->orderBy('created_at', 'desc')->get();
+        $penyewaan = Penyewaan::select('costumer_id', 'tgl_mulai', 'tgl_selesai')
+            ->groupBy('costumer_id', 'tgl_mulai', 'tgl_selesai')->orderBy('tgl_selesai', 'asc')->get();
 
         return view('penyewaan.penyewaan')
             ->with('penyewaan', $penyewaan);
@@ -84,7 +84,7 @@ class PenyewaanController extends Controller
         return redirect('/penyewaan');
     }
     // hapus unit yang batal disewap
-    public function penyewaanhapusunit(string $idcostumer, $idunit)
+    public function penyewaanhapusunit(string $idcostumer, $idunit, $tglmulai, $tglselesai)
     {
         // dd($idcostumer, $idunit);
         // menghapus unit yang dipilih dari tabel penyewaan
@@ -102,7 +102,7 @@ class PenyewaanController extends Controller
         
         // redirest kembali kehalaman jika masi ada item yang disewa oleh costumer
         if($costumer_id) {
-            return redirect('/penyewaan-costumer/' . $idcostumer);
+            return redirect('/penyewaan-costumer/' . $idcostumer . '/' . $tglmulai . '/' . $tglselesai);
         } 
         
         // redirect kehalaman penyewaan jika costumer sudah tidak ada
@@ -118,7 +118,7 @@ class PenyewaanController extends Controller
         return view('penyewaan.penyewaan-edit', compact('costumer', 'penyewaan', 'laptops'));
     }
     // penyewaan update
-    public function penyewaanupdate(Request $request, string $idcostumer)
+    public function penyewaanupdate(Request $request, string $idcostumer, $tglmulai, $tglselesai)
     {
         $user_id = Auth::user()->id;
 
@@ -131,8 +131,6 @@ class PenyewaanController extends Controller
         $laptop_id = $request->input('laptop_id');
 
         if ($laptop_id) {
-
-
             $count = count($laptop_id) - 1; // menghitung berapa laptop dalam array
             $list_laptop = []; // membuat variabel data list laptop kadalam sebuah variabel array
 
@@ -154,7 +152,7 @@ class PenyewaanController extends Controller
             }
 
             foreach ($list_laptop as $key => $value) {
-                Penyewaan::where('costumer_id', $idcostumer)->update($value);
+                Penyewaan::create($value);
             }
         }
 
@@ -167,14 +165,14 @@ class PenyewaanController extends Controller
 
         Penyewaan::where('costumer_id', $idcostumer)->update($data);
 
-        return redirect('/penyewaan-costumer/' . $idcostumer);
+        return redirect('/penyewaan-costumer/' . $idcostumer . '/' . $tglmulai . '/' . $tglselesai);
     }
 
     // untuk melihat item dan status penyewaan costumer
-    public function penyewaancostumer(string $id)
+    public function penyewaancostumer(string $id, $tglmulai, $tglselesai)
     {
         $costumer = Penyewaan::where('costumer_id', $id)->first();
-        $penyewaans = Penyewaan::where('costumer_id', $id)->get();
+        $penyewaans = Penyewaan::where('costumer_id', $id)->where('tgl_mulai', $tglmulai)->where('tgl_selesai', $tglselesai)->get();
         $jumlahunitsewa = count($penyewaans) - 1;
 
         // dd($costumer);
@@ -220,10 +218,10 @@ class PenyewaanController extends Controller
             ->with('speklaptop', $speklaptop);
     }
 
-    public function penyewaanselesai(string $id)
+    public function penyewaanselesai(string $idcostumer, $tglselesai)
     {
         // mencari laptop yang disewa oleh custumer
-        $penyewaans = Penyewaan::where('costumer_id', $id)->get();
+        $penyewaans = Penyewaan::where('costumer_id', $idcostumer)->get();
         $jumlahunitsewa = count($penyewaans) - 1;
 
         // mengambil semua id laptop yang disewa
@@ -241,8 +239,8 @@ class PenyewaanController extends Controller
             Laptop::where('id', $id_laptop[$i])->update($status_laptop);
         }
 
-        // menghapus data penyewaan pada tabel penyewaan yang sudah selesai
-        Penyewaan::where('costumer_id', $id)->delete();
+        // menghapus data penyewaan pada tabel penyewaan yang sudah selesai berdasar id dan tgl selesai
+        Penyewaan::where('costumer_id', $idcostumer)->where('tgl_selesai', $tglselesai)->delete();
 
         return redirect('/penyewaan');
     }
