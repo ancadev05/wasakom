@@ -78,7 +78,7 @@
                             <small class="d-block text-secondary" style="font-size: 12px"></small>
                             <i class="d-block" style="font-size: 12px">* Jika tipe tidak muncul, tambahkan di menu Merek & Tipe</i>
 
-                            <select class="form-select @error('tipe') is-invalid @enderror" name="tipe" id="tipe">
+                            <select class="form-select @error('tipe') is-invalid @enderror select2" name="tipe" id="tipe">
                                 <option value="" selected>---</option>
                                 {{-- @foreach ($laptop_tipe as $item) --}}
                                 <option value="" {{ old('tipe') }}></option>
@@ -255,6 +255,11 @@
                         console.error('Error fetching data:', error);
                     });
             }
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
         });
     </script>
 @endsection

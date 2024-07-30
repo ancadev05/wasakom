@@ -39,6 +39,10 @@
   <link rel="stylesheet" href="{{ asset('assets/datatables/Buttons-2.4.2/css/buttons.bootstrap5.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/datatables/DataTables-1.13.8/css/dataTables.bootstrap5.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/datatables/Responsive-2.5.0/css/responsive.bootstrap5.css') }}">
+  
+  {{-- select2 --}}
+  <link rel="stylesheet" href="{{ asset('assets/vendor/select2-4.1.0/css/select2.min.css') }}" rel="stylesheet">
+
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -101,7 +105,9 @@
   {{-- <script src="{{ asset('assets/datatables/DataTables-1.13.8/js/dataTables.bootstrap5.js') }}"></script> --}}
   <script src="{{ asset('assets/datatables/Responsive-2.5.0/js/dataTables.responsive.js') }}"></script>
   <script src="{{ asset('assets/datatables/Responsive-2.5.0/js/responsive.bootstrap5.js') }}"></script>
-
+  
+  {{-- select2 --}}
+  <script src="{{ asset('assets/vendor/select2-4.1.0/js/select2.min.js') }}"></script>
 
   {{-- script costum --}}
   @yield('script')

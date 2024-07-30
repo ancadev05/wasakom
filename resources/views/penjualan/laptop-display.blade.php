@@ -46,7 +46,7 @@
                         <div class="mb-3">
                             <label class="form-label" for="laptop_id">Masukkan ID Laptop:</label>
                             <span><i class="text-danger">*</i></span>
-                            <select class="form-select @error('laptop_id') is-invalid @enderror" name="laptop_id"
+                            <select class="form-select @error('laptop_id') is-invalid @enderror select2" name="laptop_id"
                                 id="laptop_id">
                                 <option value="" selected>---</option>
                                 @foreach ($laptops as $item)
@@ -91,4 +91,12 @@
             </form>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
 @endsection
