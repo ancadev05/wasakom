@@ -19,7 +19,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="mb-3">
                             <label class="form-label" for="costumer_id">costumer_id User:</label>
-                            <select class="form-select @error('costumer_id') is-invalid @enderror" name="costumer_id" id="costumer_id">
+                            <select class="form-select @error('costumer_id') is-invalid @enderror" name="costumer_id" id="costumer_id" @readonly(true)>
                                 <option value="" selected>---</option>
                                 @foreach ($costumer as $item)
                                     <option value="{{ $item->id }}" {{ $penyewaan->costumer_id == $item->id ? 'selected' : '' }}>

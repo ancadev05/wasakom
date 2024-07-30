@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
-            $table->string('status_penyewaan');
-            $table->text('ket');
+            $table->string('status_penyewaan')->nullable()->default('ok');
+            $table->text('ket')->nullable();
             $table->foreignId('costumer_id')->constrained();
             $table->foreignId('laptop_id')->constrained();
             $table->foreignId('user_id')->constrained();

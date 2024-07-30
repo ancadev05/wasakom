@@ -100,7 +100,7 @@ class PenyewaanController extends Controller
         // mencari costumer id apa masi ada atau tidak
         $costumer_id = Penyewaan::where('costumer_id', $idcostumer)->first();
         
-        // redirest kembali kehalaman jika masi ada item yang disewa oleh costumer
+        // redirect kembali kehalaman jika masi ada item yang disewa oleh costumer
         if($costumer_id) {
             return redirect('/penyewaan-costumer/' . $idcostumer . '/' . $tglmulai . '/' . $tglselesai);
         } 
@@ -165,7 +165,11 @@ class PenyewaanController extends Controller
 
         Penyewaan::where('costumer_id', $idcostumer)->update($data);
 
-        return redirect('/penyewaan-costumer/' . $idcostumer . '/' . $tglmulai . '/' . $tglselesai);
+        // manampilkan data penyewaan dari costumer baru yang sudah diubah
+        $idcostumerbaru = Penyewaan::where('costumer_id', $request->costumer_id)->first();
+        $costumerbaru = $idcostumerbaru->costumer_id;
+
+        return redirect('/penyewaan-costumer/' . $costumerbaru . '/' . $tglmulai . '/' . $tglselesai);
     }
 
     // untuk melihat item dan status penyewaan costumer
@@ -175,11 +179,12 @@ class PenyewaanController extends Controller
         $penyewaans = Penyewaan::where('costumer_id', $id)->where('tgl_mulai', $tglmulai)->where('tgl_selesai', $tglselesai)->get();
         $jumlahunitsewa = count($penyewaans) - 1;
 
-        // dd($costumer);
+        // dd($jumlahunitsewa);
         // mengambil semua id laptop yang disewa
         for ($i = 0; $i <= $jumlahunitsewa; $i++) {
             $id_laptop[] = $penyewaans[$i]->laptop_id;
         }
+        dd($id_laptop);
         $jumlahunit = count($id_laptop); // menghitung jumlah unit untuk perulangan
 
         // 

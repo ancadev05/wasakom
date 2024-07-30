@@ -61,7 +61,7 @@
                                     <td>{{ $item['mt'] }}</td>
                                     <td>{{ $item['spek'] }}</td>
                                     <td>
-                                        <form action="{{ url('/penyewaan-hapus-unit/' . $costumer->costumer_id . '/' . $item['id'] . '/' . $costumer->tgl_mulai) }}" method="post">
+                                        <form action="{{ url('/penyewaan-hapus-unit/' . $costumer->costumer_id . '/' . $item['id'] . '/' . $costumer->tgl_mulai . '/' . $costumer->tgl_selesai) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"

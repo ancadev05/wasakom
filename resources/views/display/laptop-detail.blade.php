@@ -171,7 +171,7 @@
             // Ganti dengan nomor WhatsApp bisnis Anda
             // abdi = 62895324784741
             // kono = 6285695605182
-            var nomorWA = "6285695605182";
+            var nomorWA = "62895324784741";
             var pesan = "Saya tertarik dengan laptop ini kak: " + window.location.href;
             var url = "https://wa.me/" + nomorWA + "?text=" + encodeURIComponent(pesan);
             window.open(url, '_blank');

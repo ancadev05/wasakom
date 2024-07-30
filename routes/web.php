@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/penyewaan', [PenyewaanController::class, 'index']);
     Route::get('/penyewaan-buat', [PenyewaanController::class, 'penyewaanbuat']);
     Route::post('/penyewaan-buat', [PenyewaanController::class, 'penyewaanstore']);
-    Route::delete('/penyewaan-hapus-unit/{idcostumer}/{idunit}/{tglmulai}', [PenyewaanController::class, 'penyewaanhapusunit']);
+    Route::delete('/penyewaan-hapus-unit/{idcostumer}/{idunit}/{tglmulai}/{tglselesai}', [PenyewaanController::class, 'penyewaanhapusunit']);
     Route::get('/penyewaan-edit/{idcostumer}', [PenyewaanController::class, 'penyewaanedit']);
     Route::post('/penyewaan-update/{idcostumer}/{tglmulai}/{tglselesai}', [PenyewaanController::class, 'penyewaanupdate']);
     Route::get('/penyewaan-costumer/{id}/{tglmulai}/{tglselesai}', [PenyewaanController::class, 'penyewaancostumer']);
