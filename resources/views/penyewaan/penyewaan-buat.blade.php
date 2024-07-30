@@ -71,6 +71,17 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label class="form-label" for="ket">Keterangan</label>
+                            <span><i class="text-secondary" style="font-size: 11px">Boleh kosong</i></span>
+                            <textarea class="form-control @error('ket') is-invalid @enderror" type="text" name="ket"
+                                id="ket" placeholder="masukkan ket tambahan" rows="5">{{ old('ket') }}</textarea>
+                            @error('ket')
+                                <small class="invalid-feedback"> {{ $message }} </small>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
