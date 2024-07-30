@@ -47,10 +47,17 @@
             </a>
         </li>         
 
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/laptop-terjual') }}">
                 <i class="bi bi-cart"></i>
                 <span>Penjualan Laptop</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="https://wa.me/6282346404299" target="_blank">
+                <i class="bi bi-whatsapp"></i>
+                <span>Berikan Masukan</span>
             </a>
         </li>
         
