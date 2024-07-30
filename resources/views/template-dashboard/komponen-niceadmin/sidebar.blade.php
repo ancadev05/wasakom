@@ -96,5 +96,6 @@
          <!-- End Tables Nav -->
 
      </ul>
+     <div class="position-absolute bottom-0 mb-2 bg-text seondary text-center" style="font-size: 15px"><span class="text-center">Teknisi_ta' V-Beta 1.0</span></div>
 
  </aside><!-- End Sidebar-->
