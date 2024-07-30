@@ -163,13 +163,13 @@ class PenyewaanController extends Controller
             'user_id' => $user_id
         ];
 
-        Penyewaan::where('costumer_id', $idcostumer)->update($data);
+        Penyewaan::where('costumer_id', $idcostumer)->where('tgl_mulai', $tglmulai)->where('tgl_selesai', $tglselesai)->update($data);
 
         // manampilkan data penyewaan dari costumer baru yang sudah diubah
         $idcostumerbaru = Penyewaan::where('costumer_id', $request->costumer_id)->first();
         $costumerbaru = $idcostumerbaru->costumer_id;
 
-        return redirect('/penyewaan-costumer/' . $costumerbaru . '/' . $tglmulai . '/' . $tglselesai);
+        return redirect('/penyewaan-costumer/' . $costumerbaru . '/' . $idcostumerbaru->tgl_mulai . '/' . $idcostumerbaru->tgl_selesai);
     }
 
     // untuk melihat item dan status penyewaan costumer
@@ -184,7 +184,7 @@ class PenyewaanController extends Controller
         for ($i = 0; $i <= $jumlahunitsewa; $i++) {
             $id_laptop[] = $penyewaans[$i]->laptop_id;
         }
-        dd($id_laptop);
+        // dd($id_laptop);
         $jumlahunit = count($id_laptop); // menghitung jumlah unit untuk perulangan
 
         // 
