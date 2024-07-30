@@ -57,7 +57,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="https://wa.me/6282346404299" target="_blank">
                 <i class="bi bi-whatsapp"></i>
-                <span>Berikan Masukan</span>
+                <span>Berikan Saran</span>
             </a>
         </li>
         
