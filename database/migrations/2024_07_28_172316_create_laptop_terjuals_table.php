@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('laptop_terjuals', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_costumer');
-            $table->string('merek_tipe');
+            $table->date('tgl_jual')->nullable();
+            $table->string('mt');
             $table->string('spesifikasi');
-            $table->text('ket');
+            $table->text('keterangan')->nullable();
+            $table->integer('harga_jual')->nullable();
+            $table->foreignId('costumer_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

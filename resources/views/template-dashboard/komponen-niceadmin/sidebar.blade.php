@@ -31,7 +31,7 @@
             </a>
         </li>
 
-         <li class="nav-heading">Penyewaan</li>
+         <li class="nav-heading">-</li>
 
          <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/costumer') }}">
@@ -50,7 +50,7 @@
          <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/laptop-terjual') }}">
                 <i class="bi bi-cart"></i>
-                <span>Laptop Terjual</span>
+                <span>Penjualan Laptop</span>
             </a>
         </li>
         

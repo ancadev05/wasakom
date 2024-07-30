@@ -85,6 +85,8 @@ Route::middleware(['auth'])->group(function () {
 
     // penjualan
     Route::get('/laptop-terjual', [PenjualanController::class, 'laptopterjual']);
+    Route::get('/laptop-display', [PenjualanController::class, 'laptopdisplay']);
+    Route::post('/juallaptop', [PenjualanController::class, 'juallaptop']);
 
     // profil
     Route::get('/profil', [UserController::class, 'profil']);

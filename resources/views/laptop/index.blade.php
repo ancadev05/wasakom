@@ -83,12 +83,12 @@
     <script>
         $(document).ready(function() {
             $('#datatables').DataTable({
-                // responsive: true
+                layout: {
+                    top: {
+                        buttons: ["excel"],
+                    },
+                }
             });
-
-        // new DataTable('#datatables', {
-            // responsive: true
-        // });
         });
     </script>
 @endsection

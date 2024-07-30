@@ -10,43 +10,47 @@
     </div><!-- End Page Title -->
 
     <section class="section">
-        <a href="{{ url('404') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Buat</a>
+        <a href="{{ url('laptop-display') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Jual</a>
         <div class="card p-3">
             <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover" id="datatables">
+                <table class="table table-sm table-striped table-hover w-100" id="datatables">
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
+                            <th>No</th>
                             <th>Tanggal</th>
-                            <th>Costumer</th>
-                            <th>#id:SN</th>
-                            <th>Merek-Type</th>
-                            <th>Spek</th>
-                            <th>Status</th>
+                            <th>Merek-Tipe</th>
+                            <th>Spesifikasi</th>
+                            <th>Harga Jual</th>
+                            <th>Keterangan</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($laptops as $laptop)
-                            <tr>
-                                <td>{{ $laptop->updated_at }}</td>
-                                <td></td>
-                                <td>#{{ $laptop->id }}:{{ $laptop->sn }}</td>
-                                <td>{{ $laptop->laptopmerek->merek }}-{{ $laptop->laptoptipe->tipe }}</td>
-                                <td>{{ $laptop->cpu }}/{{ $laptop->ram }}/{{ $laptop->storage }}</td>
-                                <td>
-                                    {{ $laptop->laptopstatus->status . ' ' }}
-
-                                    @if ($laptop->laptop_kondisi_id == 1)
-                                        <i class="bi bi-check-circle-fill text-success" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" title="Normal"></i>
-                                    @else
-                                        <i class="bi bi-exclamation-circle-fill text-warning" data-bs-toggle="tooltip"
-                                            data-bs-placment="top" title="Minus"></i>
-                                    @endif
-                                </td>
-                            </tr>
-                        @empty
-                            <div class="alert alert-danger">Belum ada data yang tersedia</div>
-                        @endforelse
+                        @php
+                            $i=1;
+                        @endphp
+                        @forelse ($laptop_terjual as $laptop)
+                        <tr>
+                            <td>{{ $i }}</td>
+                            <td>
+                                @if ($laptop->tgl_jual)
+                                    {{ $laptop->tgl_jual }}
+                                @else
+                                    {{ $laptop->created_at }}
+                                @endif
+                            </td>
+                            <td>{{ $laptop->mt }}</td>
+                            <td>{{ $laptop->spesifikasi }}</td>
+                            <td class="text-end">Rp{{ format_uang($laptop->harga_jual) }},-</td>
+                            <td>{{ $laptop->keterangan }}</td>
+                            <td><button class="btn btn-sm btn-secondary">Invoice</button></td>
+                        </tr>
+                        @php
+                            $i++
+                        @endphp
+                    @empty
+                        <div class="alert alert-danger">Belum ada data yang tersedia</div>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
