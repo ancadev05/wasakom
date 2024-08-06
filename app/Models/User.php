@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(LevelAkun::class, 'level_akun_id', 'id');
     }
+
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class);
+    }
 }

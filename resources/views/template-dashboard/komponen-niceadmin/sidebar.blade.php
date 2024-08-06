@@ -40,6 +40,39 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#servisan" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-tools"></i><span>Servisan</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="servisan" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+              <li>
+                <a href="{{ url('/servisan') }}">
+                  <i class="bi bi-circle-fill"></i><span>Daftar Servisan</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url('/servisan-teknisi') }}">
+                  <i class="bi bi-circle-fill"></i><span>Servisan Teknisi</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="bi bi-circle-fill"></i><span>Laporan Harian</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="bi bi-circle-fill"></i><span>Laporan Bulanan</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="bi bi-circle-fill"></i><span>Form Validation</span>
+                </a>
+              </li>
+            </ul>
+          </li><!-- End Forms Nav -->
+
          <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/penyewaan') }}">
                 <i class="bi bi-hourglass-split"></i>
@@ -62,6 +95,13 @@
         </li>
         
         @if ($user->level_akun_id == 1)
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{{ url('/karyawan') }}">
+              <i class="bi bi-columns-gap"></i>
+              <span>Karyawan</span>
+          </a>
+        </li>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ url('/user') }}">
                     <i class="bi bi-person-gear"></i>
@@ -69,40 +109,8 @@
                 </a>
             </li>
         @endif
-         
-
-        {{-- <li class="nav-heading">Penjualan</li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ url('/laptop-terjual') }}">
-                <i class="fas fa-laptop"></i>
-                <span>Laptop Terjual</span>
-            </a>
-        </li> --}}
-
-         
-
-         {{-- <li class="nav-item">
-             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                 <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i
-                     class="bi bi-chevron-down ms-auto"></i>
-             </a>
-             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                 <li>
-                     <a href="tables-general.html">
-                         <i class="bi bi-circle"></i><span>General Tables</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="tables-data.html">
-                         <i class="bi bi-circle"></i><span>Data Tables</span>
-                     </a>
-                 </li>
-             </ul>
-         </li> --}}
-         <!-- End Tables Nav -->
 
      </ul>
-     <div class="position-absolute bottom-0 mb-2 bg-text seondary text-center" style="font-size: 15px"><span class="text-center"><u>Teknisi_ta' V-Beta 1.0</u></span></div>
+     {{-- <div class="position-absolute bottom-0 mb-2 bg-text seondary text-center" style="font-size: 15px"><span class="text-center"><u>Teknisi_ta' V-Beta 1.0</u></span></div> --}}
 
  </aside><!-- End Sidebar-->

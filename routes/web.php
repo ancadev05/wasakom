@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CostumerController;
 use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PenyewaanController;
@@ -68,8 +69,12 @@ Route::middleware(['auth'])->group(function () {
 
     // servisan
     Route::resource('/servisan', ServisanController::class);
+    Route::get('/servisan-nota', [ServisanController::class, 'servisannota']);
+    Route::get('/servisan-teknisi', [ServisanController::class, 'servisanteknisi']);
+    Route::get('/servisan-teknisi-create', [ServisanController::class, 'servisanteknisicreate']);
+    Route::get('/servisan-teknisi-edit/{id}', [ServisanController::class, 'servisanteknisiedit']);
     Route::get('/wasakom/servisan/servisan-selesai', [ServisanController::class, 'servisanSelesai'])->name('servisanSelesai');
-    Route::resource('/tipe-laptop', TipeLaptopController::class);
+    // Route::resource('/tipe-laptop', TipeLaptopController::class);
 
     // Penyewaan
     Route::get('/penyewaan', [PenyewaanController::class, 'index']);
@@ -92,6 +97,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profil', [UserController::class, 'profil']);
     Route::post('/profile-update/{id}', [UserController::class, 'profileupdate']);
 
+    // karyawan
+    Route::resource('/karyawan', KaryawanController::class)->middleware('userAkses');
+
+    
     // user
     Route::get('/user', [UserController::class, 'user'])->middleware('userAkses');
     Route::get('/user-create', [UserController::class, 'usercreate'])->middleware('userAkses:1');

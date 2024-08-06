@@ -17,7 +17,7 @@
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                         <img src="{{ asset('storage/foto-user/' . $user->foto) }}" alt="Profile" class="rounded-circle">
-                        <h2>{{ $user->name }}</h2>
+                        <h2>{{ $user->karyawan->nama }}</h2>
                         {{-- <h3>{{ $user->levelakun->level }}</h3> --}}
                         {{-- <div class="social-links mt-2">
                             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>

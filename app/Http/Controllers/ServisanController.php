@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Costumer;
+use App\Models\LaptopMerek;
+use App\Models\Servisan;
 use Illuminate\Http\Request;
 
 class ServisanController extends Controller
@@ -20,7 +23,13 @@ class ServisanController extends Controller
      */
     public function create()
     {
-        //
+        $costumers = Costumer::get();
+        $laptop_merek = LaptopMerek::get();
+
+        return view ('servisan.servisan-create', compact(
+            'costumers',
+            'laptop_merek'
+        ));
     }
 
     /**
@@ -61,6 +70,45 @@ class ServisanController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    // cetak dan lihat nota servisan
+    public function servisannota()
+    {
+        return view('servisan.servisan-nota');
+    }
+
+
+    // daftar servisan yang sudah dikerjakan teknisi
+    public function servisanteknisi()
+    {
+        return view('servisan.servisan-teknisi');
+    }
+
+    // buat servisan yang akan dikerjakan teknisi
+    public function servisanteknisicreate()
+    {
+        // $servisan = Servisan::get();
+        $costumer = Costumer::get();
+        $servisan = 1;
+
+
+        return view('servisan.servisan-teknisi-create', compact(
+            'costumer',
+            'servisan'
+        ));
+    }
+
+    // mengedit untuk status servisan yang sudah dikerjakan
+    public function servisanteknisiedit(string $id)
+    {
+        $status = [
+            'status' => ['Selesai', 'Proses', 'Oper Vendor', 'Cancel']
+        ];
+
+        return view('servisan.servisan-teknisi-edit', compact(
+            'status'
+        ));
     }
 
     // function tambahan
