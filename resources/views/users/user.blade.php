@@ -17,7 +17,7 @@
                     <thead class="bg-secondary text-bg-dark text-center">
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Nama Karyawan</th>
                             <th>Username</th>
                             <th>Password</th>
                             <th>Level</th>
@@ -31,7 +31,7 @@
                         @forelse ($users as $item)
                             <tr>
                                 <td>{{ $i }}</td>
-                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->karyawan->nama }}</td>
                                 <td>{{ $item->username }}</td>
                                 <td>********</td>
                                 <td>{{ $item->level_akun_id . '-' . $item->levelakun->level }}</td>

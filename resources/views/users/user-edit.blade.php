@@ -16,13 +16,17 @@
                     <form action="{{ url('/user-edit/' . $user->id) }}" method="post">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label" for="name">Nama <span
+                            <label class="form-label" for="karyawan_id">Nama <span
                                     class="text-danger fw-bold">*</span></label>
-                            <input class="form-control @error('name') is-invalid @enderror" type="text" name="name"
-                                id="name" value="{{ $user->name }}">
-                            @error('name')
-                                <small class="invalid-feedback"> {{ $message }} </small>
-                            @enderror
+                                    <select class="form-select @error('karyawan_id') is-invalid @enderror" name="karyawan_id" id="karyawan_id">
+                                        @foreach ($karyawans as $item)
+                                            <option value="{{ $item->id }}" {{ $user->karyawan_id == $item->id ? 'selected' : '' }}>
+                                                {{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('karyawan_id')
+                                        <small class="invalid-feedback"> {{ $message }} </small>
+                                    @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="username">Username <span
@@ -46,21 +50,12 @@
                             <label class="form-label" for="level_akun_id">Level <span
                                     class="text-danger fw-bold">*</span></label>
                             <select class="form-select @error('level_akun_id') is-invalid @enderror" name="level_akun_id" id="level_akun_id">
-                                <option value="" selected>---</option>
                                 @foreach ($level_akun as $item)
                                     <option value="{{ $item->id }}" {{ $user->level_akun_id == $item->id ? 'selected' : '' }}>
                                         {{ $item->level }}</option>
                                 @endforeach
                             </select>
                             @error('level_akun_id')
-                                <small class="invalid-feedback"> {{ $message }} </small>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="karyawan_id">Karyawan</label>
-                            <input class="form-control @error('karyawan_id') is-invalid @enderror" type="text" name="karyawan_id"
-                                id="karyawan_id" value="{{ old('karyawan_id') }}">
-                            @error('karyawan_id')
                                 <small class="invalid-feedback"> {{ $message }} </small>
                             @enderror
                         </div>

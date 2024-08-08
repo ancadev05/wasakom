@@ -97,7 +97,7 @@
         @if ($user->level_akun_id == 1)
         <li class="nav-item">
           <a class="nav-link collapsed" href="{{ url('/karyawan') }}">
-              <i class="bi bi-columns-gap"></i>
+              <i class="bi bi-person-badge"></i>
               <span>Karyawan</span>
           </a>
         </li>

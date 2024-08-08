@@ -23,7 +23,8 @@ class User extends Authenticatable
         'password',
         'sandi',
         'no_wa',
-        'level_akun_id'
+        'level_akun_id',
+        'karyawan_id'
     ];
 
     /**

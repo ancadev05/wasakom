@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karyawan;
 use App\Models\Laptop;
 use App\Models\LaptopMerek;
 use App\Models\LaptopTipe;
@@ -33,31 +34,32 @@ class UserController extends Controller
     // buat akun user
     public function usercreate()
     {
+        $karyawans = Karyawan::get();
         $level_akun = LevelAkun::get();
-        return view('users.user-create', compact('level_akun'));
+        return view('users.user-create', compact(
+            'level_akun', 'karyawans'
+        ));
     }
     // store user
     public function userstore(Request $request)
     {
         $request->validate(
             [
-                'name' => 'required',
+                'karyawan_id' => 'required',
                 'username' => 'required|unique:users,username',
                 'password' => 'required',
-                'level_akun_id' => 'required'
+                'level_akun_id' => 'required',
+                'karyawan_id' => 'required'
             ]
         );
 
         $user = [
-            'name' => $request->name,
             'username' => $request->username,
             'password' => $request->password,
             'sandi' => $request->password,
             'level_akun_id' => $request->level_akun_id,
-            'no_wa' => date('mdhis'),
+            'karyawan_id' => $request->karyawan_id,
         ];
-
-
 
         User::create($user);
 
@@ -66,9 +68,10 @@ class UserController extends Controller
     // edit user
     public function useredit(string $id)
     {
+        $karyawans = Karyawan::get();
         $level_akun = LevelAkun::get();
         $user = User::where('id', $id)->first();
-        return view('users.user-edit', compact('user', 'level_akun'));
+        return view('users.user-edit', compact('user', 'level_akun', 'karyawans'));
     }
     // user update
     public function userupdate(Request $request, string $id)
