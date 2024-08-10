@@ -10,8 +10,8 @@
     <i class="bi bi-list toggle-sidebar-btn"></i>
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <form class="search-form d-flex align-items-center" method="get" action="{{ url('laptop-cari') }}">
+            <input type="search" name="cari" placeholder="Search Id or SN Laptop" title="Enter search keyword" value="{{ Request::get('cari') }}">
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->

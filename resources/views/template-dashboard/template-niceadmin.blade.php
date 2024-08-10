@@ -109,6 +109,16 @@
   {{-- select2 --}}
   <script src="{{ asset('assets/vendor/select2-4.1.0/js/select2.min.js') }}"></script>
 
+  {{-- alert pencarian laptop --}}
+  <script>
+    $(document).ready(function() {
+        @if (session('not')) {
+            alert('{{ session('not') }}')
+        }
+        @endif
+    });
+  </script>
+
   {{-- script costum --}}
   @yield('script')
 

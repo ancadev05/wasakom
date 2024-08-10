@@ -39,7 +39,32 @@
                     <td>: {{ $costumer->costumer->no_wa }}</td>
                 </tr>
             </table>
+
+            {{-- total item --}}
+            <div class="table-responsive mb-3">
+                <table class="table table-sm w-100">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Deskripsi</th>
+                            <th>Qty.</th>
+                            <th>Waktu</th>
+                            <th>Harga Sewa</th>
+                            <th>Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {{-- /total item --}}
+
+            {{-- list laptop --}}
             <div class="table-responsive">
+                <h5>List Laptop:</h5>
                 <table class="table table-sm table-striped table-hover w-100" id="datatables">
                     <thead>
                         <tr>

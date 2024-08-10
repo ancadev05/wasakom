@@ -489,4 +489,26 @@ class LaptopController extends Controller
         return view('laptop.laptop-total')
             ->with('laptops', $laptops);
     }
+
+    // pencarian laptop
+    public function laptopcari(Request $request) 
+    {
+        $cari = $request->cari;
+
+        if (strlen($cari)) {
+            
+            $laptop = Laptop::where('id', 'like', "%$cari%")
+            ->orwhere('sn', 'like', "%$cari")->first();
+
+            if($laptop) {
+                return view('laptop.laptop-cari', compact(
+                    'laptop'
+                ));
+            }
+            
+        }
+
+        // return view('laptop.laptop-cari');
+        return redirect()->back()->with('not', 'Data tidak ditemukan');
+    }
 }

@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tambah-tipe', [LaptopController::class, 'tipestore']);
     Route::post('/update-tipe/{id}', [LaptopController::class, 'tipeupdate']);
     Route::delete('/delete-tipe/{id}', [LaptopController::class, 'tipedelete']);
+    Route::get('/laptop-cari', [LaptopController::class, 'laptopcari']);
 
     // crud list laptop
     Route::resource('/laptop', LaptopController::class);
