@@ -200,7 +200,7 @@ class LaptopController extends Controller
         // Hapus data di database
         Laptop::where('id', $id)->delete();
 
-        return redirect()->to('laptop')->with('success', 'Data berhasil dihapus');
+        return redirect()->to('laptop')->with('delete', 'Data berhasil dihapus');
     }
 
     // menampilkan merek dan tipe laptop
@@ -223,7 +223,7 @@ class LaptopController extends Controller
 
         LaptopMerek::create($merek);
 
-        return redirect('/mt');
+        return redirect('/mt')->with('success', 'success');
     }
     // edit merek
     public function editmerek(string $id)
