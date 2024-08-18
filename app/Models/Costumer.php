@@ -15,4 +15,9 @@ class Costumer extends Model
     {
         return $this->hasMany(Penyewaan::class);
     }
+
+    public function servisan()
+    {
+        return $this->hasMany(Servisan::class);
+    }
 }

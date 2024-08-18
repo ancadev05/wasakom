@@ -5,7 +5,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/dashboard') }}">
-                <i class="bi bi-columns-gap"></i>
+                <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
         </li>
@@ -86,6 +86,15 @@
                 <span>Penjualan Laptop</span>
             </a>
         </li>
+
+        {{-- menu Accounting --}}
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#">
+                <i class="bi bi-calculator"></i>
+                <span>Accounting</span>
+            </a>
+        </li>
+        {{-- /menu Accounting --}}
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="https://wa.me/6282346404299" target="_blank">

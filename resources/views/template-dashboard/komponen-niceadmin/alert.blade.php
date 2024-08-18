@@ -11,16 +11,71 @@
             }
         @endif
 
-        // alert jika berhasil tambah data
-        @if (session("success")) {
-                Swal.fire({
-                    title: "Succss!",
-                    text: "Berhasil tambah data.",
+        // alert create
+        @if (session('create'))
+            {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
                     icon: "success",
-                    timer: 2000,
+                    title: "{{ Session::get('create') }}"
                 });
             }
         @endif
+
+         // alert update data
+         @if (session('update'))
+            {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "{{ Session::get('update') }}"
+                });
+            }
+        @endif
+
+        // alert jika berhasil tambah data
+        // @if (session('success'))
+        //     {
+        //         Swal.fire({
+        //             title: "Succss!",
+        //             text: "Berhasil tambah data.",
+        //             icon: "success",
+        //             timer: 2000,
+        //         });
+        //     }
+        // @endif
+
+        // alert jika berhasil update data
+        // @if (session('update'))
+        //     {
+        //         Swal.fire({
+        //             title: "Succss!",
+        //             text: "Berhasil update data.",
+        //             icon: "success",
+        //             timer: 2000,
+        //         });
+        //     }
+        // @endif
 
         // confirm hapus data
         $(".delete-btn").on("click", function(event) {
@@ -44,12 +99,37 @@
             });
         });
 
-        // alert jika data telah dihapus
-        @if (session("delete")) {
+        // alert delete data
+        @if (session('delete'))
+            {
                 Swal.fire({
                     title: "Deleted!",
-                    text: "Your file has been deleted.",
+                    text: "{{ Session::get('delete') }}",
                     icon: "success",
+                    // timer: 3000,
+                });
+            }
+        @endif
+
+        // alert success
+        // @if (session('success'))
+        //     {
+        //         Swal.fire({
+        //             title: "Success!",
+        //             text: "{{ Session::get('success') }}",
+        //             icon: "success",
+        //             timer: 3000,
+        //         });
+        //     }
+        // @endif
+
+        // alert info
+        @if (session('info'))
+            {
+                Swal.fire({
+                    title: "Info!",
+                    text: "{{ Session::get('info') }}",
+                    icon: "info",
                     timer: 3000,
                 });
             }

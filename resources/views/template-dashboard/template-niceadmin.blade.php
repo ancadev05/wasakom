@@ -48,6 +48,8 @@
     {{-- sweetalert2 --}}
     <link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
 
+    {{-- costum css --}}
+    <link rel="stylesheet" href="{{ asset('assets/costum-css/style.css') }}">
 
 
     <!-- =======================================================
@@ -118,9 +120,13 @@
 
     {{-- sweetalert2 --}}
     <script src="{{ asset('assets/vendor/sweetalert2/sweetalert2.min.js') }}"></script>
-    {{-- sweetalert costum --}}
-    {{-- <script src="{{ asset('assets/js-costum/costum-sweetalert2.js') }}"></script> --}}
-
+    
+    {{-- html2canvas --}}
+    <script src="{{ asset('assets/vendor/html2canvas.min.js') }}"></script>
+    {{-- jspdf --}}
+    <script src="{{ asset('assets/vendor/jspdf.umd.min.js') }}"></script>
+    {{-- coutum js --}}
+    <script src="{{ asset('assets/costum-js/script.js') }}"></script>
     {{-- alert --}}
     @include('template-dashboard.komponen-niceadmin.alert')
 

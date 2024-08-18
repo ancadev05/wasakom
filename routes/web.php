@@ -8,6 +8,7 @@ use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PenyewaanController;
 use App\Http\Controllers\ServisanController;
+use App\Http\Controllers\ServisanTeknisiController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\TipeLaptopController;
 use App\Http\Controllers\UserController;
@@ -68,14 +69,10 @@ Route::middleware(['auth'])->group(function () {
     // costumer
     Route::resource('/costumer', CostumerController::class);
 
-    // servisan
+    // daftar servisan
     Route::resource('/servisan', ServisanController::class);
-    Route::get('/servisan-nota', [ServisanController::class, 'servisannota']);
-    Route::get('/servisan-teknisi', [ServisanController::class, 'servisanteknisi']);
-    Route::get('/servisan-teknisi-create', [ServisanController::class, 'servisanteknisicreate']);
-    Route::get('/servisan-teknisi-edit/{id}', [ServisanController::class, 'servisanteknisiedit']);
-    Route::get('/wasakom/servisan/servisan-selesai', [ServisanController::class, 'servisanSelesai'])->name('servisanSelesai');
-    // Route::resource('/tipe-laptop', TipeLaptopController::class);
+    // servisan teknisi
+    Route::resource('/servisan-teknisi', ServisanTeknisiController::class);
 
     // Penyewaan
     Route::get('/penyewaan', [PenyewaanController::class, 'index']);

@@ -20,4 +20,9 @@ class LaptopMerek extends Model
     {
         return $this->hasMany(LaptopTipe::class, 'id', 'laptop_merek_id');
     }
+
+    public function servisans()
+    {
+        return $this->hasMany(Servisan::class, 'id', 'laptop_merek_id');
+    }
 }

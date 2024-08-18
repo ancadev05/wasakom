@@ -12,37 +12,70 @@
 
 
 <section class="section">
+    {{-- manampilkan daftar servisan yang selesai dan sementara dikerjakan oleh teknisi --}}
 
-    <a href="{{ url('/servisan-teknisi-create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Servisan</a>
+    {{-- menu yang hanya teknisi bisa akses --}}
+    @if (Auth::user()->level_akun_id == 6)
+        <a href="{{ url('/servisan-teknisi/create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Servisan</a>
+    @endif
 
     <div class="card p-3">
         <div class="table-responsive">
-            <table class="table table-sm w-100">
+            <table class="table table-sm table-striped nowrap w-100" id="datatables">
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Tgl. Masuk</th>
+                        <th>No_Servisan</th>
                         <th>User</th>
                         <th>Merek</th>
                         <th>Keluhan</th>
+                        <th>Teknisi</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>27/03/2024</td>
-                        <td>user</td>
-                        <td>asus</td>
-                        <td>mati ayam</td>
-                        <td>Oper vendor</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-secondary"><i class="bi bi-eye"></i></a>
-                            <a href="{{ url('/servisan-teknisi-edit/1') }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></a>
-                        </td>
-                    </tr>
+                    @php
+                        $i = 1;
+                    @endphp
+                    @foreach ($servisan_teknisis as $item)
+                        <tr>
+                            <td>{{ $i }}</td>
+                            <td>{{ $item->servisan->no_servisan }}</td>
+                            <td>{{ $item->servisan->costumer->nama }}</td>
+                            <td>{{ $item->servisan->tipe }}</td>
+                            <td>{{ $item->servisan->keluhan }}</td>
+                            <td>{{ $item->user->karyawan->nama }}</td>
+                            <td>{{ $item->status }}</td>
+                            {{-- aksi yang hanay boleh dilakukan oleh jabatan teknisi --}}
+                            <td>
+                                <a href="{{ url('/servisan-teknisi/' . $item->id) }}" class="btn btn-sm shadow-sm btn-secondary"><i class="bi bi-eye"></i></a>
+                                @if (Auth::user()->level_akun_id == 6)
+                                    {{-- menampilkan tombol delete servisan sesuai user id --}}
+                                    @if (Auth::user()->id == $item->user_id)
+                                        <a href="{{ url('/servisan-teknisi/' . $item->id . '/edit') }}" class="btn btn-sm shadow-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                        {{-- menyembunyikan tombol delete jika servisan sudah selesai --}}
+                                        @if ($item->status == 'Selesai')
+                                            <form action="{{ url('servisan-teknisi/' . $item->id) }}" method="post" class="d-inline-block d-none">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-sm btn-danger shadow-sm delete-btn"><i class="bi bi-x-lg"></i></button>
+                                            </form>
+                                        @else
+                                            <form action="{{ url('servisan-teknisi/' . $item->id) }}" method="post" class="d-inline-block">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-sm btn-danger shadow-sm delete-btn"><i class="bi bi-x-lg"></i></button>
+                                            </form>
+                                        @endif
+                                    @endif
+                                @endif  
+                            </td>
+                        </tr>
+                        @php
+                            $i++
+                        @endphp
+                    @endforeach
                 </tbody>
               </table>
         </div>
@@ -50,8 +83,14 @@
     
   
 </section>
+@endsection
 
-
-
-    
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#datatables').DataTable({
+                
+            });
+        });
+    </script>
 @endsection

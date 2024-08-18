@@ -107,7 +107,7 @@ class LaptopController extends Controller
         Laptop::create($data);
 
         // Redirect ke halaman index
-        return redirect()->to('laptop')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->to('laptop')->with('create', 'Data berhasil ditambahkan');
     }
 
     /**
