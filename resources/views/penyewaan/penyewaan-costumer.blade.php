@@ -54,9 +54,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-
-                        </tr>
+                        @php
+                            $i= 1;
+                        @endphp
+                        @foreach ($hitung as $item => $jml)
+                            <tr>
+                                <td>{{ $i }}</td>
+                                <td>{{ $item }}</td>
+                                <td>{{ $jml }}</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            @php
+                                $i++;
+                            @endphp
+                        @endforeach
                     </tbody>
                 </table>
             </div>

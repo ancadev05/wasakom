@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CostumerController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\LaporanTeknisiController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PenyewaanController;
@@ -73,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/servisan', ServisanController::class);
     // servisan teknisi
     Route::resource('/servisan-teknisi', ServisanTeknisiController::class);
+    // laporan teknisi
+    Route::get('/laporan-teknisi-harian', [LaporanTeknisiController::class, 'laporanteknisiharian']);
 
     // Penyewaan
     Route::get('/penyewaan', [PenyewaanController::class, 'index']);
@@ -90,6 +93,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/laptop-terjual', [PenjualanController::class, 'laptopterjual']);
     Route::get('/laptop-display', [PenjualanController::class, 'laptopdisplay']);
     Route::post('/juallaptop', [PenjualanController::class, 'juallaptop']);
+
+    // accounting
+    Route::get('/accounting', function(){
+        return view('accounting.index');
+    });
 
     // profil
     Route::get('/profil', [UserController::class, 'profil']);

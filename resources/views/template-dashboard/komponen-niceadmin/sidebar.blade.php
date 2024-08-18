@@ -56,7 +56,7 @@
                 </a>
               </li>
               <li>
-                <a href="">
+                <a href="{{ url('/laporan-teknisi-harian') }}">
                   <i class="bi bi-circle-fill"></i><span>Laporan Harian</span>
                 </a>
               </li>
@@ -89,7 +89,7 @@
 
         {{-- menu Accounting --}}
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="{{ url('/accounting') }}">
                 <i class="bi bi-calculator"></i>
                 <span>Accounting</span>
             </a>

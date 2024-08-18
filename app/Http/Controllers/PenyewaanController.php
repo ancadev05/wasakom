@@ -172,7 +172,7 @@ class PenyewaanController extends Controller
         return redirect('/penyewaan-costumer/' . $costumerbaru . '/' . $idcostumerbaru->tgl_mulai . '/' . $idcostumerbaru->tgl_selesai);
     }
 
-    // untuk melihat item dan status penyewaan costumer
+    // untuk melihat item apa saja yang di sewa dan status penyewaan costumer
     public function penyewaancostumer(string $id, $tglmulai, $tglselesai)
     {
         $costumer = Penyewaan::where('costumer_id', $id)->first();
@@ -208,18 +208,26 @@ class PenyewaanController extends Controller
             $laptop = $value;
         }
 
-        // dd($penyewaans);
-        // dd($laptop);
-        // dd($id_laptop);
-        // dd($mrk_id);
-        // dd($mrk);
-        // dd($merek2);
-        // dd($speklaptop);
+        // data laptop yang akan ditampilkan dalam surat penyewaan
+        // menghitung jumlah masing-masing unit yang disewa
+        for ($i=0; $i < $jumlahunit; $i++) { 
+            $hitunglaptop[] = $speklaptop[$i]['mt'];
+        }
+        $hitung = array_count_values($hitunglaptop);
 
-        $laptops = Laptop::where('id', $id)->first();
+        
+        // dd($hitunglaptop);
+        // dd($speklaptop);
+        // dd($speklaptop[0]['mt']);
+        // dd($laptop);
+        // dd($hitung);
+
+
+        // $laptops_sewa = Penyewaan::where('id', $id)->first();
 
         return view('penyewaan.penyewaan-costumer')
             ->with('costumer', $costumer)
+            ->with('hitung', $hitung)
             ->with('speklaptop', $speklaptop);
     }
 
