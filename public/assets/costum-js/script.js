@@ -1,6 +1,11 @@
 $(document).ready(function() {
     // untuk export halaman menjadi dokumen pdf
     $('#export-pdf').on('click', function() {
+
+        // menampilkan loader
+        console.log('test');
+        // $('#bg-loader').toggleClass('d-none');
+
         const {
             jsPDF
         } = window.jspdf; // Mengakses jsPDF dari UMD
@@ -38,6 +43,10 @@ $(document).ready(function() {
                 heightLeft -= pageHeight;
             }
 
+            // menyembunyikan loader
+            $('#bg-loader').toggleClass('d-none');
+
+            // save file document
             pdf.save('financial_report_high_res.pdf');
 
             // Membuka PDF dalam tab baru
@@ -50,6 +59,8 @@ $(document).ready(function() {
             // printWindow.focus();
             // printWindow.print();
             // printWindow.close();
+
+            
 
         });
     });
@@ -121,7 +132,6 @@ $(document).ready(function() {
                     printWindow.close();
                     URL.revokeObjectURL(url);
                 };
-                // printWindow.close();
             };
 
         });

@@ -21,7 +21,7 @@
                             <div>
                                 <h3 class="card-title">Jurnal</h3>
                                 <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ipsum.</p>
-                                <a href="#" class="card-link">Buat</a>
+                                <a href="{{ url('/jurnal') }}" class="card-link">Buat</a>
                             </div>
                             
                         </div>

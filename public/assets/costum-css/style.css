@@ -85,3 +85,36 @@
     10%,70%  {background-size:100% 205%,var(--s,0) 100%}
     70%,100% {background-position: top,center}
   }
+
+  /* loader untuk export pdf */
+  #bg-loader {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  #loader-export-text {
+    position: fixed;
+    z-index: 100000;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+  }
+  #loader-export {
+    position: fixed;
+    z-index: 100001;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(120px / cos(45deg));
+    height: 14px;
+    background: repeating-linear-gradient(-45deg,#ffffff 0 15px,#ff000000 0 20px) left/200% 100%;
+    animation: l3 2s infinite linear;
+  }
+  @keyframes l3 {
+      100% {background-position:right}
+  }
