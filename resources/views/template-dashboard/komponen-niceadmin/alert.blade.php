@@ -11,68 +11,65 @@
             }
         @endif
 
+        // alert sukses jika berhasil menambah atau update data
+        @if (session('success'))
+            {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "{{ Session::get('success') }}"
+                });
+            }
+        @endif
+
         // alert create
-        @if (session('create'))
-            {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-                Toast.fire({
-                    icon: "success",
-                    title: "{{ Session::get('create') }}"
-                });
-            }
-        @endif
-
-         // alert update data
-         @if (session('update'))
-            {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-                Toast.fire({
-                    icon: "success",
-                    title: "{{ Session::get('update') }}"
-                });
-            }
-        @endif
-
-        // alert jika berhasil tambah data
-        // @if (session('success'))
+        // @if (session('create'))
         //     {
-        //         Swal.fire({
-        //             title: "Succss!",
-        //             text: "Berhasil tambah data.",
+        //         const Toast = Swal.mixin({
+        //             toast: true,
+        //             position: "top-end",
+        //             showConfirmButton: false,
+        //             timer: 5000,
+        //             timerProgressBar: true,
+        //             didOpen: (toast) => {
+        //                 toast.onmouseenter = Swal.stopTimer;
+        //                 toast.onmouseleave = Swal.resumeTimer;
+        //             }
+        //         });
+        //         Toast.fire({
         //             icon: "success",
-        //             timer: 2000,
+        //             title: "{{ Session::get('create') }}"
         //         });
         //     }
         // @endif
 
-        // alert jika berhasil update data
-        // @if (session('update'))
+        // alert update data
+        //  @if (session('update'))
         //     {
-        //         Swal.fire({
-        //             title: "Succss!",
-        //             text: "Berhasil update data.",
+        //         const Toast = Swal.mixin({
+        //             toast: true,
+        //             position: "top-end",
+        //             showConfirmButton: false,
+        //             timer: 3000,
+        //             timerProgressBar: true,
+        //             didOpen: (toast) => {
+        //                 toast.onmouseenter = Swal.stopTimer;
+        //                 toast.onmouseleave = Swal.resumeTimer;
+        //             }
+        //         });
+        //         Toast.fire({
         //             icon: "success",
-        //             timer: 2000,
+        //             title: "{{ Session::get('update') }}"
         //         });
         //     }
         // @endif
@@ -100,39 +97,28 @@
         });
 
         // alert delete data
-        @if (session('delete'))
-            {
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "{{ Session::get('delete') }}",
-                    icon: "success",
-                    // timer: 3000,
-                });
-            }
-        @endif
-
-        // alert success
-        // @if (session('success'))
+        // @if (session('delete'))
         //     {
         //         Swal.fire({
-        //             title: "Success!",
-        //             text: "{{ Session::get('success') }}",
+        //             title: "Deleted!",
+        //             text: "{{ Session::get('delete') }}",
         //             icon: "success",
-        //             timer: 3000,
         //         });
         //     }
         // @endif
 
         // alert info
-        @if (session('info'))
-            {
-                Swal.fire({
-                    title: "Info!",
-                    text: "{{ Session::get('info') }}",
-                    icon: "info",
-                    timer: 3000,
-                });
-            }
-        @endif
+        // @if (session('info'))
+        //     {
+        //         Swal.fire({
+        //             title: "Info!",
+        //             text: "{{ Session::get('info') }}",
+        //             icon: "info",
+        //             timer: 3000,
+        //         });
+        //     }
+        // @endif
+
+
     });
 </script>
