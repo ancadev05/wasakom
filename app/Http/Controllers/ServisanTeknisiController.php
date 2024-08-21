@@ -58,7 +58,7 @@ class ServisanTeknisiController extends Controller
 
         ServisanTeknisi::create($servisan_teknisi);
 
-        return redirect('/servisan-teknisi');
+        return redirect('/servisan-teknisi')->with('success', 'Berhasil ambil servisan!');
     }
 
     /**
@@ -112,7 +112,7 @@ class ServisanTeknisiController extends Controller
 
         ServisanTeknisi::where('id', $id)->update($servisan_teknisi);
 
-        return redirect('/servisan-teknisi');
+        return redirect('/servisan-teknisi')->with('success', 'Berhasil update servisan!');
     }
 
     /**
@@ -132,6 +132,6 @@ class ServisanTeknisiController extends Controller
         // batalkan servisan teknisi
         ServisanTeknisi::where('id', $id)->delete();
         
-        return redirect('/servisan-teknisi');
+        return redirect('/servisan-teknisi')->with('success', 'Berhasil delete servisan!');
     }
 }

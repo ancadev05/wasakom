@@ -12,15 +12,15 @@
 
     <section class="section">
 
-        <div class="card p-3" style="font-size: 12px">
-            <div class="row" id="document-print">
+        <div class="card p-3">
+            <div class="row" id="document-print" style="font-size: 16px">
                 <div class="col-12 col-lg-6">
-                    <div class="row mb-2 border-bottom pb-2 align-items-center">
-                        <div class="col-2">
-                            <img src="{{ asset('assets/img/logo-wana.png') }}" alt="" width="60px" class="ms-2">
+                    <div class="row mb-3 border-bottom pb-2 align-items-center">
+                        <div class="col-2 me-3">
+                            <img src="{{ asset('assets/img/logo-wana.png') }}" alt="" width="80px" class="ms-2">
                         </div>
-                        <div class="col-10" style="line-height:1.2;">
-                            <div class="fw-bold" style="font-size: 16px">CV. Wana Satria Komputindo</div>
+                        <div class="col" style="line-height:1.2; font-size: 15px">
+                            <div class="fw-bold" style="font-size: 19px">CV. Wana Satria Komputindo</div>
                             <div class="m-0 p-0"><small>Jl. Monumen Emmy Saelan No. 9C, Kel. Gn. Sari,</small></div>
                             <div class="m-0 p-0"><small>Kec. Rappocini, Kota Makassar</small></div>
                             <div class="m-0 p-0"><small>Telp. 0811-459-354</small></div>
@@ -60,13 +60,13 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <div class="mb-2">
+                    <div class="mb-3">
                         <span class="fw-bold d-block">Kelengkapan:</span>
-                        <span class="d-block mb-1">{{ $servisan->kelengkapan }}</span>
+                        <span class="d-block mb-3">{{ $servisan->kelengkapan }}</span>
                         <span class="fw-bold">Description:</span>
                         <span class="d-block">{{ $servisan->keluhan . '. ' . $servisan->ket}}</span>
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
                         <span class="fw-bold me-3">Servisan:</span>
                         <span class="me-2">
                             <input type="checkbox" name="ringan" id="ringan">

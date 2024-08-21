@@ -78,7 +78,7 @@ class ServisanController extends Controller
 
         Servisan::create($servisan);
 
-        return redirect('/servisan')->with('success', 'Servisan berhasil ditambahkan!');
+        return redirect('/servisan')->with('success', 'Berhasil tambah servisan!');
     }
 
     /**
@@ -138,7 +138,7 @@ class ServisanController extends Controller
 
         Servisan::where('id', $id)->update($servisan);
 
-        return redirect('/servisan')->with('success', 'Data berhasil diupdate!');
+        return redirect('/servisan')->with('success', 'Berhasil update servisan!');
     }
 
     /**
@@ -151,7 +151,7 @@ class ServisanController extends Controller
         
         if($status_pengerjaan == 0) {
             Servisan::where('id', $id)->delete();
-            return redirect('/servisan')->with('success', 'Servisan berhasil dihapus!');
+            return redirect('/servisan')->with('success', 'Berhasil delete servisan!');
         };
 
         return redirect('/servisan')->with('info', 'Servisan sementara pengerjaan. Data tidak bisa dihapus!');
