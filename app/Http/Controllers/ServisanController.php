@@ -148,7 +148,7 @@ class ServisanController extends Controller
     {
         $servisan = Servisan::where('id', $id)->first();
         $status_pengerjaan = $servisan->status_pengerjaan;
-
+        
         if($status_pengerjaan == 0) {
             Servisan::where('id', $id)->delete();
             return redirect('/servisan')->with('success', 'Data berhasil dihapus!');

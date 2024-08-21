@@ -66,7 +66,7 @@
                                 @if ($item->status_pengerjaan == 1)
                                     <a href="#" class="btn btn-sm shadow-sm mb-1 btn-danger d-none" data-bs-toggle="tooltip" data-bs-placment="top" title="Hapus"><i class="bi bi-trash"></i></a>
                                 @else
-                                    <form action="{{ url('servisan  /' . $item->id) }}" method="post" class="d-inline">
+                                    <form action="{{ url('servisan/' . $item->id) }}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-sm shadow-sm mb-1 btn-danger delete-btn" data-bs-toggle="tooltip" data-bs-placment="top" title="Hapus"><i class="bi bi-trash"></i></button>
