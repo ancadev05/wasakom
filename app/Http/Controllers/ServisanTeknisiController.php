@@ -15,7 +15,7 @@ class ServisanTeknisiController extends Controller
      */
     public function index()
     {
-        $servisan_teknisis = ServisanTeknisi::get();
+        $servisan_teknisis = ServisanTeknisi::orderBy('id', 'desc')->get();
         return view('servisan.servisan-teknisi', compact(
             'servisan_teknisis'
         ));
@@ -29,7 +29,7 @@ class ServisanTeknisiController extends Controller
         $costumer = Costumer::get();
 
         // menampilkan servisan yang baru masuk atau belum dikerjakan
-        $servisans = Servisan::where('status_pengerjaan', 0)->orderBy('tgl_masuk', 'asc')->get();
+        $servisans = Servisan::where('status_pengerjaan', 0)->orderBy('tgl_masuk', 'desc')->get();
 
         return view('servisan.servisan-teknisi-create', compact(
             'costumer',
@@ -132,6 +132,6 @@ class ServisanTeknisiController extends Controller
         // batalkan servisan teknisi
         ServisanTeknisi::where('id', $id)->delete();
         
-        return redirect('/servisan-teknisi')->with('success', 'Berhasil delete servisan!');
+        return redirect('/servisan-teknisi')->with('success', 'Berhasil batalkan servisan!');
     }
 }

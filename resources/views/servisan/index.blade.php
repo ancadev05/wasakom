@@ -16,6 +16,8 @@
     <a href="{{ url('/servisan/create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Servisan</a>
 
     <div class="card p-3">
+        {{-- alert --}}
+        <div class="alert alert-info">Untuk melihat status detail servisan, masuk ke menu <b>Servisan Teknisi</b>.</div>
         <div class="table-responsive">
             <table class="table table-sm table-striped nowrap w-100" id="datatables">
                 <thead>
@@ -46,13 +48,13 @@
                                 @foreach ($servisan_teknisis as $teknisi)
                                     @if ($item->id == $teknisi->servisan_id)
                                         @if ($teknisi->status == 'Selesai')
-                                            <b class="text-center text-success d-block"><i class="bi bi-check-circle-fill"></i></b>
+                                            <b class="text-center text-success d-block" data-bs-toggle="tooltip" data-bs-placment="top" title="Selesai"><i class="bi bi-check-circle-fill"></i></b>
                                         @elseif($teknisi->status == 'Proses')
-                                            <div class="loader m-auto"></div>
+                                            <div class="loader m-auto" data-bs-toggle="tooltip" data-bs-placment="top" title="Proses"></div>
                                         @elseif($teknisi->status == 'Oper Vendor')
-                                            <div class="text-warning text-center fw-bold"><i class="bi bi-hourglass-split"></i></span>
+                                            <div class="text-warning text-center fw-bold" data-bs-toggle="tooltip" data-bs-placment="top" title="Oper Vendor"><i class="bi bi-hourglass-split"></i></span>
                                         @else
-                                            <i class="bi bi-x-circle-fill text-danger text-center d-block"></i>
+                                            <i class="bi bi-x-circle-fill text-danger text-center d-block" data-bs-toggle="tooltip" data-bs-placment="top" title="Cancel"></i>
                                         @endif
                                     @endif
                                 @endforeach

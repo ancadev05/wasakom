@@ -17,7 +17,7 @@ class ServisanController extends Controller
      */
     public function index()
     {
-        $servisans = Servisan::orderBy('tgl_masuk', 'asc')->get();
+        $servisans = Servisan::orderBy('tgl_masuk', 'desc')->get();
 
         // mancari apakah servisan sudah diambil teknisi atau belum
         $servisan_teknisis = ServisanTeknisi::get();

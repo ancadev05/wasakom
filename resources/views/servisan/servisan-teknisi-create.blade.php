@@ -12,12 +12,13 @@
     <section class="section">
         {{-- halaman untuk melihat servisan yang sudah masuk yang harus dikerjakan untuk teknisi --}}
         <div class="card p-3">
+            <div class="alert alert-info">Urutan berdasarkan tanggal masuk servisan lebih dulu.</div>
             <div class="table-responsive">
                 <table class="table table-sm table-striped nowrap w-100" id="datatables">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Costumer</th>
+                            <th>No. Servisan</th>
                             <th>Merek-Tipe</th>
                             <th>Keluhan</th>
                             <th>Kelengkapan</th>
@@ -31,7 +32,7 @@
                         @foreach ($servisans as $item)
                             <tr>
                                 <td>{{ $i }}</td>
-                                <td>{{ $item->costumer->nama }}</td>
+                                <td>{{ $item->no_servisan }}</td>
                                 <td>{{ $item->laptopmerek->merek . '-' . $item->tipe }}</td>
                                 <td>{{ $item->keluhan }}</td>
                                 <td>{{ $item->kelengkapan }}</td>
@@ -39,7 +40,7 @@
                                     <form action="{{ url('servisan-teknisi' ) }}" method="post">
                                     @csrf
                                         <input type="hidden" name="servisan_id" value="{{ $item->id }}">
-                                        <button class="btn btn-sm btn-primary" type="submit"><i class="bi bi-plus-lg"></i></button>
+                                        <button class="btn btn-sm btn-primary shadow-sm" type="submit" data-bs-toggle="tooltip" data-bs-placment="top" title="Kerjakan"><i class="bi bi-plus-lg"></i></button>
                                     </form>
                                 </td>
                             </tr>
