@@ -12,7 +12,7 @@ class CostumerController extends Controller
      */
     public function index()
     {
-        $costumers = Costumer::get();
+        $costumers = Costumer::orderBy('id', 'desc')->get();
         return view('costumer.costumer')
             ->with('costumers', $costumers);
     }
