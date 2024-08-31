@@ -87,6 +87,13 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ url('/laptop-terjual') }}">
+                <i class="bi bi-cart"></i>
+                <span>Transaksi</span>
+            </a>
+        </li>
+
         {{-- menu Accounting --}}
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ url('/accounting') }}">
