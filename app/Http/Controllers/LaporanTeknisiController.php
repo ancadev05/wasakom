@@ -53,7 +53,8 @@ class LaporanTeknisiController extends Controller
                 ->whereBetween('tgl_masuk',[$tgl_awal, $tgl_akhir])
                 ->get();
             $tms = count($merek_servisans);
-            if($tms >= 0) {
+            $jadi = false;
+            // if($tms >= 0) {
                 for ($i=0; $i < $tms; $i++) { 
                 // mengambil merek unit yang diservice
                 $laptop_merek_id = $merek_servisans[$i]->merek;
@@ -64,9 +65,9 @@ class LaporanTeknisiController extends Controller
 
                 $jadi = [$merek, $merek_total];
             } 
-        } else {
-                $jadi = false;
-            }
+        // } else {
+        //         $jadi = false;
+            // }
             
             // dd($jadi, $tgl_awal, $tgl_akhir);
             // detail servisan teknisi
