@@ -46,6 +46,7 @@
                         <th>Tgl. Masuk</th>
                         <th>No_Servisan</th>
                         <th>User</th>
+                        <th>No. HP</th>
                         <th>Merek/Tipe</th>
                         <th>Kelengkapan</th>
                         <th>Status</th>
@@ -62,6 +63,7 @@
                             <td>{{ $item->tgl_masuk }}</td>
                             <td>{{ $item->no_servisan }}</td>
                             <td>{{ $item->costumer->nama }}</td>
+                            <td>{{ $item->costumer->no_wa }}</td>
                             <td>{{ $item->laptopmerek->merek . '-' . $item->tipe }}</td>
                             <td>{{ $item->kelengkapan }}</td>
                             <td>{{ $item->status }}</td>

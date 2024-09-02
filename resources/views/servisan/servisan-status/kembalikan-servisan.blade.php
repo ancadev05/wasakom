@@ -43,7 +43,8 @@
             </div>
 
             <div class="my-3 d-flex justify-content-start">
-                <button class="btn btn-sm btn-success shadow-sm">Kembalikan <i class="bi bi-box-arrow-up-right"></i></button>
+                <button class="btn btn-sm btn-success shadow-sm me-2">Kembalikan <i class="bi bi-box-arrow-up-right"></i></button>
+                <button onclick="history.back()" class="btn btn-sm btn-danger shadow-sm">Back</button>
             </div>
         </form>
         
