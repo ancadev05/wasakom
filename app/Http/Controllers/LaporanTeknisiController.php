@@ -53,7 +53,7 @@ class LaporanTeknisiController extends Controller
                 ->whereBetween('tgl_masuk',[$tgl_awal, $tgl_akhir])
                 ->get();
             $tms = count($merek_servisans);
-            $jadi = false;
+            // $jadi = false;
             if($tms >= 0) {
                 for ($i=0; $i < $tms; $i++) { 
                 // mengambil merek unit yang diservice
