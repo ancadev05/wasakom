@@ -28,7 +28,7 @@ class LaporanTeknisiController extends Controller
 
             // menghitung status servisan masing-masing teknisi (selesai, proses, ov, cancel)
             $detail_servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
-                ->select('servisans.tgl_masuk as tgl_masuk', 'servisan_teknisis.status as status', 'servisan_teknisis.user_id as teknisi', DB::raw('count(*) as total'))
+                ->select('servisans.tgl_masuk', 'servisan_teknisis.status as status', 'servisan_teknisis.user_id as teknisi', DB::raw('count(*) as total'))
                 ->groupBy('status', 'teknisi')
                 ->where('servisan_teknisis.user_id', 7)->orwhere('servisan_teknisis.user_id', 2)
                 ->whereBetween('tgl_masuk',[$tgl_awal, $tgl_akhir])
