@@ -73,39 +73,21 @@
                     </div>
                 </div>
 
-                <ul>
-                    @foreach ($servisans as $item)
-                        <li>{{ $item->tgl_masuk }}</li>
-                    @endforeach
-                </ul>
-
+                
                 <table>
                     <tr>
-                        <td>teknisi</td>
-                        <td>servisan</td>
-                        <td>selesai</td>
-                        <td>proses</td>
-                        <td>oper vendor</td>
-                        <td>cancel</td>
+                        <td>Teknisi</td>
+                        <td>status</td>
+                        <td>total</td>
                     </tr>
-                    @foreach ($detail_servisans as $item)
+                    @foreach ($total_status_servisan_teknisi as $item)
                         <tr>
-                            <td>{{ $item->teknisi }}</td>
+                            <td>{{ $item->teknis }}</td>
                             <td>{{ $item->status }}</td>
                             <td>{{ $item->total }}</td>
                         </tr>
                     @endforeach
-                    <tr>
-
-                    </tr>
                 </table>
-
-                {{-- <h1>{{ $teknisi->user->karyawan->nama }}</h1> --}}
-                <ul>
-                    @foreach ($teknisi as $item)
-                        <li>{{ $item->user->karyawan->nama }}</li>
-                    @endforeach
-                </ul>
 
                 {{-- chart --}}
                 <div class="row">
@@ -191,7 +173,7 @@
                                             series: [{
                                                 name: '',
                                                 // data: [400, 430, 448, 470]
-                                                data: @json($jadi[1])
+                                                data: @json($servisan_merek[1])
                                             }],
                                             chart: {
                                                 type: 'bar',
@@ -207,7 +189,7 @@
                                                 enabled: false
                                             },
                                             xaxis: {
-                                                categories: @json($jadi[0]),
+                                                categories: @json($servisan_merek[0]),
                                             },
                                             tooltip: {
                                                 y: {
@@ -226,7 +208,37 @@
                     </div>
                     {{-- /bar chart --}}
                 </div> {{-- end chart --}}
-            </div> {{-- end card --}}
+
+                <table class="table table-sm nowrap">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Costumer</th>
+                            <th>Keluhan</th>
+                            <th>Merek</th>
+                            <th>Kerusakan</th>
+                            <th>Keterangan</th>
+                            <th>Status</th>
+                            <th>Teknisi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($servisans as $item)
+                        <tr>
+                            <td>{{ $item->tgl_masuk }}</td>
+                            <td>{{ $item->costumer->nama }}</td>
+                            <td>{{ $item->keluhan }}</td>
+                            <td>{{ $item->laptopmerek->merek }}</td>
+                            <td>{{ $item->kerusakan }}</td>
+                            <td>{{ $item->ket }}</td>
+                            <td>{{ $item->status }}</td>
+                            <td>{{ $item->user->karyawan->nama }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+
+            </div> {{-- end card/document --}}
         @endif
 
 

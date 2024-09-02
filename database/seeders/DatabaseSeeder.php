@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
             LevelAkunSeeder::class,
             UserSedeer::class,
             LaptopMerekSeeder::class,
-            // LaptopTipeSeeder::class,
+            LaptopTipeSeeder::class,
             LaptopStatusSeeder::class,
             LaptopKondisiSeeder::class,
         ]);
 
-        // Laptop::factory(200)->create();
+        Laptop::factory(200)->create();
     }
 }
