@@ -18,7 +18,7 @@
                     toast: true,
                     position: "top-end",
                     showConfirmButton: false,
-                    timer: 5000,
+                    timer: 3500,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                         toast.onmouseenter = Swal.stopTimer;
@@ -32,47 +32,6 @@
             }
         @endif
 
-        // alert create
-        // @if (session('create'))
-        //     {
-        //         const Toast = Swal.mixin({
-        //             toast: true,
-        //             position: "top-end",
-        //             showConfirmButton: false,
-        //             timer: 5000,
-        //             timerProgressBar: true,
-        //             didOpen: (toast) => {
-        //                 toast.onmouseenter = Swal.stopTimer;
-        //                 toast.onmouseleave = Swal.resumeTimer;
-        //             }
-        //         });
-        //         Toast.fire({
-        //             icon: "success",
-        //             title: "{{ Session::get('create') }}"
-        //         });
-        //     }
-        // @endif
-
-        // alert update data
-        //  @if (session('update'))
-        //     {
-        //         const Toast = Swal.mixin({
-        //             toast: true,
-        //             position: "top-end",
-        //             showConfirmButton: false,
-        //             timer: 3000,
-        //             timerProgressBar: true,
-        //             didOpen: (toast) => {
-        //                 toast.onmouseenter = Swal.stopTimer;
-        //                 toast.onmouseleave = Swal.resumeTimer;
-        //             }
-        //         });
-        //         Toast.fire({
-        //             icon: "success",
-        //             title: "{{ Session::get('update') }}"
-        //         });
-        //     }
-        // @endif
 
         // confirm hapus data
         $(".delete-btn").on("click", function(event) {
@@ -95,29 +54,6 @@
                 }
             });
         });
-
-        // alert delete data
-        // @if (session('delete'))
-        //     {
-        //         Swal.fire({
-        //             title: "Deleted!",
-        //             text: "{{ Session::get('delete') }}",
-        //             icon: "success",
-        //         });
-        //     }
-        // @endif
-
-        // alert info
-        // @if (session('info'))
-        //     {
-        //         Swal.fire({
-        //             title: "Info!",
-        //             text: "{{ Session::get('info') }}",
-        //             icon: "info",
-        //             timer: 3000,
-        //         });
-        //     }
-        // @endif
 
 
     });

@@ -29,6 +29,7 @@
                         <th>Merek/Tipe</th>
                         <th>Kelengkapan</th>
                         <th>Status</th>
+                        <th>Teknisi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -56,6 +57,13 @@
                                         @else
                                             <i class="bi bi-x-circle-fill text-danger text-center d-block" data-bs-toggle="tooltip" data-bs-placment="top" title="Cancel"></i>
                                         @endif
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach ($servisan_teknisis as $teknisi)
+                                    @if ($item->id == $teknisi->servisan_id)
+                                        {{ $teknisi->user->karyawan->nama }}
                                     @endif
                                 @endforeach
                             </td>

@@ -61,4 +61,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(ServisanTeknisi::class);
     }
+
+    // relasi ketabel servisan
+    public function servisans()
+    {
+        return $this->hasMany(Servisan::class, 'id', 'user_id');
+    }
 }

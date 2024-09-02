@@ -25,4 +25,10 @@ class Servisan extends Model
     {
         return $this->belongsTo(LaptopMerek::class, 'laptop_merek_id', 'id');
     }
+
+    // relasi ke tabel user
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
