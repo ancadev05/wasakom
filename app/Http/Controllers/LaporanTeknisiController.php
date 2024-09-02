@@ -6,6 +6,7 @@ use App\Models\LaptopMerek;
 use App\Models\Servisan;
 use Illuminate\Http\Request;
 use App\Models\ServisanTeknisi;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class LaporanTeknisiController extends Controller
@@ -45,9 +46,11 @@ class LaporanTeknisiController extends Controller
 
             // mencaridetail servisan berdasarkan teknisi tertentu
             for ($i = 0; $i < $teknisi->count(); $i++) {
-                // mengambil id teknisi sesuai jumlah teknisi yang ada
+                // mengambil id teknisi sesuai jumlah teknisi yang ada 
                 $teknisi_id[$i] = $teknisi[$i]->teknisi;
+                $nama_teknisi[] = User::where('id', $teknisi_id[$i])->first()->karyawan->nama; // mencari nama teknisi
 
+                // mencari status servisan berdasarkan teknisi tertentu
                 $servisan_teknisi[$i] = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
                     ->select('servisan_teknisis.status as status', 'servisan_teknisis.user_id as teknisi', DB::raw('count(*) as total'))
                     ->groupBy('status', 'teknisi')
@@ -56,17 +59,25 @@ class LaporanTeknisiController extends Controller
                     ->orderBy('status', 'asc')
                     ->get();
 
-                $kerja_teknisi[$i] = [
-                    'teknisi' => $servisan_teknisi[$i][0]->teknisi,
-                    $servisan_teknisi[$i][0]->status => $servisan_teknisi[$i][0]->total,
-                    $servisan_teknisi[$i][1]->total => $servisan_teknisi[$i][1]->total,
-                ];
+                for ($i = 0; $i < $teknisi->count(); $i++) {
+                    foreach ($servisan_teknisi as $i => $value) {
+                        $selesai[$i] = $servisan_teknisi[$i][0]->total;
+                    }
+                }
+
+
+
+                // $servisan_teknisi = [
+                //     'teknisi' => $nama_teknisi,
+                //     'servisan' => [44, 55, 57, 56]
+                // ];
             }
 
             // dd($kerja_teknisi[0]);
-            dd($servisan_teknisi);
+            // dd($teknisi[0]->user->sandi);
+            // dd($selesai);
 
-            // mencari jumlah merek yang di servis pada tanggal tertentu
+            // mencari jumlah merek produk (laptop) yang di servis pada tanggal tertentu
             $merek_servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
                 // ->join('laptop_mereks', 'servisans.laptop_merek_id', '=', 'laptop_mereks.id')
                 ->select('servisans.laptop_merek_id as merek', DB::raw('count(*) as total'))
@@ -90,6 +101,8 @@ class LaporanTeknisiController extends Controller
                 $servisan_merek = false;
             }
 
+
+            // dd($servisan_merek);
             // teknisi
             $teknisi = ServisanTeknisi::select('user_id')->groupBy('user_id')->get();
             // $status = ServisanTeknisi::select('status')->groupBy('status')->get();

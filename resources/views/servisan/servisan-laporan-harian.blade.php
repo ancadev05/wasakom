@@ -82,7 +82,7 @@
                     </tr>
                     @foreach ($total_status_servisan_teknisi as $item)
                         <tr>
-                            <td>{{ $item->teknis }}</td>
+                            <td>{{ $item->teknisi }}</td>
                             <td>{{ $item->status }}</td>
                             <td>{{ $item->total }}</td>
                         </tr>
