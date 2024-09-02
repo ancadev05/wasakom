@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Costumer;
+use App\Models\LaptopMerek;
 use App\Models\Servisan;
 use Illuminate\Http\Request;
 use App\Models\ServisanTeknisi;
@@ -85,9 +86,11 @@ class ServisanTeknisiController extends Controller
         $status = [
             'status' => ['Selesai', 'Proses', 'Oper Vendor', 'Cancel']
         ];
+        $costumers = Costumer::get();
+        $laptopmereks = LaptopMerek::get();
 
         return view('servisan.servisan-teknisi-edit', compact(
-            'servisan_teknisi', 'status'
+            'servisan_teknisi', 'status', 'costumers', 'laptopmereks'
         ));
     }
 
@@ -96,7 +99,6 @@ class ServisanTeknisiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
         $servisan_teknisi = [
             'kerusakan' => $request->kerusakan,
             'status' => $request->status,

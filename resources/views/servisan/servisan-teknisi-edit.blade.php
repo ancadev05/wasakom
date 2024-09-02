@@ -20,7 +20,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="tgl_masuk">Tanggal:</label>
                         <input class="form-control @error('tgl_masuk') is-invalid @enderror" type="date" name="tgl_masuk"
-                            id="tgl_masuk" value="{{ old('tgl_masuk') }}">
+                            id="tgl_masuk" value="{{ $servisan_teknisi->servisan->tgl_masuk }}">
                         @error('tgl_masuk')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -28,7 +28,9 @@
                     <div class="mb-3">
                         <label class="form-label" for="costumer_id">Costumer:</label>
                         <select class="form-select @error('costumer_id') is-invalid @enderror select2" name="costumer_id" id="costumer_id">
-                            <option value="" selected>--</option>
+                            @foreach ($costumers as $item)
+                                <option value="{{ $item->id }}" {{ $servisan_teknisi->servisan->costumer_id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                            @endforeach
                         </select>
                         @error('costumer_id')
                             <small class="invalid-feedback"> {{ $message }} </small>
@@ -38,7 +40,9 @@
                         <label class="form-label" for="merek">Merek <span
                                 class="text-danger fw-bold">*</span>:</label>
                         <select class="form-select @error('merek') is-invalid @enderror" name="merek" id="merek">
-                            <option value="" selected>...</option>
+                            @foreach ($laptopmereks as $item)
+                                <option value="{{ $item->id }}" {{ $servisan_teknisi->servisan->laptop_merek_id == $item->id ? 'selected' : '' }}>{{ $item->merek }}</option>
+                            @endforeach
                         </select>
                         @error('merek')
                             <small class="invalid-feedback"> {{ $message }} </small>
@@ -65,7 +69,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="kerusakan">Kerusakan:</label>
                         <textarea class="form-control @error('kerusakan') is-invalid @enderror" type="text" name="kerusakan"
-                            id="kerusakan" placeholder="..." rows="2">{{ old('kerusakan') }}</textarea>
+                            id="kerusakan" placeholder="..." rows="2" required>{{ $servisan_teknisi->kerusakan }}</textarea>
                         @error('kerusakan')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -103,7 +107,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="estimasi">Estimasi Pengerjaan:</label>
                         <input class="form-control @error('estimasi') is-invalid @enderror" type="date" name="estimasi"
-                            id="estimasi" value="{{ old('estimasi') }}">
+                            id="estimasi" value="{{ $servisan_teknisi->estimasi }}">
                         @error('estimasi')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -111,7 +115,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="tgl_selesai">Tanggal Selesai:</label>
                         <input class="form-control @error('tgl_selesai') is-invalid @enderror" type="date" name="tgl_selesai"
-                            id="tgl_selesai" value="{{ old('tgl_selesai') }}">
+                            id="tgl_selesai" value="{{ $servisan_teknisi->tgl_selesai }}" required>
                         @error('tgl_selesai')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -119,7 +123,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="ket">Keterangan:</label>
                         <textarea class="form-control @error('ket') is-invalid @enderror" type="text" name="ket"
-                            id="ket" placeholder="..." rows="2">{{ old('ket') }}</textarea>
+                            id="ket" placeholder="..." rows="2" required>{{ $servisan_teknisi->ket }}</textarea>
                         @error('ket')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -127,7 +131,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="status">Status <span
                                 class="text-danger fw-bold">*</span>:</label>
-                        <select class="form-select @error('status') is-invalid @enderror" name="status" id="status">
+                        <select class="form-select @error('status') is-invalid @enderror" name="status" id="status" required>
                             @php
                                 $status = $servisan_teknisi->status;
                             @endphp
@@ -143,7 +147,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="catatan">Catatan:</label>
                         <textarea class="form-control @error('catatan') is-invalid @enderror" type="text" name="catatan"
-                            id="catatan" placeholder="..." rows="2">{{ old('catatan') }}</textarea>
+                            id="catatan" placeholder="..." rows="2">{{ $servisan_teknisi->catatan }}</textarea>
                         @error('catatan')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
