@@ -73,6 +73,17 @@ Route::middleware(['auth'])->group(function () {
 
     // daftar servisan
     Route::resource('/servisan', ServisanController::class);
+    // filter servisan
+    Route::get('/servisan-selesai', [ServisanController::class, 'servisanselesai']);
+    Route::get('/servisan-proses', [ServisanController::class, 'servisanproses']);
+    Route::get('/servisan-ov', [ServisanController::class, 'servisanov']);
+    Route::get('/servisan-diambil', [ServisanController::class, 'servisandiambil']);
+    Route::get('/servisan-cancel', [ServisanController::class, 'servisancancel']);
+    // pengembalian servisan
+    Route::get('/pengembalian/{id}', [ServisanController::class, 'pengembalian']);
+    Route::post('/proses-pengembalian', [ServisanController::class, 'prosespengembalian']);
+
+
     // servisan teknisi
     Route::resource('/servisan-teknisi', ServisanTeknisiController::class);
     // laporan teknisi

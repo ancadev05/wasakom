@@ -43,7 +43,7 @@
                             <td>{{ $i }}</td>
                             <td>{{ $item->servisan->no_servisan }}</td>
                             <td>{{ $item->servisan->costumer->nama }}</td>
-                            <td>{{ $item->servisan->tipe }}</td>
+                            <td>{{ $item->servisan->laptopmerek->merek }}</td>
                             <td>{{ $item->servisan->keluhan }}</td>
                             <td>{{ $item->user->karyawan->nama }}</td>
                             <td>{{ $item->status }}
@@ -57,11 +57,11 @@
                                     <i class="bi bi-x-circle-fill text-danger text-center d-block" data-bs-toggle="tooltip" data-bs-placment="top" title="Cancel"></i>
                                 @endif
                             </td>
-                            {{-- aksi yang hanay boleh dilakukan oleh jabatan teknisi --}}
                             <td>
                                 <a href="{{ url('/servisan-teknisi/' . $item->id) }}" class="btn btn-sm shadow-sm btn-secondary" data-bs-toggle="tooltip" data-bs-placment="top" title="Lihat"><i class="bi bi-eye"></i></a>
+                                {{-- aksi yang hanay boleh dilakukan oleh jabatan teknisi --}}
                                 @if (Auth::user()->level_akun_id == 6)
-                                    {{-- menampilkan tombol delete servisan sesuai user id --}}
+                                    {{-- menampilkan tombol delete servisan sesuai user id agar servisan hanya bisa dihapus oleh teknisi bersangkutan --}}
                                     @if (Auth::user()->id == $item->user_id)
                                         <a href="{{ url('/servisan-teknisi/' . $item->id . '/edit') }}" class="btn btn-sm shadow-sm btn-warning" data-bs-toggle="tooltip" data-bs-placment="top" title="Edit"><i class="bi bi-pencil-square"></i></a>
                                         {{-- menyembunyikan tombol delete jika servisan sudah selesai --}}

@@ -25,7 +25,9 @@
                     <div class="mb-3">
                         <label class="form-label" for="costumer_id">Costumer:</label>
                         <select class="form-select @error('costumer_id') is-invalid @enderror select2" name="costumer_id" id="costumer_id" disabled>
-                            <option value="" selected>--</option>
+                            @foreach ($costumers as $item)
+                                <option value="{{ $item->id }}" {{ $servisan_teknisi->servisan->costumer_id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                            @endforeach
                         </select>
                         @error('costumer_id')
                             <small class="invalid-feedback"> {{ $message }} </small>
@@ -35,7 +37,9 @@
                         <label class="form-label" for="merek">Merek <span
                                 class="text-danger fw-bold">*</span>:</label>
                         <select class="form-select @error('merek') is-invalid @enderror" name="merek" id="merek" disabled>
-                            <option value="" selected>...</option>
+                            @foreach ($laptopmereks as $item)
+                                <option value="{{ $item->id }}" {{ $servisan_teknisi->servisan->laptop_merek_id == $item->id ? 'selected' : '' }}>{{ $item->merek }}</option>
+                            @endforeach
                         </select>
                         @error('merek')
                             <small class="invalid-feedback"> {{ $message }} </small>
@@ -44,7 +48,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="tipe">Tipe:</label>
                         <input class="form-control @error('tipe') is-invalid @enderror" type="text" name="tipe"
-                            id="tipe" placeholder="..." value="{{ $servisan_teknisi->servisan->tipe }}" readonly>
+                            id="tipe" placeholder="..." value="{{ $servisan_teknisi->servisan->tipe }}" disabled>
                         @error('tipe')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -52,7 +56,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="keluhan">Keluhan:</label>
                         <textarea class="form-control @error('keluhan') is-invalid @enderror" type="text" name="keluhan"
-                            id="keluhan" placeholder="..." rows="2" readonly>{{ $servisan_teknisi->servisan->keluhan }}</textarea>
+                            id="keluhan" placeholder="..." rows="2" disabled>{{ $servisan_teknisi->servisan->keluhan }}</textarea>
                         @error('keluhan')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -62,7 +66,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="kerusakan">Kerusakan:</label>
                         <textarea class="form-control @error('kerusakan') is-invalid @enderror" type="text" name="kerusakan"
-                            id="kerusakan" placeholder="..." rows="2" readonly>{{ old('kerusakan') }}</textarea>
+                            id="kerusakan" placeholder="..." rows="2" disabled>{{ $servisan_teknisi->kerusakan }}</textarea>
                         @error('kerusakan')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -77,19 +81,19 @@
                             <div class="form-check me-3">
                                 <input class="form-check-input @error('jenis_kerusakan') is-invalid @enderror"
                                     type="radio" name="jenis_kerusakan" id="jenis_kerusakan1" value="Ringan"
-                                    {{ $jenis_kerusakan == 'Ringan' ? 'checked' : '' }}>
+                                    {{ $jenis_kerusakan == 'Ringan' ? 'checked' : '' }} disabled>
                                 <label class="form-check-label" for="jenis_kerusakan1">Ringan</label>
                             </div>
                             <div class="form-check me-3">
                                 <input class="form-check-input @error('jenis_kerusakan') is-invalid @enderror"
                                     type="radio" name="jenis_kerusakan" id="jenis_kerusakan2" value="Sedang"
-                                    {{ $jenis_kerusakan == 'Sedang' ? 'checked' : '' }}>
+                                    {{ $jenis_kerusakan == 'Sedang' ? 'checked' : '' }} disabled>
                                 <label class="form-check-label" for="jenis_kerusakan2">Sedang</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input @error('jenis_kerusakan') is-invalid @enderror"
                                     type="radio" name="jenis_kerusakan" id="jenis_kerusakan3" value="Berat"
-                                    {{ $jenis_kerusakan == 'Berat' ? 'checked' : '' }}>
+                                    {{ $jenis_kerusakan == 'Berat' ? 'checked' : '' }} disabled>
                                 <label class="form-check-label" for="jenis_kerusakan3">Berat</label>
                             </div>
                             @error('jenis_kerusakan')
@@ -116,7 +120,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="ket">Keterangan:</label>
                         <textarea class="form-control @error('ket') is-invalid @enderror" type="text" name="ket"
-                            id="ket" placeholder="..." rows="2" readonly>{{ old('ket') }}</textarea>
+                            id="ket" placeholder="..." rows="2" disabled>{{ $servisan_teknisi->ket }}</textarea>
                         @error('ket')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -140,7 +144,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="catatan">Catatan:</label>
                         <textarea class="form-control @error('catatan') is-invalid @enderror" type="text" name="catatan"
-                            id="catatan" placeholder="..." rows="2" readonly>{{ old('catatan') }}</textarea>
+                            id="catatan" placeholder="..." rows="2" disabled>{{ $servisan_teknisi->catatan }}</textarea>
                         @error('catatan')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
@@ -150,7 +154,7 @@
             </div>
 
             <div class="d-flex justify-content-center my-3">
-                <a href="{{ url('/servisan-teknisi') }}" class="btn btn-sm btn-danger shadow-sm">Back</a>
+                <button onclick="history.back()" class="btn btn-sm btn-danger shadow-sm">Back</button>
             </div>
     </div>
     

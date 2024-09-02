@@ -16,7 +16,12 @@ class ServisanTeknisiController extends Controller
      */
     public function index()
     {
-        $servisan_teknisis = ServisanTeknisi::orderBy('id', 'desc')->get();
+        $user = Auth::user()->id;
+
+        $servisan_teknisis = ServisanTeknisi::orderBy('id', 'desc')
+            ->where('user_id', $user)
+            ->get();
+            
         return view('servisan.servisan-teknisi', compact(
             'servisan_teknisis'
         ));
@@ -71,9 +76,11 @@ class ServisanTeknisiController extends Controller
         $status = [
             'status' => ['Selesai', 'Proses', 'Oper Vendor', 'Cancel']
         ];
+        $costumers = Costumer::get();
+        $laptopmereks = LaptopMerek::get();
 
         return view('servisan.servisan-teknisi-show', compact(
-            'servisan_teknisi', 'status'
+            'servisan_teknisi', 'status', 'costumers', 'laptopmereks'
         ));
     }
 

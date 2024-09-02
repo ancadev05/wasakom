@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('servisan_id')->constrained();
             $table->string('kerusakan')->nullable();
-            $table->enum('status', ['Selesai', 'Proses', 'Oper Vendor', 'Cancel'])->default('Proses');
+            $table->enum('status', ['Selesai', 'Proses', 'Oper Vendor', 'Cancel', 'Diambil'])->default('Proses');
             $table->date('estimasi')->nullable();
             $table->date('tgl_selesai')->nullable();
             $table->enum('jenis_kerusakan', ['Ringan', 'Sedang', 'Berat'])->default('Ringan');

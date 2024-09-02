@@ -17,7 +17,8 @@ class ServisanController extends Controller
      */
     public function index()
     {
-        $servisans = Servisan::orderBy('tgl_masuk', 'desc')->get();
+        $servisans = Servisan::orderBy('tgl_masuk', 'asc')->orderBy('status_pengerjaan', 'asc')
+            ->get();
 
         // mancari apakah servisan sudah diambil teknisi atau belum
         $servisan_teknisis = ServisanTeknisi::get();
@@ -61,7 +62,7 @@ class ServisanController extends Controller
             $gambar_file->storeAs('public/gambar-laptop-servisan/', $gambar_nama); // memindahkan file ke folder public agar bisa diakses
         }
 
-        $no_servisan = 'SRV.' . date('Ymd') .'.'. date('his');
+        $no_servisan = 'SRV.' . date('ymd') .'.'. date('his');
 
         $servisan = [
             'tgl_masuk' => $request->tgl_masuk,
@@ -157,4 +158,79 @@ class ServisanController extends Controller
         return redirect('/servisan')->with('info', 'Servisan sementara pengerjaan. Data tidak bisa dihapus!');
     }
 
+    // menampilkan servisan yang selesai dikerjakan oleh teknisi
+    public function servisanselesai()
+    {
+        $servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
+            ->select('servisans.*', 'servisan_teknisis.status', 'servisan_teknisis.id as servisan_teknisi_id')
+            ->where('status', 'Selesai')
+            ->get();
+
+            return view('servisan.servisan-status.selesai', compact('servisans'));
+    }
+    // menampilkan servisan yang sementara proses dikerjakan oleh teknisi
+    public function servisanproses()
+    {
+        $servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
+            ->select('servisans.*', 'servisan_teknisis.status')
+            ->where('status', 'Proses')
+            ->get();
+
+            return view('servisan.servisan-status.proses', compact('servisans'));
+    }
+    // menampilkan servisan yang di oper ke vendor
+    public function servisanov()
+    {
+        $servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
+            ->select('servisans.*', 'servisan_teknisis.status')
+            ->where('status', 'Oper Vendor')
+            ->get();
+
+            return view('servisan.servisan-status.ov', compact('servisans'));
+    }
+    // menampilkan servisan yang sudah diambil
+    public function servisandiambil()
+    {
+        $servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
+            ->select('servisans.*', 'servisan_teknisis.status')
+            ->where('status', 'Diambil')
+            ->get();
+
+            return view('servisan.servisan-status.diambil', compact('servisans'));
+    }
+    // menampilkan servisan yang sudah diambil
+    public function servisancancel()
+    {
+        $servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
+            ->select('servisans.*', 'servisan_teknisis.status')
+            ->where('status', 'Cancel')
+            ->get();
+
+            return view('servisan.servisan-status.cancel', compact('servisans'));
+    }
+
+    // proses pengembalian servisan
+    public function pengembalian(string $id)
+    {
+        $servisan_teknisi_id = $id;
+        return view('servisan.servisan-status.kembalikan-servisan', compact('servisan_teknisi_id'));
+    }
+    public function prosespengembalian(Request $request)
+    {
+        $servisan_teknisi_id = $request->servisan_teknisi_id;
+
+        $pp = 'diambil oleh ' . $request->pengambil . ' dari ' . $request->pemberi . '. ';
+        $catatan = $request->catatan;
+
+        $data = [
+            'status' => 'Diambil',
+            'catatan' => $pp . $catatan
+        ];
+
+        // dd($data);
+
+        $servisanteknisi = ServisanTeknisi::where('id', $servisan_teknisi_id)->update($data);
+
+        return redirect('/servisan-diambil')->with('success', 'Servisan telah diambil user!');
+    }
 }

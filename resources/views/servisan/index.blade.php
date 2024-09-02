@@ -9,15 +9,41 @@
     <h1>Daftar Servisan</h1>
 </div>
 
-
+<div class="my-3">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a href="{{ url('/servisan') }}" class="nav-link active">Daftar Servisan</a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('/servisan-selesai') }}" class="nav-link">Selesai</a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('/servisan-proses') }}" class="nav-link">Proses</a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('/servisan-ov') }}" class="nav-link">Oper Vendor</a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('/servisan-diambil') }}" class="nav-link">Sudah Diambil</a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('/servisan-cancel') }}" class="nav-link">Cancel</a>
+        </li>
+    </ul>
+</div>
 
 <section class="section">
     {{-- menampilkan seluruh servisan masuk --}}
-    <a href="{{ url('/servisan/create') }}" class="btn btn-sm btn-primary mb-3 shadow-sm"><i class="bi bi-plus-lg"></i> Servisan</a>
+    
 
     <div class="card p-3">
         {{-- alert --}}
-        <div class="alert alert-info">Untuk melihat status detail servisan, masuk ke menu <b>Servisan Teknisi</b>.</div>
+        <div class="alert alert-info">Klik <b>Status</b> servisan untuk melihat detail servisan yang sudah atau sementara dikerjakan oleh teknisi.</div>
+
+        <div class="my-3 d-flex justify-content-end">
+            <a href="{{ url('/servisan/create') }}" class="btn btn-sm btn-primary shadow-sm"><i class="bi bi-plus-lg"></i> Servisan</a>
+        </div>
+
         <div class="table-responsive">
             <table class="table table-sm table-striped nowrap w-100" id="datatables">
                 <thead>
@@ -48,15 +74,17 @@
                             <td>
                                 @foreach ($servisan_teknisis as $teknisi)
                                     @if ($item->id == $teknisi->servisan_id)
-                                        @if ($teknisi->status == 'Selesai')
-                                            <b class="text-center text-success d-block" data-bs-toggle="tooltip" data-bs-placment="top" title="Selesai"><i class="bi bi-check-circle-fill"></i></b>
-                                        @elseif($teknisi->status == 'Proses')
-                                            <div class="loader m-auto" data-bs-toggle="tooltip" data-bs-placment="top" title="Proses"></div>
-                                        @elseif($teknisi->status == 'Oper Vendor')
-                                            <div class="text-warning text-center fw-bold" data-bs-toggle="tooltip" data-bs-placment="top" title="Oper Vendor"><i class="bi bi-hourglass-split"></i></span>
-                                        @else
-                                            <i class="bi bi-x-circle-fill text-danger text-center d-block" data-bs-toggle="tooltip" data-bs-placment="top" title="Cancel"></i>
-                                        @endif
+                                        <a href="{{ url('/servisan-teknisi/' . $teknisi->id) }}">
+                                            @if ($teknisi->status == 'Selesai')
+                                                <b class="text-center text-success d-block" data-bs-toggle="tooltip" data-bs-placment="top" title="Selesai"><i class="bi bi-check-circle-fill"></i></b>
+                                            @elseif($teknisi->status == 'Proses')
+                                                <div class="loader m-auto" data-bs-toggle="tooltip" data-bs-placment="top" title="Proses"></div>
+                                            @elseif($teknisi->status == 'Oper Vendor')
+                                                <div class="text-warning text-center fw-bold" data-bs-toggle="tooltip" data-bs-placment="top" title="Oper Vendor"><i class="bi bi-hourglass-split"></i></span>
+                                            @else
+                                                <i class="bi bi-x-circle-fill text-danger text-center d-block" data-bs-toggle="tooltip" data-bs-placment="top" title="Cancel"></i>
+                                            @endif
+                                        </a>
                                     @endif
                                 @endforeach
                             </td>
@@ -81,6 +109,17 @@
                                         @method('delete')
                                         <button type="submit" class="btn btn-sm shadow-sm mb-1 btn-danger delete-btn" data-bs-toggle="tooltip" data-bs-placment="top" title="Hapus"><i class="bi bi-trash"></i></button>
                                     </form>
+                                @endif
+
+                                {{-- tombol untuk teknisi agar bisa langsung mengambil servisan dari daftar servisan --}}
+                                @if (Auth::user()->level_akun_id == 6)
+                                    @if ($item->status_pengerjaan == 0)
+                                    <form action="{{ url('servisan-teknisi' ) }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="servisan_id" value="{{ $item->id }}">
+                                        <button class="btn btn-sm btn-success shadow-sm" type="submit" data-bs-toggle="tooltip" data-bs-placment="top" title="Kerjakan"><i class="bi bi-plus-lg"></i></button>
+                                    </form>
+                                    @endif 
                                 @endif
                             </td>
                         </tr> 
