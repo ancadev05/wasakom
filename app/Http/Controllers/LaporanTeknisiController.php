@@ -16,28 +16,17 @@ class LaporanTeknisiController extends Controller
             $tgl_awal = $request->tgl_awal;
             $tgl_akhir = $request->tgl_akhir;
 
-            // $servisans = Servisan::where('status_pengerjaan', '1')->whereBetween('tgl_masuk',[$tgl_awal, $tgl_akhir])
-            //     ->join('servisan_teknisis', 'servisans.id', '=', 'servisans.id')
-            //     ->select('servisans.*', 'servisan_teknisis.*', 'servisans.id as servisan_id', 'servisan_teknisis.id as servisan_teknisi_id')
-            //     ->where('servisan_teknisis.status', 'selesai')
-            //     ->count();
-                // ->get();
-
+            // mencari jumlah servisan berdasarkan tanggal tertentu 
+            // di tabel servisan yang di join ke tabel servisan_teknisi
             $servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
                 ->select('servisan_teknisis.status as status', 'servisan_teknisis.jenis_kerusakan as jenis_kerusakan')
                 ->whereBetween('tgl_masuk',[$tgl_awal, $tgl_akhir])
                 ->get();
 
-            // mencari servisan berdasarkan tanggal tertentu pada tabel servisan
-            // $servisans = Servisan::where('status_pengerjaan', '1')->whereBetween('tgl_masuk',[$tgl_awal, $tgl_akhir])->get();
-            
-            // menghitung jumlah servisan 
-            $total = count($servisans);
-
-            // total servisan
+            // menghitung jumlah servisan berdasar tanggal tertentu 
             $total_servisan = count($servisans);
 
-            // detail servisan 
+            // menghitung status servisan masing-masing teknisi (selesai, proses, ov, cancel)
             $detail_servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
                 ->select('servisan_teknisis.status as status', 'servisan_teknisis.user_id as teknisi', DB::raw('count(*) as total'))
                 ->groupBy('status', 'teknisi')
@@ -45,7 +34,7 @@ class LaporanTeknisiController extends Controller
                 ->whereBetween('tgl_masuk',[$tgl_awal, $tgl_akhir])
                 ->get();
 
-            // merek unit servisan
+            // mencari jumlah merek yang di servis pada tanggal tertentu
             $merek_servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
                 // ->join('laptop_mereks', 'servisans.laptop_merek_id', '=', 'laptop_mereks.id')
                 ->select('servisans.laptop_merek_id as merek', DB::raw('count(*) as total'))
@@ -56,40 +45,19 @@ class LaporanTeknisiController extends Controller
             $jadi = false;
             if($tms >= 0) {
                 for ($i=0; $i < $tms; $i++) { 
-                // mengambil merek unit yang diservice
-                $laptop_merek_id = $merek_servisans[$i]->merek;
-                $laptop_merek = LaptopMerek::where('id', $laptop_merek_id)->first();
-                $merek[] = $laptop_merek->merek;
-                // mengambil setiap total dari merek yang diservice
-                $merek_total[] = $merek_servisans[$i]->total;
+                    // mengambil merek unit yang diservice
+                    $laptop_merek_id = $merek_servisans[$i]->merek;
+                    $laptop_merek = LaptopMerek::where('id', $laptop_merek_id)->first();
+                    $merek[] = $laptop_merek->merek;
+                    // mengambil setiap total dari merek yang diservice
+                    $merek_total[] = $merek_servisans[$i]->total;
 
-                $jadi = [$merek, $merek_total];
-            } 
-        } else {
+                    $jadi = [$merek, $merek_total];
+                } 
+            } else {
                 $jadi = false;
             }
             
-            // dd($jadi, $tgl_awal, $tgl_akhir);
-            // detail servisan teknisi
-            // $detail_servisan_teknisi = [
-            //     [
-            //         'tekniis' => 'Hamzah',
-            //         'total' => $status,
-            //         'selesai' => $total,
-            //         'proses' => $total,
-            //         'oper_vendor' => $total,
-            //         'cancel' => $total,
-            //     ],
-            //     [
-            //         'tekniis' => 'Muh Resky',
-            //         'total' => $status,
-            //         'selesai' => $total,
-            //         'proses' => $total,
-            //         'oper_vendor' => $total,
-            //         'cancel' => $total,
-            //     ],
-            // ];
-
             // teknisi
             $teknisi = ServisanTeknisi::select('user_id')->groupBy('user_id')->get();
             // $status = ServisanTeknisi::select('status')->groupBy('status')->get();
@@ -97,10 +65,6 @@ class LaporanTeknisiController extends Controller
             for ($i=0; $i < $total_status; $i++) { 
                 $list_status[] = $servisans[$i]->status;
             }
-
-                // dd($detail_servisans);
-
-            // $servisans = Servisan::where('status_pengerjaan', '1')->whereBetween('tgl_masuk',[$tgl_awal, $tgl_akhir])->get();
 
             return view('servisan.servisan-laporan-harian', compact(
                 'tgl_awal', 
@@ -110,10 +74,6 @@ class LaporanTeknisiController extends Controller
                 'total_servisan',
                 'detail_servisans',
                 'jadi',
-                // 'total_selesai',
-                // 'total_proses',
-                // 'total_oper_vendor',
-                // 'total_cancel',
             ));
         }
         return view('servisan.servisan-laporan-harian');
