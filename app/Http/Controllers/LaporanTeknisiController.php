@@ -54,7 +54,7 @@ class LaporanTeknisiController extends Controller
                 ->get();
             $tms = count($merek_servisans);
             if($tms >= 0) {
-            for ($i=0; $i < $tms; $i++) { 
+                for ($i=0; $i < $tms; $i++) { 
                 // mengambil merek unit yang diservice
                 $laptop_merek_id = $merek_servisans[$i]->merek;
                 $laptop_merek = LaptopMerek::where('id', $laptop_merek_id)->first();
@@ -63,7 +63,8 @@ class LaporanTeknisiController extends Controller
                 $merek_total[] = $merek_servisans[$i]->total;
 
                 $jadi = [$merek, $merek_total];
-            } else {
+            } 
+        } else {
                 $jadi = false;
             }
             
