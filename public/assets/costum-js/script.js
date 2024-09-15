@@ -131,7 +131,7 @@ $(document).ready(function() {
             // Tentukan ukuran kertas dan margin
             var margin = 10; // margin dalam satuan mm
             var imgWidth = 210 - 2 * margin; // Lebar A4 dikurangi margin kiri dan kanan
-            var pageHeight = 148 - 2 * margin; // Tinggi A4 dikurangi margin atas dan bawah
+            var pageHeight = 148 - 10 * margin; // Tinggi A4 dikurangi margin atas dan bawah
             var imgHeight = (canvas.height * imgWidth) / canvas.width;
             var heightLeft = imgHeight;
             var position = margin;
