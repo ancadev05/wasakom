@@ -47,8 +47,32 @@ class ServisanController extends Controller
      */
     public function store(Request $request)
     {
+        // pengecekan apakah ada costumer baru yang ditambahkan atau memakai costumer lama
+        if($request->nama) {
+            // penambahan costumer baru sebelum buat servisan
+            $request->validate([
+                'nama' => 'required',
+                'no_wa' => 'required',
+            ]);
+            $costumer = [
+                'nama' => $request->nama,
+                'no_wa' => $request->no_wa,
+                'alamat' => $request->alamat,
+                'foto_ktp' => 'ok',
+            ];
+            Costumer::create($costumer);
+
+            // mengambil costumer id terakhir yang sudah dibuat
+            // dengan metode mencari nama terakhir, lalu diurutkan berdasar urutan terakhir 
+            // dan mengambil yang pertama, dalam hal ini costumer yang baru saja dibuat
+            $costumer_id = Costumer::where('nama', $request->nama)->latest()->first()->id;
+        } else {
+            $costumer_id = $request->costumer_id;
+        }
+
+        
         $request->validate([
-            'costumer_id' => 'required',
+            // 'costumer_id' => 'required',
             'keluhan' => 'required',
             'merek' => 'required',
         ]);
@@ -67,7 +91,7 @@ class ServisanController extends Controller
         $servisan = [
             'tgl_masuk' => $request->tgl_masuk,
             'no_servisan' => $no_servisan,
-            'costumer_id' => $request->costumer_id,
+            'costumer_id' => $costumer_id,
             'keluhan' => $request->keluhan,
             'laptop_merek_id' => $request->merek,
             'tipe' => $request->tipe,

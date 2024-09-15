@@ -21,23 +21,68 @@
                     <div class="mb-3">
                         <label class="form-label" for="tgl_masuk">Tanggal:</label>
                         <input class="form-control @error('tgl_masuk') is-invalid @enderror" type="date" name="tgl_masuk"
-                            id="tgl_masuk" value="{{ old('tgl_masuk') }}">
+                            id="tgl_masuk" value="{{ old('tgl_masuk') }}" required>
                         @error('tgl_masuk')
                             <small class="invalid-feedback"> {{ $message }} </small>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="costumer_id">Costumer:</label>
-                        <select class="form-select @error('costumer_id') is-invalid @enderror select2" name="costumer_id" id="costumer_id">
-                            <option value="" selected></option>
-                            @foreach ($costumers as $item)
-                                <option value="{{ $item->id }}" {{ old('costumer_id') == $item->id ? 'selected' : '' }}>
-                                    {{ $item->nama }}</option>
-                            @endforeach
-                        </select>
-                        @error('costumer_id')
-                            <small class="invalid-feedback"> {{ $message }} </small>
-                        @enderror
+                    <div class="mb-3" id="costumer-lama">
+                        <div class="row">
+                            <label class="form-label" for="costumer_id">Costumer:</label>
+                            <div class="col-10">
+                                <select class="form-select @error('costumer_id') is-invalid @enderror select2" name="costumer_id" id="costumer_id">
+                                    <option value="" selected></option>
+                                    @foreach ($costumers as $item)
+                                        <option value="{{ $item->id }}" {{ old('costumer_id') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('costumer_id')
+                                    <small class="invalid-feedback"> {{ $message }} </small>
+                                @enderror
+                            </div>
+                            <div class="col-1">
+                                <button type="button" class="btn btn-sm btn-primary shadow-sm mb-3 d-block" onclick="tc()" id="plus"><i class="bi bi-plus-lg"></i></button>
+                                <button type="button" class="btn btn-sm btn-secondary shadow-sm mb-3 d-none" onclick="tc()" id="dash"><i class="bi bi-dash-lg"></i></button>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    
+                    <div id="costumer-baru" class="d-none px-3 py-2 shadow-sm  border border-1 mb-3">
+                        <div class="mb-3">
+                            <div class="mb-3">
+                                <label class="form-label" for="nama">Nama Costumer <span
+                                        class="text-danger fw-bold">*</span></label>
+                                <input class="form-control @error('nama') is-invalid @enderror" type="text" name="nama"
+                                    id="nama" value="{{ old('nama') }}">
+                                @error('nama')
+                                    <small class="invalid-feedback"> {{ $message }} </small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3">
+                                <label class="form-label" for="no_wa">No_Wa <span
+                                        class="text-danger fw-bold">*</span></label>
+                                <input class="form-control @error('no_wa') is-invalid @enderror" type="number" name="no_wa"
+                                    id="no_wa" value="{{ old('no_wa') }}" maxlength="13">
+                                @error('no_wa')
+                                    <small class="invalid-feedback"> {{ $message }} </small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3">
+                                <label class="form-label" for="alamat">Alamat</label>
+                                <textarea class="form-control @error('alamat') is-invalid @enderror" type="text" name="alamat"
+                                    id="alamat" placeholder="..." rows="3">{{ old('alamat') }}</textarea>
+                                @error('alamat')
+                                    <small class="invalid-feedback"> {{ $message }} </small>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="merek">Merek <span
@@ -130,6 +175,14 @@
                     reader.readAsDataURL(file);
                 }
             });
+
+            
         });
+
+        function tc() {
+                $('#costumer-baru').slideToggle('slow').toggleClass('d-none')
+                $('#plus').fadeIn('slow').toggleClass('d-none')
+                $('#dash').fadeIn('slow').toggleClass('d-none')
+            }
     </script>
 @endsection

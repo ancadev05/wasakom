@@ -14,7 +14,7 @@ class UserAkses
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $level_akun_id): Response
     {
         // route yang hanya boleh diakses oleh super user
         // if (Auth::user()->level == $level) {
@@ -22,7 +22,7 @@ class UserAkses
         // }
         
         // melanjutkan request jika level akun 1
-        if (Auth::user()->level_akun_id == 1) {
+        if (Auth::user()->level_akun_id == $level_akun_id) {
             return $next($request);
             // return redirect('/user');
         } else {
