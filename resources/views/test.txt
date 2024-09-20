@@ -29,11 +29,53 @@ class LaporanTeknisiController extends Controller
 
             // menghitung status servisan masing-masing teknisi (selesai, proses, ov, cancel)
             $total_status_servisan_teknisi = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
-                ->select('servisan_teknisis.status as status', 'servisan_teknisis.user_id', DB::raw('count(*) as total'))
-                ->groupBy('status', 'servisan_teknisis.user_id')
+                ->select('servisan_teknisis.status as status', 'servisan_teknisis.user_id as teknisi', DB::raw('count(*) as total'))
+                ->groupBy('status', 'teknisi')
                 ->whereBetween('tgl_masuk', [$tgl_awal, $tgl_akhir])
-                ->orderBy('servisan_teknisis.user_id', 'asc')->orderBy('status', 'asc')
+                ->orderBy('teknisi', 'asc')->orderBy('status', 'asc')
                 ->get();
+
+            // dd($total_status_servisan_teknisi);
+            // hitung jumlah teknisi yang bekerja di tanggal tertentu
+            $teknisi = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
+                ->select('servisan_teknisis.user_id as teknisi')
+                ->groupBy('teknisi')->distinct()
+                ->whereBetween('tgl_masuk', [$tgl_awal, $tgl_akhir])
+                ->orderBy('teknisi', 'asc')
+                ->get();
+
+            // mencaridetail servisan berdasarkan teknisi tertentu
+            for ($i = 0; $i < $teknisi->count(); $i++) {
+                // mengambil id teknisi sesuai jumlah teknisi yang ada 
+                $teknisi_id[$i] = $teknisi[$i]->teknisi;
+                $nama_teknisi[] = User::where('id', $teknisi_id[$i])->first()->karyawan->nama; // mencari nama teknisi
+
+                // mencari status servisan berdasarkan teknisi tertentu
+                $servisan_teknisi[$i] = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
+                    ->select('servisan_teknisis.status as status', 'servisan_teknisis.user_id as teknisi', DB::raw('count(*) as total'))
+                    ->groupBy('status', 'teknisi')
+                    ->where('servisan_teknisis.user_id', $teknisi_id[$i])
+                    ->whereBetween('tgl_masuk', [$tgl_awal, $tgl_akhir])
+                    ->orderBy('status', 'asc')
+                    ->get();
+
+                for ($i = 0; $i < $teknisi->count(); $i++) {
+                    foreach ($servisan_teknisi as $i => $value) {
+                        $selesai[$i] = $servisan_teknisi[$i][0]->total;
+                    }
+                }
+
+
+
+                // $servisan_teknisi = [
+                //     'teknisi' => $nama_teknisi,
+                //     'servisan' => [44, 55, 57, 56]
+                // ];
+            }
+
+            // dd($kerja_teknisi[0]);
+            // dd($teknisi[0]->user->sandi);
+            // dd($selesai);
 
             // mencari jumlah merek produk (laptop) yang di servis pada tanggal tertentu
             $merek_servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
@@ -59,13 +101,24 @@ class LaporanTeknisiController extends Controller
                 $servisan_merek = false;
             }
 
+
+            // dd($servisan_merek);
+            // teknisi
+            $teknisi = ServisanTeknisi::select('user_id')->groupBy('user_id')->get();
+            // $status = ServisanTeknisi::select('status')->groupBy('status')->get();
+            $total_status = count($servisans);
+            for ($i = 0; $i < $total_status; $i++) {
+                $list_status[] = $servisans[$i]->status;
+            }
+
             return view('servisan.servisan-laporan-harian', compact(
                 'tgl_awal',
                 'tgl_akhir',
                 'servisans',
+                'teknisi',
                 'total_servisan',
                 'total_status_servisan_teknisi',
-                'servisan_merek'
+                'servisan_merek',
             ));
         }
         return view('servisan.servisan-laporan-harian');

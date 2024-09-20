@@ -73,35 +73,91 @@
                     </div>
                 </div>
 
-                <h4>Status Servisan Teknisi</h4>
-                <hr>
-                <table class="table table-sm">
-                    <thead>
+                
+                <table>
+                    <tr>
+                        <td>Teknisi</td>
+                        <td>status</td>
+                        <td>total</td>
+                    </tr>
+                    @foreach ($total_status_servisan_teknisi as $item)
                         <tr>
-                            <th>Teknisi</th>
-                            <th>Status</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($total_status_servisan_teknisi as $item)
-                        <tr>
-                            <td>{{ $item->user->karyawan->nama }}</td>
+                            <td>{{ $item->teknisi }}</td>
                             <td>{{ $item->status }}</td>
                             <td>{{ $item->total }}</td>
                         </tr>
                     @endforeach
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>{{ $total_servisan }}</td>
-                    </tr>
-                    </tbody>
                 </table>
-
 
                 {{-- chart --}}
                 <div class="row">
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Servisan Teknisi</h5>
+
+                                <!-- Column Chart -->
+                                <div id="columnChart"></div>
+
+                                {{-- <script>
+                                    document.addEventListener("DOMContentLoaded", () => {
+                                        new ApexCharts(document.querySelector("#columnChart"), {
+                                            series: [
+                                                {
+                                                name: 'Hamzah',
+                                                data: [44, 55, 57, 56]
+                                            }, 
+                                            {
+                                                name: 'Muh. Resky',
+                                                data: [76, 85, 101, 98]
+                                            }
+                                        ],
+                                            chart: {
+                                                type: 'bar',
+                                                height: 350
+                                            },
+                                            plotOptions: {
+                                                bar: {
+                                                    horizontal: false,
+                                                    columnWidth: '55%',
+                                                    endingShape: 'rounded'
+                                                },
+                                            },
+                                            dataLabels: {
+                                                enabled: false
+                                            },
+                                            stroke: {
+                                                show: true,
+                                                width: 2,
+                                                colors: ['transparent']
+                                            },
+                                            xaxis: {
+                                                categories: ['Total Servisan', 'Selesai', 'Proses', 'Oper Vendor', 'Cancel']
+                                            },
+                                            yaxis: {
+                                                title: {
+                                                    text: 'Total Servisan ' + @json($total_servisan) + ' unit'
+                                                }
+                                            },
+                                            fill: {
+                                                opacity: 1
+                                            },
+                                            tooltip: {
+                                                y: {
+                                                    formatter: function(val) {
+                                                        return val + " unit"
+                                                    }
+                                                }
+                                            }
+                                        }).render();
+                                    });
+                                </script> --}}
+                                <!-- End Column Chart -->
+                            </div>
+                        </div>
+                    </div>
+
                     {{-- bar chart --}}
                     <div class="col-lg-6">
                         <div class="card">
@@ -151,11 +207,8 @@
                         </div>
                     </div>
                     {{-- /bar chart --}}
-                </div>
+                </div> {{-- end chart --}}
 
-
-                <h4>Detail Servisan</h4>
-                <hr>
                 <table class="table table-sm nowrap">
                     <thead>
                         <tr>
