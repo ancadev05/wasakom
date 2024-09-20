@@ -116,11 +116,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile-update/{id}', [UserController::class, 'profileupdate']);
 
     // karyawan
-    Route::resource('/karyawan', KaryawanController::class)->middleware('userAkses');
+    Route::resource('/karyawan', KaryawanController::class)->middleware('userAkses:1');
 
     
     // user
-    Route::get('/user', [UserController::class, 'user'])->middleware('userAkses');
+    Route::get('/user', [UserController::class, 'user'])->middleware('userAkses:1');
     Route::get('/user-create', [UserController::class, 'usercreate'])->middleware('userAkses:1');
     Route::post('/user-create', [UserController::class, 'userstore'])->middleware('userAkses:1');
     Route::get('/user-edit/{id}', [UserController::class, 'useredit'])->middleware('userAkses:1');

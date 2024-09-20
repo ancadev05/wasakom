@@ -79,7 +79,8 @@
                             </span>
 
                             <small class="d-block text-secondary" style="font-size: 12px"></small>
-                            <i class="d-block" style="font-size: 12px">* Jika tipe tidak muncul, tambahkan di menu Merek & Tipe</i>
+                            <i class="d-block" style="font-size: 12px">* Jika tipe tidak muncul, tambahkan di menu Merek &
+                                Tipe</i>
 
                             <select class="form-select @error('tipe') is-invalid @enderror" name="tipe" id="tipe">
                                 {{-- <option value="" selected>---</option> --}}
@@ -119,8 +120,9 @@
                         <div class="mb-3">
                             <label class="form-label" for="storage">Storage <span
                                     class="text-danger fw-bold">*</span></label>
-                            <input class="form-control @error('storage') is-invalid @enderror" type="text" name="storage"
-                                id="storage" placeholder="example: SSD-128GB" value="{{ $laptop->storage }}">
+                            <input class="form-control @error('storage') is-invalid @enderror" type="text"
+                                name="storage" id="storage" placeholder="example: SSD-128GB"
+                                value="{{ $laptop->storage }}">
                             @error('storage')
                                 <small class="invalid-feedback"> {{ $message }} </small>
                             @enderror
@@ -175,38 +177,56 @@
                                 <small class="invalid-feedback"> {{ $message }} </small>
                             @enderror
                         </div>
+                        @php
+                            $level = Auth::user()->level_akun_id;
+                        @endphp
                         <div class="mb-3">
                             <label class="form-label" for="status">Status Laptop <span
                                     class="text-danger fw-bold">*</span></label>
-                            <select class="form-select @error('status') is-invalid @enderror" name="status"
-                                id="status">
-                                <option value="" selected>---</option>
-                                @foreach ($laptop_status as $item)
-                                    <option value="{{ $item->id }}"
-                                        {{ $laptop->laptop_status_id == $item->id ? 'selected' : '' }}>
-                                        {{ $item->status }}</option>
-                                @endforeach
-                            </select>
-                            @error('status')
-                                <small class="invalid-feedback"> {{ $message }} </small>
-                            @enderror
+                            @if ($level == 6)
+                                <select class="form-select @error('status') is-invalid @enderror" name="status"
+                                    id="status">
+                                    @foreach ($laptop_status as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ $laptop->laptop_status_id == $item->id ? 'selected' : '' }}>
+                                            {{ $item->status }}</option>
+                                    @endforeach
+                                </select>
+                                @error('status')
+                                    <small class="invalid-feedback"> {{ $message }} </small>
+                                @enderror
+                            @else
+                                <select class="form-select @error('status') is-invalid @enderror" name="status"
+                                    id="status">
+                                    <option value="{{ $laptop->laptop_status_id }}" selected>
+                                        {{ $laptop->laptopstatus->status }}</option>
+                                </select>
+                            @endif
+
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="kondisi">Kondisi <span
                                     class="text-danger fw-bold">*</span></label>
                             <i style="font-size: 12px">* Pastikan kondisi laptop dalam keadaan normal</i>
-                            <select class="form-select @error('kondisi') is-invalid @enderror" name="kondisi"
-                                id="kondisi">
-                                <option value="" selected>---</option>
-                                @foreach ($laptop_kondisi as $item)
-                                    <option value="{{ $item->id }}"
-                                        {{ $laptop->laptop_kondisi_id == $item->id ? 'selected' : '' }}>
-                                        {{ $item->kondisi }}</option>
-                                @endforeach
-                            </select>
-                            @error('kondisi')
-                                <small class="invalid-feedback"> {{ $message }} </small>
-                            @enderror
+                            @if ($level == 6)
+                                <select class="form-select @error('kondisi') is-invalid @enderror" name="kondisi"
+                                    id="kondisi">
+                                    @foreach ($laptop_kondisi as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ $laptop->laptop_kondisi_id == $item->id ? 'selected' : '' }}>
+                                            {{ $item->kondisi }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kondisi')
+                                    <small class="invalid-feedback"> {{ $message }} </small>
+                                @enderror
+                            @else
+                                <select class="form-select @error('kondisi') is-invalid @enderror" name="kondisi"
+                                    id="kondisi">
+                                    <option value="{{ $laptop->laptop_kondisi_id }}" selected>
+                                        {{ $laptop->laptopkondisi->kondisi }}</option>
+                                </select>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="kelengkapan">Kelengkapan</label>
