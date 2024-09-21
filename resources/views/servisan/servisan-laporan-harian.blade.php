@@ -73,7 +73,7 @@
                     </div>
                 </div>
 
-                <h4>Status Servisan Teknisi</h4>
+                <h4>Status Servisan Teknisi ok</h4>
                 <hr>
                 <table class="table table-sm">
                     <thead>
@@ -99,6 +99,24 @@
                     </tbody>
                 </table>
 
+                <h4>Tingkat Kerusakan</h4>
+                <hr>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Tingkat</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($tingkat_kerusakan as $item)
+                        <tr>
+                            <td>{{ $item->jenis_kerusakan }}</td>
+                            <td>{{ $item->total }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
 
                 {{-- chart --}}
                 <div class="row">
@@ -134,6 +152,57 @@
                                             },
                                             xaxis: {
                                                 categories: @json($servisan_merek[0]),
+                                            },
+                                            tooltip: {
+                                                y: {
+                                                    formatter: function(val) {
+                                                        return val + " unit"
+                                                    }
+                                                }
+                                            }
+                                        }).render();
+                                    });
+                                </script>
+                                <!-- End Bar Chart -->
+
+                            </div>
+                        </div>
+                    </div>
+                    {{-- /bar chart --}}
+
+                    {{-- menghitung tingkat kerusakan --}}
+                    {{-- bar chart --}}
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Tingkat Kerusakan</h5>
+
+                                <!-- Bar Chart -->
+                                <div id="barChart"></div>
+
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", () => {
+                                        new ApexCharts(document.querySelector("#barChart"), {
+                                            series: [{
+                                                name: '',
+                                                // data: [400, 430, 448, 470]
+                                                data: @json($tingkat_kerusakan[0])
+                                            }],
+                                            chart: {
+                                                type: 'bar',
+                                                height: 350
+                                            },
+                                            plotOptions: {
+                                                bar: {
+                                                    borderRadius: 4,
+                                                    horizontal: true,
+                                                }
+                                            },
+                                            dataLabels: {
+                                                enabled: false
+                                            },
+                                            xaxis: {
+                                                categories: @json($tingkat_kerusakan[0]),
                                             },
                                             tooltip: {
                                                 y: {

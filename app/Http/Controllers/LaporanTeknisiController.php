@@ -35,6 +35,23 @@ class LaporanTeknisiController extends Controller
                 ->orderBy('servisan_teknisis.user_id', 'asc')->orderBy('status', 'asc')
                 ->get();
 
+            // tingkat kerusakan
+            $tingkat_kerusakan = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
+                ->select('servisan_teknisis.jenis_kerusakan', DB::raw('count(*) as total'))
+                ->groupBy('servisan_teknisis.jenis_kerusakan')
+                ->whereBetween('tgl_masuk', [$tgl_awal, $tgl_akhir])
+                ->get();
+            // $tk = count($tingkat_kerusakan);
+            // $servisan_kerusakan = false;
+            // if ($tk >= 0) {
+            //     for ($i = 0; $i < $tk; $i++) {
+            //         $servisan_kerusakan[$i] = $tingkat_kerusakan[$i]->kerusakan;
+            //         $total_kerusakan[$i] = $tingkat_kerusakan[$i]->total;
+
+            //         $tingkat_kerusakan = [$servisan_kerusakan, $total_kerusakan];
+            //     }
+            // }
+
             // mencari jumlah merek produk (laptop) yang di servis pada tanggal tertentu
             $merek_servisans = Servisan::join('servisan_teknisis', 'servisans.id', '=', 'servisan_teknisis.servisan_id')
                 // ->join('laptop_mereks', 'servisans.laptop_merek_id', '=', 'laptop_mereks.id')
@@ -67,7 +84,8 @@ class LaporanTeknisiController extends Controller
                     'servisans',
                     'total_servisan',
                     'total_status_servisan_teknisi',
-                    'servisan_merek'
+                    'servisan_merek',
+                    'tingkat_kerusakan'
                 ));
             // } else {
                 // return redirect()->back()->with('not', 'Data tidak ditemukan');
