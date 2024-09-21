@@ -51,7 +51,7 @@
         </div>
 
 
-        @if ($tgl_awal)
+        @if ($tgl_awal && $total_servisan > 0)
             {{-- export pdf --}}
             <div class="d-flex justify-content-end mb-3">
                 <button class="btn btn-sm btn-danger" id="export-pdf"><i class="bi bi-file-pdf"></i> Export PDF</button>

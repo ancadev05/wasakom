@@ -59,15 +59,21 @@ class LaporanTeknisiController extends Controller
                 $servisan_merek = false;
             }
 
-            return view('servisan.servisan-laporan-harian', compact(
-                'tgl_awal',
-                'tgl_akhir',
-                'servisans',
-                'total_servisan',
-                'total_status_servisan_teknisi',
-                'servisan_merek'
-            ));
+            // alert jika tidak ada data ditemukan
+            // if ($total_servisan > 0) {
+                return view('servisan.servisan-laporan-harian', compact(
+                    'tgl_awal',
+                    'tgl_akhir',
+                    'servisans',
+                    'total_servisan',
+                    'total_status_servisan_teknisi',
+                    'servisan_merek'
+                ));
+            // } else {
+                // return redirect()->back()->with('not', 'Data tidak ditemukan');
+            // }
         }
+
         return view('servisan.servisan-laporan-harian');
     }
 }
