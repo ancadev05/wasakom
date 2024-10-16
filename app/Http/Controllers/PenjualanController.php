@@ -23,7 +23,10 @@ class PenjualanController extends Controller
     public function laptopdisplay()
     {
         $costumers = Costumer::get();
-        $laptops = Laptop::where('laptop_status_id', 1)->where('laptop_kondisi_id', 1)->orderBy('id', 'desc')->get();
+        // hanya menampilkan laptop dengan status display
+        // $laptops = Laptop::where('laptop_status_id', 1)->where('laptop_kondisi_id', 1)->orderBy('id', 'desc')->get();
+        // menampilkan semua laptop
+        $laptops = Laptop::where('laptop_kondisi_id', 1)->orderBy('id', 'desc')->get();
 
         return view('penjualan.laptop-display', compact('costumers', 'laptops'));
     }
